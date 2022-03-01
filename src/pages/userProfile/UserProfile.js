@@ -106,7 +106,7 @@ const UserProfile = () => {
               </Col>
               <Col>
                   <div className='address-heading'><h1>Your registered address:</h1></div>
-                  <Button onClick={handleShowAddressModal}>Add Address</Button>
+                  <div style={{textAlign:"center",marginBottom:"30px"}}><Button onClick={handleShowAddressModal} color="red">Add Address</Button></div>
                                 <AddAddressModal
                                   show={addressModalShow}
                                   onHide={handleCloseAddressModal}
@@ -117,12 +117,12 @@ const UserProfile = () => {
                       <Row>
                         {userAddress &&
                         userAddress.map((addressElement, i) =>
-                          <Col sm={5} className="userAddressCard m-auto">
+                          <Col md={5} className="userAddressCard mx-auto m-1">
                           <Row>
                             <Col xs={11 } className="my-auto"><p>{addressElement.address}, {addressElement.city},{addressElement.pincode}</p>
                             <p>Mobile:{addressElement.mobile}</p></Col>
                             
-                            <Col xs={1} className="my-auto"><Button onClick={() => deleteAddress(addressElement.address_id)}>X</Button></Col>
+                            <Col xs={1} className="my-auto"><Button className="btn-danger" onClick={() => deleteAddress(addressElement.address_id)}>X</Button></Col>
                           </Row>
                         </Col>      
                         )}

@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './header/Header';
 import Feed from './component/Feed';
 import Grid from '@mui/material/Grid';
-
+import UserProfile from './pages/userProfile/UserProfile'
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +48,7 @@ const App = () => {
         </Grid>
       </Grid>
 
-
+      <UserProfile />
     </>
   )
 }

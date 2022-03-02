@@ -6,20 +6,27 @@ import AuctionProductDetail from './auction/AuctionProductDetail';
 import { SignpostOutlined } from '@mui/icons-material';
 // import UserProfile from './pages/userProfile/UserProfile';
 import BiddingPage from './auction/BiddingPage';
-
-
+import CreatedAuction from './auction/CreatedAuction';
+import { BrowserRouter } from "react-router-dom";
+import FrontPage from './auth/FrontPage';
 const App = () => {
-  
+
 
   return (
     <>
-      {/* <Signup/> */}
+      <BrowserRouter>
       
-      <Header />
-      <BiddingPage/>
-      {/* <UserProfile/> */}
-      {/* <Homepage/> */}
-      {/* <AuctionProductDetail/> */}
+        {/* <Signup/> */}
+        <FrontPage />
+        {/* <Header /> */}
+
+        {/* <BiddingPage/> */}
+        {/* <UserProfile/> */}
+        {/* <Homepage/>  */}
+        {/* <CreatedAuction/> */}
+        {/* <AuctionProductDetail /> */}
+      </BrowserRouter>
+
 
     </>
   )

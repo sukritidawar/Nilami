@@ -4,15 +4,18 @@ const Reducer = (state, action) => {
   const { type,user_id} = action;
   switch (type) {
     case LOGIN:
+      console.log(action);
       return {
+        ...state,
         isAuth: true,
-        user_id 
+        user_id,
       };
 
     case LOGOUT:
       return {
+        ...state,
         isAuth: false,
-        user_id:null
+        user_id:null,
       };
 
     default:

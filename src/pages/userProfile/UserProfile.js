@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 import Keys from "../../config";
 import EditUserInfoModal from "./EditUserInfoModal";
 import AddAddressModal from "./AddAddressModal";
+import Store from "../../store/Store";
 axios.defaults.withCredentials = true;
 
 const UserProfile = () => {
     const [userDetails, setUserDetails] = useState(null);
     const [userAddress, setUserAddress] = useState(null);
-    const [userAuth, setUserAuth] = useState(0);
+    const [userAuth, setUserAuth] = useContext(Store);
 
     const [infoModalShow, setinfoModalShow] = useState(false);
 
@@ -50,13 +51,13 @@ const UserProfile = () => {
         try {
           const url = Keys.BASE_API + "user/profile";
           const url2 = Keys.BASE_API + "user/login";
-          var res = await axios.post(url2,{email:"sho1",password:"sho1"});
+          // var res = await axios.post(url2,{email:"sho1",password:"sho1"});
           var userInfo = await axios.get(url);
           setUserDetails(userInfo.data.userData);
           setUserAddress(userInfo.data.userAddress);
           setUserAuth(userInfo.data.success);
 
-          console.log(res);
+          // console.log(res);
           //console.log(userInfo.data.user.user_id)
           // console.log(userDetails.user);
           //console.log(userDetails.user.user_id);
@@ -70,7 +71,7 @@ const UserProfile = () => {
     
     return (    
       <div>
-        {!userAuth ? 
+        {userAuth.isAuth ? 
            <></>
          : (
           <Container className='container'>

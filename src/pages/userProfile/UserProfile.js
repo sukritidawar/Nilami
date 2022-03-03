@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 import Keys from "../../config";
 import EditUserInfoModal from "./EditUserInfoModal";
 import AddAddressModal from "./AddAddressModal";
+import Store from "../../store/Store";
 axios.defaults.withCredentials = true;
 
 const UserProfile = () => {
     const [userDetails, setUserDetails] = useState(null);
     const [userAddress, setUserAddress] = useState(null);
-    const [userAuth, setUserAuth] = useState(0);
+    const [userAuth, setUserAuth] = useContext(Store);
 
     const [infoModalShow, setinfoModalShow] = useState(false);
 
@@ -50,13 +51,13 @@ const UserProfile = () => {
         try {
           const url = Keys.BASE_API + "user/profile";
           const url2 = Keys.BASE_API + "user/login";
-          var res = await axios.post(url2,{email:"sho1",password:"sho1"});
+          // var res = await axios.post(url2,{email:"sho1",password:"sho1"});
           var userInfo = await axios.get(url);
           setUserDetails(userInfo.data.userData);
           setUserAddress(userInfo.data.userAddress);
           setUserAuth(userInfo.data.success);
 
-          console.log(res);
+          // console.log(res);
           //console.log(userInfo.data.user.user_id)
           // console.log(userDetails.user);
           //console.log(userDetails.user.user_id);
@@ -70,7 +71,7 @@ const UserProfile = () => {
     
     return (    
       <div>
-        {!userAuth ? 
+        {userAuth.isAuth ? 
            <></>
          : (
           <Container className='container'>
@@ -106,7 +107,7 @@ const UserProfile = () => {
               </Col>
               <Col>
                   <div className='address-heading'><h1>Your registered address:</h1></div>
-                  <Button onClick={handleShowAddressModal}>Add Address</Button>
+                  <div style={{textAlign:"center",marginBottom:"30px"}}><Button onClick={handleShowAddressModal} color="red">Add Address</Button></div>
                                 <AddAddressModal
                                   show={addressModalShow}
                                   onHide={handleCloseAddressModal}
@@ -117,12 +118,12 @@ const UserProfile = () => {
                       <Row>
                         {userAddress &&
                         userAddress.map((addressElement, i) =>
-                          <Col sm={5} className="userAddressCard m-auto">
+                          <Col md={5} className="userAddressCard mx-auto m-1">
                           <Row>
                             <Col xs={11 } className="my-auto"><p>{addressElement.address}, {addressElement.city},{addressElement.pincode}</p>
                             <p>Mobile:{addressElement.mobile}</p></Col>
                             
-                            <Col xs={1} className="my-auto"><Button onClick={() => deleteAddress(addressElement.address_id)}>X</Button></Col>
+                            <Col xs={1} className="my-auto"><Button className="btn-danger" onClick={() => deleteAddress(addressElement.address_id)}>X</Button></Col>
                           </Row>
                         </Col>      
                         )}

@@ -1,6 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react';
+import axios from "axios";
 import { Grid, TextField,Button} from '@mui/material';
-
+import Store from "../store/Store";
+import Keys from "../config";
+import { LOGIN } from "../store/Types";
+axios.defaults.withCredentials = true;
 
 const defaultuser = {
   name: "",
@@ -10,11 +14,12 @@ const defaultuser = {
   address: "",
   city: "",
   pincode: "",
-  mobile: ""
+  mobile: "",
 }
 
 const Signup = () => {
 
+  const [state, dispatch] = useContext(Store);
   const [user, setUser] = useState(defaultuser);
 
   let name, value;
@@ -25,12 +30,48 @@ const Signup = () => {
     setUser({ ...user, [name]: value })
   };
 
-  const postData = async (e) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+   console.log(user);
+   postData(user);
+    setUser({
+      name: "",
+      email: "",
+      password: "",
+      primary_number: "",
+      address: "",
+      city: "",
+      pincode: "",
+      mobile: "",
+    });
+  }; 
 
+  const postData = async (newUser) => {
+     try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const url = Keys.BASE_API + "user/signup";
+      const body = JSON.stringify(newUser);
+
+      var res = await axios.post(url,body,config);
+      console.log(res);
+      // console.log(state);
+      await dispatch({
+        type: LOGIN,
+        user_id: `${res.data.user_id}`,
+      });
+      console.log(state);
+     } catch (error) {
+       console.log(error);
+     }
   };
+
   return (
     <>
-      <form onSubmit={postData}>
+      <form onSubmit={handleSubmit} method="POST">
         <Grid container spacing={2}>
           <Grid item xs={12} md={7}>
             <Grid container spacing={2}>
@@ -170,7 +211,7 @@ const Signup = () => {
               <Button
                 variant="contained"
                 color="primary"
-                type="submit"
+                type="submit" onClick={handleSubmit}
                 mt={1}>
                 Submit
               </Button>

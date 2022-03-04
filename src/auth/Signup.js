@@ -1,10 +1,12 @@
 import React, { useState, useContext } from 'react';
 import axios from "axios";
-import { Grid, TextField,Button} from '@mui/material';
+import { Container, Grid, Box, Paper, Button, TextField, Typography } from '@mui/material';
 import Store from "../store/Store";
 import Keys from "../config";
 import { LOGIN } from "../store/Types";
 import Cookies from 'js-cookie';
+import { makeStyles } from "@material-ui/core/styles";
+
 axios.defaults.withCredentials = true;
 
 const defaultuser = {
@@ -18,6 +20,28 @@ const defaultuser = {
   mobile: "",
 }
 
+const useStyles = makeStyles((theme) => ({
+  page:{
+    backgroundColor:"#e6e6e6"
+  },
+  signup_comp: {
+    [theme.breakpoints.down('md')]: {
+      paddingTop: theme.spacing(10),
+      paddingLeft: theme.spacing(15),
+      paddingRight: theme.spacing(3),
+      paddingBottom: theme.spacing(5),
+    },
+    [theme.breakpoints.up('md')]: {
+      paddingTop: theme.spacing(3),
+      paddingLeft: theme.spacing(5),
+      paddingBottom: theme.spacing(5),
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+  }
+}));
 const Signup = () => {
 
   const [state, dispatch] = useContext(Store);
@@ -34,8 +58,8 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   console.log(user);
-   postData(user);
+    console.log(user);
+    postData(user);
     setUser({
       name: "",
       email: "",
@@ -46,10 +70,10 @@ const Signup = () => {
       pincode: "",
       mobile: "",
     });
-  }; 
+  };
 
   const postData = async (newUser) => {
-     try {
+    try {
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +82,7 @@ const Signup = () => {
       const url = Keys.BASE_API + "user/signup";
       const body = JSON.stringify(newUser);
 
-      var res = await axios.post(url,body,config);
+      var res = await axios.post(url, body, config);
       console.log(res);
       Cookies.set('user_id',`${res.data.user_id}`);
       // console.log(state);
@@ -67,21 +91,24 @@ const Signup = () => {
         user_id: `${res.data.user_id}`,
       }));
       console.log(state);
-     } catch (error) {
-       console.log(error);
-     }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  return (
-    <>
-      {state.isAuth && (<h1>thank{state.user_id}</h1>)}
-      
-      <form onSubmit={handleSubmit} method="POST">
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={7}>
-            <Grid container spacing={2}>
 
-              <Grid item xs={12} md={8}>
+  const styles = useStyles();
+  return (
+
+    <>
+      <div className={styles.page}>
+      <Typography variant='h2'>Niलाmi</Typography>
+      <Typography variant="h4">Welcome, ek line achi si lini hai</Typography>
+      <Container className={styles.signup_comp}>
+        <Paper component={Box} width="60%" mx="auto" p={4} boxShadow={10}>
+          <form onSubmit={handleSubmit} method="POST">
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   id="outlined-basic"
                   label="Name"
@@ -95,7 +122,7 @@ const Signup = () => {
                   required
                 />
               </Grid>
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   id="outlined-basic"
                   label="Email"
@@ -109,7 +136,7 @@ const Signup = () => {
                   required
                 />
               </Grid>
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   id="outlined-basic"
                   label="Password"
@@ -123,7 +150,7 @@ const Signup = () => {
                   required
                 />
               </Grid>
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   id="outlined-basic"
                   label="Phone"
@@ -138,7 +165,7 @@ const Signup = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   id="outlined-basic"
                   label="Profile url"
@@ -153,7 +180,7 @@ const Signup = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   id="outlined-basic"
                   label="address"
@@ -168,7 +195,7 @@ const Signup = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   id="outlined-basic"
                   label="city"
@@ -183,7 +210,7 @@ const Signup = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   id="outlined-basic"
                   label="Pincode"
@@ -198,7 +225,7 @@ const Signup = () => {
                 />
               </Grid>
 
-              <Grid item xs={12} md={8}>
+              <Grid item xs={12} md={12}>
                 <TextField
                   id="outlined-basic"
                   label="Mobile"
@@ -212,26 +239,30 @@ const Signup = () => {
                   required
                 />
               </Grid>
-              <Grid item xs={12} md={5}>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit" onClick={handleSubmit}
-                mt={1}>
-                Submit
-              </Button>
+              <Grid item xs={12} md={3}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit" onClick={handleSubmit}
+                  mt={1}
+                  fullWidth>
+                  Submit
+                </Button>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <Typography variant='body1'>Already on Nilami <Button
+                  variant="text"
+                  color="primary"
+                  type="submit" onClick={handleSubmit}
+                  mt={1}>
+                  Signin
+                </Button></Typography>
               </Grid>
             </Grid>
-
-          </Grid>
-
-          <Grid item xs={12} md={5}>
-
-            <img src="https://media.istockphoto.com/photos/courtroom-concept-picture-id897099028?k=20&m=897099028&s=612x612&w=0&h=KdVJd5CHaqoYwAyqQW5Fled5s-kJ0lfQWdzFSV4RP7g="
-            />
-          </Grid>
-        </Grid>
-      </form>
+          </form>
+        </Paper>
+      </Container>
+      </div>
     </>
   );
 };

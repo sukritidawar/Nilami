@@ -20,6 +20,7 @@ const AuctionCommp = () => {
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             Product name
+            final price - $1000
           </Typography>
           
         </CardContent>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { useContext, useReducer, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 import Homepage from './component/Homepage';
 import Header from './header/Header';
 import Signup from './auth/Signup'
@@ -8,11 +9,11 @@ import { SignpostOutlined } from '@mui/icons-material';
 import UserProfile from './pages/userProfile/UserProfile';
 import BiddingPage from './auction/BiddingPage';
 import CreatedAuction from './auction/CreatedAuction';
-import { BrowserRouter } from "react-router-dom";
+
 import FrontPage from './auth/FrontPage';
 import Store from "./store/Store";
 import Reducer from "./store/Reducer";
-
+import Login from './auth/Login';
 const App = () => {
 
   const initialState = useContext(Store);
@@ -22,11 +23,12 @@ const App = () => {
 
       <BrowserRouter>
         <Store.Provider value={[state, dispatch]}>
-          <Signup />
+        {/* <Login/> */}
+          {/* <Signup /> */}
 
           {/* <Header /> */}
           {/* <BiddingPage/> */}
-          <UserProfile />
+          {/* <UserProfile /> */}
           {/* <Homepage/> */}
           {/* <AuctionProductDetail/> */}
         </Store.Provider>
@@ -37,7 +39,7 @@ const App = () => {
         {/* <BiddingPage/> */}
         {/* <UserProfile/> */}
         {/* <Homepage/>  */}
-        {/* <CreatedAuction/> */}
+        <CreatedAuction/>
         {/* <AuctionProductDetail /> */}
       </BrowserRouter>
 

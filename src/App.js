@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useContext, useReducer, useState } from "react";
 import Homepage from './component/Homepage';
 import Header from './header/Header';
@@ -9,21 +9,35 @@ import UserProfile from './pages/userProfile/UserProfile';
 import BiddingPage from './auction/BiddingPage';
 import Store from "./store/Store";
 import Reducer from "./store/Reducer";
+import { LOGIN } from "./store/Types";
+import Cookies from 'js-cookie';
 
 const App = () => {
-  const initialState = useContext(Store);
-  const [state, dispatch] = useReducer(Reducer, initialState);
+  // const initialState = useContext(Store);
+  // const [state, dispatch] = useReducer(Reducer, initialState);
 
+  // useEffect(() => {
+  //   if (Cookies.get("token")) {
+  //     const user_id = Cookies.get("user_id");
+  //     dispatch({
+  //       type: LOGIN,
+  //       user_id: `${user_id}`
+  //     });
+  //     return;
+  //   }else{
+  //     console.log("sfas");
+  //   }
+  // },[])
   return (
-      <Store.Provider value={[state, dispatch]}>
-              <Signup/>
+      // <Store.Provider value={[state, dispatch]}>
+      //         {/* <Signup/> */}
       
-      {/* <Header /> */}
-      {/* <BiddingPage/> */}
+      // {/* <Header /> */}
+      // {/* <BiddingPage/> */}
       <UserProfile/>
-      {/* <Homepage/> */}
-      {/* <AuctionProductDetail/> */}
-      </Store.Provider>
+      // {/* <Homepage/> */}
+      // {/* <AuctionProductDetail/> */}
+      // </Store.Provider>
   )
 }
 

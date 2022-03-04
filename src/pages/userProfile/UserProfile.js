@@ -12,7 +12,9 @@ axios.defaults.withCredentials = true;
 const UserProfile = () => {
     const [userDetails, setUserDetails] = useState(null);
     const [userAddress, setUserAddress] = useState(null);
-    const [userAuth, setUserAuth] = useContext(Store);
+    const [userAuth, setUserAuth] = useState(false);
+    const [isLoading,setIsLoading] = useState(false);
+
 
     const [infoModalShow, setinfoModalShow] = useState(false);
 
@@ -43,35 +45,39 @@ const UserProfile = () => {
         })
       
     }
-    
-    useEffect(() => {
-      const getUserDetails = async () => {
-        console.log("hello");
-  
-        try {
-          const url = Keys.BASE_API + "user/profile";
-          const url2 = Keys.BASE_API + "user/login";
-          // var res = await axios.post(url2,{email:"sho1",password:"sho1"});
-          var userInfo = await axios.get(url);
-          setUserDetails(userInfo.data.userData);
-          setUserAddress(userInfo.data.userAddress);
-          setUserAuth(userInfo.data.success);
 
-          // console.log(res);
-          //console.log(userInfo.data.user.user_id)
-          // console.log(userDetails.user);
-          //console.log(userDetails.user.user_id);
-          // console.log(userAddress);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      getUserDetails();
-    }, []);
+    const getUserDetails = async () => {
+      console.log("hello");
+
+      try {
+        const url = Keys.BASE_API + "user/profile";
+        const url2 = Keys.BASE_API + "user/login";
+        var res = await axios.post(url2,{email:"sho1",password:"sho1"});
+        const userInfo = await axios.get(url);
+        console.log(userInfo.data.userData.user);
+        setUserDetails(userInfo.data.userData);
+        setUserAddress(userInfo.data.userAddress);
+        setIsLoading(true);
+      } catch (e) {
+        console.log(e);
+      }
+      
+    };
+    
+    useEffect(async ()=>{
+      await getUserDetails();
+      console.log(userDetails);
+    },[isLoading]);
+
+    useEffect(() => {
+      setIsLoading(false);
+    },[]);
     
     return (    
+      // <div></div>
       <div>
-        {userAuth.isAuth ? 
+        
+        {!isLoading ? 
            <></>
          : (
           <Container className='container'>

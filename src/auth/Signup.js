@@ -4,6 +4,7 @@ import { Grid, TextField,Button} from '@mui/material';
 import Store from "../store/Store";
 import Keys from "../config";
 import { LOGIN } from "../store/Types";
+import Cookies from 'js-cookie';
 axios.defaults.withCredentials = true;
 
 const defaultuser = {
@@ -21,6 +22,7 @@ const Signup = () => {
 
   const [state, dispatch] = useContext(Store);
   const [user, setUser] = useState(defaultuser);
+
 
   let name, value;
   const getUserData = (event) => {
@@ -58,11 +60,12 @@ const Signup = () => {
 
       var res = await axios.post(url,body,config);
       console.log(res);
+      Cookies.set('user_id',`${res.data.user_id}`);
       // console.log(state);
-      await dispatch({
+      console.log(await dispatch({
         type: LOGIN,
         user_id: `${res.data.user_id}`,
-      });
+      }));
       console.log(state);
      } catch (error) {
        console.log(error);
@@ -71,6 +74,8 @@ const Signup = () => {
 
   return (
     <>
+      {state.isAuth && (<h1>thank{state.user_id}</h1>)}
+      
       <form onSubmit={handleSubmit} method="POST">
         <Grid container spacing={2}>
           <Grid item xs={12} md={7}>

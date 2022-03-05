@@ -9,7 +9,7 @@ import { SignpostOutlined } from '@mui/icons-material';
 import UserProfile from './pages/userProfile/UserProfile';
 import BiddingPage from './auction/BiddingPage';
 import CreatedAuction from './auction/CreatedAuction';
-
+import RegisteredAuction from './auction/RegisteredAuction';
 import FrontPage from './auth/FrontPage';
 import Store from "./store/Store";
 import Reducer from "./store/Reducer";
@@ -35,10 +35,12 @@ const App = () => {
   return (
       <Store.Provider value={[state, dispatch]}>
              {/* <Signup/> */}
-      
-      {/* <Header /> */}
+              <Header />
+      {/* <CreatedAuction/> */}
+      <RegisteredAuction/>
+     
       {/* <BiddingPage/> */}
-      <UserProfile/>
+      {/* <UserProfile/> */}
       {/* <Homepage/> */}
       {/* <AuctionProductDetail/> */}
       </Store.Provider>

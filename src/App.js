@@ -34,11 +34,11 @@ const App = () => {
   },[])
   return (
       <Store.Provider value={[state, dispatch]}>
-             {/* <Signup/> */}
+      <Signup/>
       
       {/* <Header /> */}
       {/* <BiddingPage/> */}
-      <UserProfile/>
+      {/* <UserProfile/> */}
       {/* <Homepage/> */}
       {/* <AuctionProductDetail/> */}
       </Store.Provider>

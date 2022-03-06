@@ -53,6 +53,7 @@ const UserProfile = () => {
         const url = Keys.BASE_API + "user/profile";
         const url2 = Keys.BASE_API + "user/login";
         var res = await axios.post(url2,{email:"sho1",password:"sho1"});
+        console.log(res);
         const userInfo = await axios.get(url);
         console.log(userInfo.data.userData.user);
         setUserDetails(userInfo.data.userData);

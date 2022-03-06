@@ -2,10 +2,11 @@ import React from 'react'
 import { Grid, Box, TextField, Typography, Button, Container, Paper } from '@mui/material';
 import { makeStyles } from "@material-ui/core/styles";
 
-const user = {
+const defaultuser = {
   email: "",
   password: ""
 }
+
 const useStyles = makeStyles((theme) => ({
   login_comp: {
     [theme.breakpoints.down('md')]: {
@@ -22,8 +23,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
 const Login = () => {
   const styles = useStyles();
+
+  const [user, setUser] = useState(defaultuser);
+  let name, value;
+
+  const getUserData = (event) => {
+    name = event.target.name;
+    value = event.target.value;
+
+    setUser({ ...user, [name]: value })
+  };
+
 
   const handleLogin = () => {
 
@@ -40,23 +53,28 @@ const Login = () => {
 
               <form onSubmit={handleLogin} >
                 <TextField
-                  id="standard-basic"
-                  label="Username"
+                  label="Email"
                   variant="standard"
-                  margin="normal"
-                  // required value={email}
-                  fullWidth />
+                  placeholder='Email'
+                  name="email"
+                  type="email"
+                  value={user.email}
+                  onChange={getUserData}
+                  fullWidth
+                  required />
+
                 <TextField
-                  id="standard-basic"
                   label="Password"
                   variant="standard"
+                  placeholder='Password'
+                  name="password"
                   type="password"
-                  margin="normal"
+                  value={user.password}
+                  onChange={getUserData}
                   fullWidth
                   required
-                // value={password}
                 />
-                
+
                 <Typography><Button variant='contained'>SIGNIN</Button> New to Nilami <Button variant='text'>SIGNUp</Button></Typography>
               </form>
             </Paper>

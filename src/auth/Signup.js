@@ -253,7 +253,7 @@ const Signup = () => {
                 <Typography variant='body1'>Already on Nilami <Button
                   variant="text"
                   color="primary"
-                  onClick={nav}
+                  type="submit" onClick={handleSubmit}
                   mt={1}>
                   Signin
                 </Button></Typography>

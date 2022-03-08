@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState, useContext } from 'react';
+import axios from "axios";
 import { Grid, Box, TextField, Typography, Button, Container, Paper } from '@mui/material';
+import Store from "../store/Store";
+import Keys from "../config";
+import { LOGIN } from "../store/Types";
+import Cookies from 'js-cookie';
 import { makeStyles } from "@material-ui/core/styles";
+
+axios.defaults.withCredentials = true;
 
 const defaultuser = {
   email: "",
@@ -27,6 +34,7 @@ const useStyles = makeStyles((theme) => ({
 const Login = () => {
   const styles = useStyles();
 
+  const [state, dispatch] = useContext(Store);
   const [user, setUser] = useState(defaultuser);
   let name, value;
 
@@ -38,8 +46,32 @@ const Login = () => {
   };
 
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const url = Keys.BASE_API + "user/login";
+      const body = JSON.stringify(user);
 
+      var res = await axios.post(url, body, config);
+
+      if (res.data.success) {
+        Cookies.set('isAuth', `${res.data.success}`);
+        Cookies.set('user_id', `${res.data.user_id}`);
+        
+        console.log(await dispatch({
+          type: LOGIN,
+          isAuth: `${res.data.success}`,
+          user_id: `${res.data.user_id}`,
+        }));
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className={styles.login_comp}>
@@ -75,7 +107,7 @@ const Login = () => {
                   required
                 />
 
-                <Typography><Button variant='contained'>SIGNIN</Button> New to Nilami <Button variant='text'>SIGNUp</Button></Typography>
+                <Typography><Button variant='contained' onClick = {handleLogin}>SIGNIN</Button> New to Nilami <Button variant='text'>SIGNUp</Button></Typography>
               </form>
             </Paper>
           </Container>

@@ -3,6 +3,7 @@ import { useContext, useReducer, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import Homepage from './component/Homepage';
 import Header from './header/Header';
+import Login from './auth/Login';
 import Signup from './auth/Signup'
 import AuctionProductDetail from './auction/AuctionProductDetail';
 import { SignpostOutlined } from '@mui/icons-material';
@@ -34,10 +35,11 @@ const App = () => {
   },[])
   return (
       <Store.Provider value={[state, dispatch]}>
-             {/* <Signup/> */}
-              <Header />
+      {/* <Signup/> */}
+      <Login />
+      {/* <Header/> */}
       {/* <CreatedAuction/> */}
-      <RegisteredAuction/>
+      {/* <RegisteredAuction/> */}
      
       {/* <BiddingPage/> */}
       {/* <UserProfile/> */}

@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import Keys from "../config";
 import { Grid, Typography, Button, Box } from '@mui/material'
 import { makeStyles } from "@material-ui/core/styles";
 import SendIcon from '@mui/icons-material/Send';
@@ -6,6 +8,18 @@ import SendIcon from '@mui/icons-material/Send';
 
 const imageee = "https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg"
 
+const defaultAuctionDetails = {
+  productName: "Loading..",
+  productDescription: "",
+  startingBid: "",
+  estimate: "",
+  startDate: "",
+  startTime: "",
+  auctioneerUserName: "",
+  auctionCategory: "",
+  city: "",
+  pincode: ""
+}
 
 const useStyles = makeStyles((theme) => ({
   auction_comp: {
@@ -23,8 +37,42 @@ const useStyles = makeStyles((theme) => ({
     },
   }
 }));
+
 const AuctionProductDetail = () => {
   const styles = useStyles();
+
+  const [auctionDetails, setAuctionDetails] = useState(defaultAuctionDetails);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const getAuctionDetails = async (id) => {
+    try {
+      const url = Keys.BASE_API + "auction/id/" + id;
+  
+      const tempAuctionDetails = await axios.get(url);
+      const fetchedAuctionDetails = {
+        productName: tempAuctionDetails.data.product_name,
+        productDescription: tempAuctionDetails.data.product_details,
+        startingBid: tempAuctionDetails.data.starting_price + "",
+        estimate: tempAuctionDetails.data.estimated_price + "",
+        startDate: tempAuctionDetails.data.start_date,
+        startTime: tempAuctionDetails.data.start_time,
+        auctioneerUserName: tempAuctionDetails.data.auctioneer_id,
+        auctionCategory: tempAuctionDetails.data.product_category,
+        city: tempAuctionDetails.data.city,
+        pincode: tempAuctionDetails.data.pincode
+      }
+      setAuctionDetails(fetchedAuctionDetails);
+      setIsLoading(false);
+  
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(async ()=>{
+    await getAuctionDetails(18);
+  },[isLoading]);
+  
   return (
     <>
       <Grid container spacing={3} className={styles.auction_comp}>
@@ -38,30 +86,30 @@ const AuctionProductDetail = () => {
         <Grid item xs={12} md={7}>
           <Grid container spacing={3}>
             <Grid item xs={11} md={8}>
-              <Typography variant='h3'>PRODUCT NAME</Typography>
+              <Typography variant='h3'>{auctionDetails.productName}</Typography>
             </Grid>
 
             <Grid item xs={11} md={11}>
               <Typography variant='body1'>
-                Born in 1924 in Simla, Ram Kumar was among India’s leading modernists. He studied Economics at St. Stephen’s College, New Delhi, in 1946. Following this, he went to Paris to studyorn in 1924 in Simla, Ram Kumar was among India’s leading modernists. He studied Economics at St. Stephen’s College, New Delhi, in 1946. Following this, he went to Paris to study....
+              {auctionDetails.productDescription}
               </Typography>
             </Grid>
 
             <Grid item xs={11} md={8}>
               <Typography variant='h5'>
-                STARTING BID : $1000
+              {"STARTING BID : $" + auctionDetails.startingBid}
               </Typography>
 
               <Typography variant='h5'>
-                ESTIMATED : $6000 - $10000
+              {"ESTIMATED : $" + auctionDetails.estimate}
               </Typography>
             </Grid>
             <Grid item xs={11} md={8}>
               <Typography variant='h6'>
-               Starting Date : 20 march 2022
+              {"Starting Date : " + auctionDetails.startDate}
               </Typography>
               <Typography variant='h6'>
-               Starting time : 18.00 IST
+              {"Starting time : " + auctionDetails.startTime}
               </Typography>
             </Grid>
             <Grid item xs={11} md={8}>
@@ -77,9 +125,9 @@ const AuctionProductDetail = () => {
             <Grid item xs={11} md={5}>
               <Box sx={{ boxShadow: "5", marginTop: "3" }}>
                 <Typography variant="h5">Details</Typography>
-                <Typography variant='body1'>Sold by - username</Typography>
-                <Typography variant="body1">Category</Typography>
-                <Typography variant='body2'>City , Pincode</Typography>
+                <Typography variant='body1'>{"Sold by - " + auctionDetails.auctioneerUserName}</Typography>
+                <Typography variant="body1">{"Category - " + auctionDetails.auctionCategory}</Typography>
+                <Typography variant='body2'>{"Address - " + auctionDetails.city + ", " + auctionDetails.pincode}</Typography>
               </Box>
             </Grid>
           </Grid>

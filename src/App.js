@@ -29,6 +29,7 @@ const App = () => {
       });
       return;
     }else{
+      //redirect to login page
       console.log("sfas");
     }
   },[])
@@ -38,8 +39,8 @@ const App = () => {
       
       {/* <Header /> */}
       {/* <BiddingPage/> */}
-      <UserProfile/>
-      {/* <Homepage/> */}
+      {/* <UserProfile/> */}
+      <Homepage/>
       {/* <AuctionProductDetail/> */}
       </Store.Provider>
   )

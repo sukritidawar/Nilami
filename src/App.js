@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import Homepage from './component/Homepage';
 import Header from './header/Header';
 import Signup from './auth/Signup';
+import Login from './auth/Login';
+import Signup from './auth/Signup';
 import AuctionProductDetail from './auction/AuctionProductDetail';
 import { SignpostOutlined } from '@mui/icons-material';
 // import UserProfile from './pages/userProfile/UserProfile';
@@ -36,9 +38,11 @@ const App = () => {
     <Store.Provider value={[state, dispatch]}>
       {/* <Signup/> */}
       <Header />
+      {/* <Header/> */}
       {/* <CreatedAuction/> */}
       {/* <RegisteredAuction/> */}
-      <BiddingPage username="xyz" desc="This is a painting." />
+      <Login />
+      {/* <BiddingPage/> */}
       {/* <UserProfile/> */}
       {/* <Homepage/> */}
       {/* <AuctionProductDetail/> */}

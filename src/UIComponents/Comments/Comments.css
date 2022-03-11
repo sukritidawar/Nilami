@@ -1,0 +1,31 @@
+.postCommentBox {
+  display: flex;
+  margin-top: 10px;
+}
+
+.postComments {
+  padding: 20px;
+}
+
+.postButton {
+  flex: 0;
+  border: none;
+  border-top: 1px solid lightgray;
+  color: #6082a3;
+  background-color: transparent;
+  border-top: 1px solid lightgray;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  border-top: 1px solid lightgray;
+}
+
+.comments {
+  max-width: 500px;
+  background-color: white;
+  border: 1px solid lightgray;
+  margin-bottom: 45px;
+}

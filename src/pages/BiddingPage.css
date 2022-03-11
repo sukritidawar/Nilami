@@ -1,0 +1,34 @@
+.Container {
+  padding: 25px;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-row-gap: 15px;
+}
+
+.auctionDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  height: 35%;
+  width: 50% !important;
+}
+
+.productDetails {
+}
+.Typo {
+  font-size: 25px;
+}
+
+.auctionOrganizer {
+  display: flex;
+}
+
+.avatar {
+  display: flex;
+}
+
+.comments {
+}
+
+.bidChat {
+}

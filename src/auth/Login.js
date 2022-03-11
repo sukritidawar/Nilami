@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState, useContext } from 'react';
+import axios from "axios";
 import { Grid, Box, TextField, Typography, Button, Container, Paper } from '@mui/material';
+import Store from "../store/Store";
+import Keys from "../config";
+import { LOGIN } from "../store/Types";
+import Cookies from 'js-cookie';
 import { makeStyles } from "@material-ui/core/styles";
 
-const user = {
+axios.defaults.withCredentials = true;
+
+const defaultuser = {
   email: "",
   password: ""
 }
+
 const useStyles = makeStyles((theme) => ({
   login_comp: {
     [theme.breakpoints.down('md')]: {
@@ -22,11 +30,48 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
 const Login = () => {
   const styles = useStyles();
 
-  const handleLogin = () => {
+  const [state, dispatch] = useContext(Store);
+  const [user, setUser] = useState(defaultuser);
+  let name, value;
 
+  const getUserData = (event) => {
+    name = event.target.name;
+    value = event.target.value;
+
+    setUser({ ...user, [name]: value })
+  };
+
+
+  const handleLogin = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const url = Keys.BASE_API + "user/login";
+      const body = JSON.stringify(user);
+
+      var res = await axios.post(url, body, config);
+
+      if (res.data.success) {
+        Cookies.set('isAuth', `${res.data.success}`);
+        Cookies.set('user_id', `${res.data.user_id}`);
+        
+        console.log(await dispatch({
+          type: LOGIN,
+          isAuth: `${res.data.success}`,
+          user_id: `${res.data.user_id}`,
+        }));
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className={styles.login_comp}>
@@ -40,24 +85,29 @@ const Login = () => {
 
               <form onSubmit={handleLogin} >
                 <TextField
-                  id="standard-basic"
-                  label="Username"
+                  label="Email"
                   variant="standard"
-                  margin="normal"
-                  // required value={email}
-                  fullWidth />
+                  placeholder='Email'
+                  name="email"
+                  type="email"
+                  value={user.email}
+                  onChange={getUserData}
+                  fullWidth
+                  required />
+
                 <TextField
-                  id="standard-basic"
                   label="Password"
                   variant="standard"
+                  placeholder='Password'
+                  name="password"
                   type="password"
-                  margin="normal"
+                  value={user.password}
+                  onChange={getUserData}
                   fullWidth
                   required
-                // value={password}
                 />
-                
-                <Typography><Button variant='contained'>SIGNIN</Button> New to Nilami <Button variant='text'>SIGNUp</Button></Typography>
+
+                <Typography><Button variant='contained' onClick = {handleLogin}>SIGNIN</Button> New to Nilami <Button variant='text'>SIGNUp</Button></Typography>
               </form>
             </Paper>
           </Container>

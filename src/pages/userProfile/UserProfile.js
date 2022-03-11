@@ -55,7 +55,7 @@ const UserProfile = () => {
         var res = await axios.post(url2,{email:"sho2@gmail.com",password:"1234"});
         console.log(res);
         const userInfo = await axios.get(url);
-        console.log(userInfo.data.userData.user);
+        // console.log(userInfo.data.userData.user);
         setUserDetails(userInfo.data.userData);
         setUserAddress(userInfo.data.userAddress);
         setIsLoading(true);
@@ -70,16 +70,16 @@ const UserProfile = () => {
       console.log(userDetails);
     },[isLoading]);
 
-    useEffect(() => {
-      setIsLoading(false);
-    },[]);
+    // useEffect(() => {
+    //   setIsLoading(false);
+    // },[]);
     
     return (    
       // <div></div>
       <div>
         
         {!isLoading ? 
-           <></>
+           <><h6>loading...</h6></>
          : (
           <Container className='container'>
             <h1 style={{textAlign: "center", color: "white"}}>Your Profile</h1> 

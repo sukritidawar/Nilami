@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
 
-const AuctionCommp = () => {
+const AuctionCommp = (props) => {
   return (
     <>
         <Card sx={{ maxWidth: 345 }}>
@@ -18,16 +18,15 @@ const AuctionCommp = () => {
           alt="green iguana"
         />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography variant="h5" component="div">
             Product name
-            final price - $1000
           </Typography>
           
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Open details
+         {props.buttonname}
         </Button>
       </CardActions>
     </Card>

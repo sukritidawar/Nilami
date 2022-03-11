@@ -33,14 +33,14 @@ const Homepage = () => {
     valueAcc:"",
   });
   const [auctionFeed,setAuctionFeed] = useState([]);
-  const [isLoading,setLoading] = useState(false);
+  const [isLoading,setLoading] = useState(true);
 
   const getDefaultAuctionFeed = async () => {
     try {
       const url = Keys.BASE_API + "auction/feed";
       var res = await axios.get(url);
       setAuctionFeed(res.data);
-      setLoading(true);
+      setLoading(false);
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -51,9 +51,7 @@ const Homepage = () => {
     console.log(auctionFeed);
   },[isLoading]);
 
-  useEffect(() => {
-    setLoading(false);
-  },[]);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,7 +90,7 @@ const Homepage = () => {
 
   return (
     <>
-      {!isLoading ?
+      {isLoading ?
       <h2>loading...</h2> 
       :
       <Grid container spacing={2} className={styles.feed_comp}>
@@ -124,24 +122,6 @@ const Homepage = () => {
         {auctionFeed.map((auction) => (
           <Feed auction = {auction} />
         ))}
-        {/* <Grid item xs={12} md={4}>
-          <Feed />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Feed />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Feed />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Feed />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Feed />
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Feed />
-        </Grid> */}
       </Grid>
        }  
     </>

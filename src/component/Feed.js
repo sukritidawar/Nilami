@@ -14,7 +14,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import dateFormat from "dateformat";
 import Keys from "../config";
 import axios from "axios";
-import { useContext,useState } from 'react';
+import { useContext,useState,useEffect } from 'react';
 import store from "../store/Store"
 import FlashMessage from "react-flash-message"
 axios.defaults.withCredentials = true;
@@ -41,6 +41,7 @@ const Feed = ({auction}) => {
       console.log("sf");
     }
   }
+  
     
   const handleShareClick = () =>{
     navigator.clipboard.writeText(Keys.BASE_API + `auction/id/${auction.auction_id}`);

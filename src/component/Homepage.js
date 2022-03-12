@@ -32,7 +32,7 @@ const Homepage = () => {
   };
   return (
     <>
-        
+        <Header/>
       <Grid container spacing={2} className={styles.feed_comp}>
       <Grid item xs={10} md = {9}>
       <FormControl fullWidth>

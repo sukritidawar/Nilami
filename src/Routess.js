@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useContext, useReducer, useState } from "react";
 import { Route, Routes, Link } from 'react-router-dom';
-
 import AuctionProductDetail from './auction/AuctionProductDetail';
 import BiddingPage from './auction/BiddingPage';
 import CreatedAuction from './auction/CreatedAuction';
@@ -41,16 +40,16 @@ const Routess = () => {
       <Routes>
       <Route exact path="/" element={<Login />} />
       <Route exact path="/signup" element={<Signup />} />
-      <Route exact path="/feed" element={<Feed />} />
+      <Route exact path="/feed" element={<Homepage />} />
       <Route exact path="/feed/:id" element={<AuctionProductDetail />} />
       <Route exact path="/feed/:id/biding" element={< BiddingPage />} />
       
       </Routes>
       {/* <Signup/> */}
-      <Login />
+      {/* <Login /> */}
       {/* <Header/> */}
       {/* <CreatedAuction/> */}
-      {/* <RegisteredAuction/> */}
+      <RegisteredAuction/>
      
       {/* <BiddingPage/> */}
       {/* <UserProfile/> */}

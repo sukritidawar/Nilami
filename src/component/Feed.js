@@ -11,25 +11,63 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import dateFormat from "dateformat";
+import Keys from "../config";
+import axios from "axios";
+import { useContext,useState,useEffect } from 'react';
+import store from "../store/Store"
+import FlashMessage from "react-flash-message"
+axios.defaults.withCredentials = true;
 
-const Feed = () => {
+const Feed = ({auction}) => {
+  const [feedLike,setfeedLike] = React.useState(`${auction.n_likes}`);
+  const [authInfo, setAuthInfo] = useContext(store);
+  const [likeColor, setlikeColor] = useState("gray");
+  const [clipboardMessage,setMessage] = useState(false);
+  
+  const updateLikes = async () => {
+    if(authInfo.isAuth){
+      try {
+          const url = Keys.BASE_API + `auction/add_like/${auction.auction_id}`;
+          var res = await axios.put(url);
+          console.log(res);
+          setfeedLike((prevValue)=>{return parseInt(prevValue) + 1});
+          setlikeColor("red");
+          console.log(feedLike);
+        } catch (error) {
+          console.log(error);
+        }
+    }else{
+      console.log("sf");
+    }
+  }
+  
+    
+  const handleShareClick = () =>{
+    navigator.clipboard.writeText(Keys.BASE_API + `auction/id/${auction.auction_id}`);
+    setMessage(true);
+  }
+  
     
     return (
         <Card sx={{ maxWidth: 400}}>
           <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                R
-              </Avatar>
-            }
-            action={
-              <IconButton aria-label="settings">
-                <MoreVertIcon />
-              </IconButton>
-            }
-            title="Shrimp and Chorizo Paella"
-            subheader="September 14, 2016"
+            // avatar={
+            //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+            //     R
+            //   </Avatar>
+            // }
+            // action={
+            //   <IconButton aria-label="settings">
+            //     <MoreVertIcon />
+            //   </IconButton>
+            // }
+            title= {auction.product_name}
+            subheader= {auction.product_category}
           />
+          
+          <p>Date: {dateFormat(auction.start_date,"dd/mm/yy")} - {dateFormat(auction.end_date,"dd/mm/yy")}</p>
+          <p>Time: {auction.start_time} - {auction.end_time}</p>
           <CardMedia
             component="img"
             height="194"
@@ -38,17 +76,22 @@ const Feed = () => {
           />
           <CardContent>
             <Typography variant="body2" color="text.secondary">
-              This impressive paella is a perfect party dish and a fun meal to cook
-              together with your guests. Add 1 cup of frozen peas along with the mussels,
-              if you like.
+              {auction.product_details}
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
+            <IconButton aria-label="add to favorites" onClick={updateLikes} style={{color:`${likeColor}`}}>
               <FavoriteIcon />
             </IconButton>
-            <IconButton aria-label="share">
+            <p>{feedLike}</p>
+            <IconButton aria-label="share" onClick={handleShareClick}>
               <ShareIcon />
+              {clipboardMessage && (
+                <FlashMessage duration={2000}>
+                  <p style={{fontSize:"0.8rem"}}>link copied to clipboard!</p>
+                </FlashMessage>
+
+              )}
             </IconButton>
           </CardActions>
           

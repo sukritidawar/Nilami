@@ -90,7 +90,7 @@ const Homepage = () => {
 
   return (
     <>
-      { <Header />}
+      {<Header />}
       {isLoading ?
         <h2>loading...</h2>
         :
@@ -112,7 +112,8 @@ const Homepage = () => {
                           <MenuItem value={1}>Location</MenuItem>
                           <MenuItem value={2}>Category</MenuItem>
                         </Select>
-                      </FormControl></Grid>
+                      </FormControl>
+                    </Grid>
                     <Grid item xs={12} md={5} style={{ alignItems: 'center' }}>
                       <input
                         name="valueAcc"
@@ -121,7 +122,8 @@ const Homepage = () => {
                         placeholder="address"
                         onChange={handleChange}
                         style={{ width: 99 }}
-                      /></Grid>
+                      />
+                    </Grid>
                   </Grid>
                 </Grid>
                 <Grid item xs={12} md={2}>
@@ -141,7 +143,8 @@ const Homepage = () => {
                 auctionFeed.map((auction) => (
                   <Feed auction={auction} />
                 ))
-              }</Grid>
+              }
+            </Grid>
           </Grid>
         </Grid >
       }

@@ -173,7 +173,7 @@ const Signup = () => {
                   variant="outlined"
                   placeholder='Profile url'
                   name="profile_url"
-                  type="password"
+                  type="text"
                   value={user.profile_url}
                   onChange={getUserData}
                   fullWidth

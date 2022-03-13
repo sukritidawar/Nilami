@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Keys from "../config";
-import { Grid, Typography, Button, Box } from '@mui/material'
+import { Grid, Typography, Button, Box, Container, CssBaseline } from '@mui/material'
 import { makeStyles } from "@material-ui/core/styles";
 import SendIcon from '@mui/icons-material/Send';
 import { useParams } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const imageee = "https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg"
 
@@ -20,23 +21,6 @@ const defaultAuctionDetails = {
   city: "",
   pincode: ""
 }
-
-const useStyles = makeStyles((theme) => ({
-  auction_comp: {
-    [theme.breakpoints.down('md')]: {
-      paddingTop: theme.spacing(3),
-      paddingLeft: theme.spacing(3),
-      paddingRight: theme.spacing(3),
-      paddingBottom: theme.spacing(5),
-      boxShadow: "5px",
-    },
-    [theme.breakpoints.up('md')]: {
-      paddingTop: theme.spacing(8),
-      paddingLeft: theme.spacing(10),
-      paddingBottom: theme.spacing(5),
-    },
-  }
-}));
 
 const AuctionProductDetail = () => {
   const styles = useStyles();
@@ -65,76 +49,99 @@ const AuctionProductDetail = () => {
       }
       setAuctionDetails(fetchedAuctionDetails);
       setIsLoading(false);
-  
+
     } catch (error) {
       console.log(error);
     }
   }
 
-  useEffect(async ()=>{
+  useEffect(async () => {
     await getAuctionDetails(18);
-  },[isLoading]);
-  
+  }, [isLoading]);
+
   return (
     <>
-      <Grid container spacing={3} className={styles.auction_comp}>
-        <Grid item xs={4} md={5}>
-          <img
-            srcSet={`${imageee}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            alt="not there"
-            loading="lazy"
-          />
-        </Grid>
-        <Grid item xs={12} md={7}>
-          <Grid container spacing={3}>
-            <Grid item xs={11} md={8}>
-              <Typography variant='h3'>{auctionDetails.productName}</Typography>
-            </Grid>
+      <ThemeProvider theme={theme}>
+        <Grid container component="main" sx={{
+          backgroundColor: 'rgb(42,157,143)',
+          padding: 10
+        }}>
+          <CssBaseline />
+          <Grid
+            item
+            xs={12}
+            md={5}
+            sx={{
+              /*border: '5px solid rgb(42,157,143);',*/
+              backgroundImage: `url(${imageee})`,
+              backgroundRepeat: 'no-repeat',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              textAlign: 'center',
+              paddingTop: 2
+            }}
+          ></Grid>
+          <Grid item xs={12} md={7} elevation={6} sx={{
+            padding: 10,
+            paddingLeft: 20,
+            backgroundColor: 'rgb(233,196,106)',
+            fontFamily: "Montserrat"
+          }}>
+            <Grid container spacing={3} >
+              <Grid item xs={11} md={7}>
+                <Typography variant='h3' style={{ fontFamily: "serif" }}>{auctionDetails.productName}</Typography>
+              </Grid>
+              <Grid item xs={11} md={5} sx={{ textAlign: "right" }}>
+                <Typography variant="h7" > {auctionDetails.auctionCategory}</Typography>
+              </Grid>
+              <Grid item xs={11} md={11}>
+                <Typography variant='body1' style={{ fontFamily: "lato" }}>
+                  {auctionDetails.productDescription}
+                </Typography>
+              </Grid>
 
-            <Grid item xs={11} md={11}>
-              <Typography variant='body1'>
-              {auctionDetails.productDescription}
-              </Typography>
-            </Grid>
+              <Grid item xs={11} md={8} >
+                <Typography variant='h6'>
+                  {"Starting Bid : $" + auctionDetails.startingBid}
+                </Typography>
 
-            <Grid item xs={11} md={8}>
-              <Typography variant='h5'>
-              {"STARTING BID : $" + auctionDetails.startingBid}
-              </Typography>
-
-              <Typography variant='h5'>
-              {"ESTIMATED : $" + auctionDetails.estimate}
-              </Typography>
-            </Grid>
-            <Grid item xs={11} md={8}>
-              <Typography variant='h6'>
-              {"Starting Date : " + auctionDetails.startDate}
-              </Typography>
-              <Typography variant='h6'>
-              {"Starting time : " + auctionDetails.startTime}
-              </Typography>
-            </Grid>
-            <Grid item xs={11} md={8}>
-              <span style={{ marginRight: "20px" }}> <Button variant="contained">
-                Register
+                <Typography variant='h6'>
+                  {"Estimated Price: $" + auctionDetails.estimate}
+                </Typography>
+              </Grid>
+              <Grid item xs={11} md={8}>
+                <Typography variant='h6'>
+                  {"Start Date : " + auctionDetails.startDate}
+                </Typography>
+                <Typography variant='h6'>
+                  {"Start time : " + auctionDetails.startTime}
+                </Typography>
+              </Grid>
+              <Grid item xs={11} md={8}>
+                <span style={{ marginRight: "20px" }}> <Button variant="contained" style={{ backgroundColor: "rgb(38,70,83)" }}>
+                  Register
               </Button></span>
 
-              <Button variant="contained" endIcon={<SendIcon />}>
-                Go to bidding
+                <Button variant="contained" href="/" style={{ backgroundColor: "rgb(231,111,81)" }} endIcon={<SendIcon />}>
+                  Go to bidding
               </Button>
-            </Grid>
+              </Grid>
 
-            <Grid item xs={11} md={5}>
-              <Box sx={{ boxShadow: "5", marginTop: "3" }}>
-                <Typography variant="h5">Details</Typography>
-                <Typography variant='body1'>{"Sold by - " + auctionDetails.auctioneerUserName}</Typography>
-                <Typography variant="body1">{"Category - " + auctionDetails.auctionCategory}</Typography>
-                <Typography variant='body2'>{"Address - " + auctionDetails.city + ", " + auctionDetails.pincode}</Typography>
-              </Box>
+              <Grid item xs={11} md={12}>
+                <Grid container>
+                  <Grid item md={7}></Grid>
+                  <Box item xs={11} md={5} sx={{ marginTop: "3" }}>
+                    <Typography variant="h5">Auctioneer Details</Typography>
+                    <Typography variant='body1'>{"Sold by - " + auctionDetails.auctioneerUserName}</Typography>
+                    <Typography variant='body2'>{"Address - " + auctionDetails.city + ", " + auctionDetails.pincode}</Typography>
+                  </Box>
+
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
+      </ThemeProvider>
     </>
   )
 }

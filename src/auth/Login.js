@@ -1,12 +1,16 @@
 import React, { useState, useContext } from 'react';
 import axios from "axios";
-import { Grid, Box, TextField, Typography, Button, Container, Paper } from '@mui/material';
+import { Grid, Box, TextField, Typography, Button, Avatar, Container, Link, Checkbox, Paper, Backdrop } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 import Store from "../store/Store";
 import Keys from "../config";
 import { LOGIN } from "../store/Types";
 import Cookies from 'js-cookie';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Image from '../images/Auction.jpg'
 import { makeStyles } from "@material-ui/core/styles";
-import {Link,useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
@@ -15,30 +19,26 @@ const defaultuser = {
   password: ""
 }
 
-const useStyles = makeStyles((theme) => ({
-  login_comp: {
-    [theme.breakpoints.down('md')]: {
-      paddingTop: theme.spacing(10),
-      paddingLeft: theme.spacing(15),
-      paddingRight: theme.spacing(3),
-      paddingBottom: theme.spacing(5),
-    },
-    [theme.breakpoints.up('md')]: {
-      paddingTop: theme.spacing(4),
-      paddingLeft: theme.spacing(5),
-      paddingBottom: theme.spacing(5),
-    },
-  }
-}));
-
-
 const Login = () => {
+  const theme = createTheme();
   const navigate = useNavigate();
-  const styles = useStyles();
 
   const [state, dispatch] = useContext(Store);
   const [user, setUser] = useState(defaultuser);
   let name, value;
+
+  function Copyright(props) {
+    return (
+      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+        {'Copyright © '}
+        <Link color="inherit" href="https://mui.com/">
+          Niलाmi
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
 
   const getUserData = (event) => {
     name = event.target.name;
@@ -63,7 +63,7 @@ const Login = () => {
       if (res.data.success) {
         Cookies.set('isAuth', `${res.data.success}`);
         Cookies.set('user_id', `${res.data.user_id}`);
-        
+
         console.log(await dispatch({
           type: LOGIN,
           isAuth: `${res.data.success}`,
@@ -72,8 +72,7 @@ const Login = () => {
 
         navigate("/feed");
       }
-      else
-      {
+      else {
         alert("wrong credentials");
         navigate("/");
       }
@@ -83,51 +82,92 @@ const Login = () => {
     }
   };
   return (
-    <div className={styles.login_comp}>
-      <Typography variant="h1" >Niलाmi</Typography>
-      <Typography>Lid it, Try it, Bid it, Buy it. </Typography>
+    <ThemeProvider theme={theme}>
+      <Grid container component="main" sx={{ height: '100vh' }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={8}
+          md={6}
+          sx={{
+            backgroundImage: `url(${Image})`,
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            textAlign: 'center',
+            paddingTop: 18
+          }}
+        >
+          <Typography variant="h1" fontSize="180px" color="rgb(15,76,92)">Niलाmi</Typography>
+          <Typography fontSize="36px" color="rgb(231,111,81)">Lid it, Try it, Bid it, Buy it. </Typography>
 
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <Container>
-            <Paper component={Box} width="60%" mx="auto" p={4} boxShadow={10}>
-
-              <form onSubmit={handleLogin} >
-                <TextField
-                  label="Email"
-                  variant="standard"
-                  placeholder='Email'
-                  name="email"
-                  type="email"
-                  value={user.email}
-                  onChange={getUserData}
-                  fullWidth
-                  required />
-
-                <TextField
-                  label="Password"
-                  variant="standard"
-                  placeholder='Password'
-                  name="password"
-                  type="password"
-                  value={user.password}
-                  onChange={getUserData}
-                  fullWidth
-                  required
-                />
-
-                <Typography><Button variant='contained' onClick = {handleLogin}>SIGNIN</Button> New to Nilami <Button variant='text' component={Link} to= "/signup">SIGNUp</Button></Typography>
-              </form>
-            </Paper>
-          </Container>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} sm={4} md={6} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: '#e9c46a' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
+          </Typography>
+            <Box component="form" noValidate onSubmit={handleLogin} sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                label="Email"
+                variant="standard"
+                placeholder='Email'
+                name="email"
+                type="email"
+                value={user.email}
+                onChange={getUserData}
+                fullWidth
+                required
+                autoFocus />
 
-          <img srcSet={require(`../images/Auction.jpg`)}
-          />
+              <TextField
+                margin="normal"
+                label="Password"
+                variant="standard"
+                placeholder='Password'
+                name="password"
+                type="password"
+                value={user.password}
+                onChange={getUserData}
+                fullWidth
+                required
+              />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleLogin}
+              >
+                Sign In
+            </Button>
+
+              <Grid container>
+                <Grid item>
+                  <Link href="/signup" variant="body2">
+                    {"New to Niलाmi? Sign Up."}
+                  </Link>
+                </Grid>
+              </Grid>
+              <Copyright sx={{ mt: 5 }} />
+            </Box>
+          </Box>
         </Grid>
       </Grid>
-    </div>
+    </ThemeProvider >
   )
 }
 

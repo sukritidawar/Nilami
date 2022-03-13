@@ -35,9 +35,9 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static">
-    {/* <AppBar> */}
-      <Container maxWidth="xl">
+    <AppBar position="static" style={{ backgroundColor: 'rgb(38,70,83)' }}>
+      {/* <AppBar> */}
+      <Container maxWidth="xl" >
         <Toolbar disableGutters>
           <Typography
             variant="h6"
@@ -45,7 +45,7 @@ const Header = () => {
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
           >
-            NILAMI
+            Niलाmi
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -107,7 +107,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar sx={{ m: 1, bgcolor: '#e9c46a' }} />
               </IconButton>
             </Tooltip>
             <Menu

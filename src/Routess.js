@@ -34,12 +34,12 @@ const Routess = () => {
         user_id: `${user_id}`
       });
       return;
-    }else{
+    } else {
       console.log("sfas");
     }
-  },[])
+  }, [])
   return (
-      <Store.Provider value={[state, dispatch]}>
+    <Store.Provider value={[state, dispatch]}>
       <Routes>
       <Route exact path="/" element={<Login />} />
       <Route exact path="/signup" element={<Signup />} />
@@ -51,7 +51,7 @@ const Routess = () => {
       <Route exact path="/myauction" element ={<CreatedAuction/>} />
       
       </Routes>
-      </Store.Provider>
+    </Store.Provider>
   )
 }
 export default Routess;

@@ -1,19 +1,16 @@
 import React, { useState, useContext } from 'react';
 import axios from "axios";
-import { Grid, Box, TextField, Typography, Button, Avatar, Container, Checkbox, Paper, Link, Backdrop } from '@mui/material';
+import { Grid, Box, TextField, Typography, Button, Avatar, Container, Link, Checkbox, Paper, Backdrop } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Store from "../store/Store";
 import Keys from "../config";
 import { LOGIN } from "../store/Types";
 import Cookies from 'js-cookie';
-<<<<<<< HEAD
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Image from '../images/Auction.jpg'
-=======
 import { makeStyles } from "@material-ui/core/styles";
-import {Link,useNavigate} from "react-router-dom";
->>>>>>> 6b72bfaea657dff39023bd62b82a76d23ec8cdb4
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
@@ -23,12 +20,8 @@ const defaultuser = {
 }
 
 const Login = () => {
-<<<<<<< HEAD
   const theme = createTheme();
-=======
   const navigate = useNavigate();
-  const styles = useStyles();
->>>>>>> 6b72bfaea657dff39023bd62b82a76d23ec8cdb4
 
   const [state, dispatch] = useContext(Store);
   const [user, setUser] = useState(defaultuser);

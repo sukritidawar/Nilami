@@ -72,6 +72,11 @@ const Login = () => {
 
         navigate("/feed");
       }
+      else
+      {
+        alert("wrong credentials");
+        navigate("/");
+      }
 
     } catch (error) {
       console.log(error);

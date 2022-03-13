@@ -11,7 +11,10 @@ import Checkbox from '@mui/material/Checkbox';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { Link, useNavigate } from "react-router-dom";
 axios.defaults.withCredentials = true;
+
+
 
 const defaultuser = {
   name: "",
@@ -28,6 +31,7 @@ const Signup = () => {
 
   const theme = createTheme();
 
+  const navigate = useNavigate();
   const [state, dispatch] = useContext(Store);
   const [user, setUser] = useState(defaultuser);
   let name, value;
@@ -85,8 +89,11 @@ const Signup = () => {
       console.log(await dispatch({
         type: LOGIN,
         user_id: `${res.data.user_id}`,
+
       }));
+
       console.log(state);
+      navigate("/feed");
     } catch (error) {
       console.log(error);
     }
@@ -427,7 +434,8 @@ export default Signup;
                 <Typography variant='body1'>Already on Nilami <Button
                   variant="text"
                   color="primary"
-                  type="submit" onClick={handleSubmit}
+                  component={Link} to="/"
+
                   mt={1}>
                   Signin
               </Button></Typography>

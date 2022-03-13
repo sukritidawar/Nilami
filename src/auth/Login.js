@@ -6,9 +6,14 @@ import Store from "../store/Store";
 import Keys from "../config";
 import { LOGIN } from "../store/Types";
 import Cookies from 'js-cookie';
+<<<<<<< HEAD
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Image from '../images/Auction.jpg'
+=======
+import { makeStyles } from "@material-ui/core/styles";
+import {Link,useNavigate} from "react-router-dom";
+>>>>>>> 6b72bfaea657dff39023bd62b82a76d23ec8cdb4
 
 axios.defaults.withCredentials = true;
 
@@ -18,7 +23,12 @@ const defaultuser = {
 }
 
 const Login = () => {
+<<<<<<< HEAD
   const theme = createTheme();
+=======
+  const navigate = useNavigate();
+  const styles = useStyles();
+>>>>>>> 6b72bfaea657dff39023bd62b82a76d23ec8cdb4
 
   const [state, dispatch] = useContext(Store);
   const [user, setUser] = useState(defaultuser);
@@ -66,6 +76,12 @@ const Login = () => {
           isAuth: `${res.data.success}`,
           user_id: `${res.data.user_id}`,
         }));
+
+        navigate("/feed");
+      }
+      else {
+        alert("wrong credentials");
+        navigate("/");
       }
 
     } catch (error) {

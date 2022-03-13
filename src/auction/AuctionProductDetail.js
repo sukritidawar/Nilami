@@ -4,7 +4,7 @@ import Keys from "../config";
 import { Grid, Typography, Button, Box } from '@mui/material'
 import { makeStyles } from "@material-ui/core/styles";
 import SendIcon from '@mui/icons-material/Send';
-
+import { useParams } from 'react-router-dom';
 
 const imageee = "https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg"
 
@@ -40,15 +40,17 @@ const useStyles = makeStyles((theme) => ({
 
 const AuctionProductDetail = () => {
   const styles = useStyles();
-
+  const { id } = useParams();
+  console.log(id);
   const [auctionDetails, setAuctionDetails] = useState(defaultAuctionDetails);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getAuctionDetails = async (id) => {
+  const getAuctionDetails = async () => {
     try {
       const url = Keys.BASE_API + "auction/id/" + id;
-  
+     console.log(url);
       const tempAuctionDetails = await axios.get(url);
+      console.log(tempAuctionDetails);
       const fetchedAuctionDetails = {
         productName: tempAuctionDetails.data.product_name,
         productDescription: tempAuctionDetails.data.product_details,

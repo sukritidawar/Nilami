@@ -44,7 +44,7 @@ const Routess = () => {
       <Route exact path="/" element={<Login />} />
       <Route exact path="/signup" element={<Signup />} />
       <Route exact path="/feed" element={<Homepage />} />
-      <Route exact path="/feed/productdetail" element={<AuctionProductDetail />} />
+      <Route exact path="/feed/:id" element={<AuctionProductDetail />} />
       <Route exact path="/feed/product/biding" element={<BiddingPage />} />
       <Route exact path="/profile" element ={<UserProfile/>} />
       <Route exact path="/registeredauction" element ={<RegisteredAuction/>} />  

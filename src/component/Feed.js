@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Link} from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -15,9 +16,11 @@ import dateFormat from "dateformat";
 import Keys from "../config";
 import axios from "axios";
 import { useContext,useState,useEffect } from 'react';
-import store from "../store/Store"
-import FlashMessage from "react-flash-message"
+import store from "../store/Store";
+import FlashMessage from "react-flash-message";
+
 axios.defaults.withCredentials = true;
+
 
 const Feed = ({auction}) => {
   const [feedLike,setfeedLike] = React.useState(`${auction.n_likes}`);
@@ -44,13 +47,16 @@ const Feed = ({auction}) => {
   
     
   const handleShareClick = () =>{
-    navigator.clipboard.writeText(Keys.BASE_API + `auction/id/${auction.auction_id}`);
+    navigator.clipboard.writeText("http://localhost:3001/"+ `feed/${auction.auction_id}`);
     setMessage(true);
   }
   
+
+  const linkedto = auction.auction_id;
     
     return (
         <Card sx={{ maxWidth: 400}}>
+          <Link to = {linkedto}>
           <CardHeader
             // avatar={
             //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -68,12 +74,15 @@ const Feed = ({auction}) => {
           
           <p>Date: {dateFormat(auction.start_date,"dd/mm/yy")} - {dateFormat(auction.end_date,"dd/mm/yy")}</p>
           <p>Time: {auction.start_time} - {auction.end_time}</p>
+          </Link>
+          <Link to = {linkedto}>
           <CardMedia
             component="img"
             height="194"
             image="https://cdn.pixabay.com/photo/2018/09/09/18/04/judge-3665164_960_720.jpg"
             alt="Paella dish"
           />
+          </Link>
           <CardContent>
             <Typography variant="body2" color="text.secondary">
               {auction.product_details}

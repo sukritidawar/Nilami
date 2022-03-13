@@ -100,49 +100,6 @@ const Feed = ({auction}) => {
                   <p style={{fontSize:"0.8rem"}}>link copied to clipboard!</p>
                 </FlashMessage>
 
-
-  return (
-    <Card sx={{ margin: 2, maxWidth: 400, padding: 2, border: '2px solid rgb(244,162,97)', }}>
-      <CardHeader
-        // avatar={
-        //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-        //     R
-        //   </Avatar>
-        // }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title={auction.product_name}
-        subheader={auction.product_category}
-      />
-
-      <p>Date: {dateFormat(auction.start_date, "dd/mm/yy")} - {dateFormat(auction.end_date, "dd/mm/yy")}</p>
-      <p>Time: {auction.start_time} - {auction.end_time}</p>
-      <CardMedia
-        component="img"
-        height="194"
-        image="https://cdn.pixabay.com/photo/2018/09/09/18/04/judge-3665164_960_720.jpg"
-        alt="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          {auction.product_details}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={updateLikes} style={{ color: `${likeColor}` }}>
-          <FavoriteIcon />
-        </IconButton>
-        <p>{feedLike}</p>
-        <IconButton aria-label="share" onClick={handleShareClick}>
-          <ShareIcon />
-          {clipboardMessage && (
-            <FlashMessage duration={2000}>
-              <p style={{ fontSize: "0.8rem" }}>link copied to clipboard!</p>
-            </FlashMessage>
-
           )}
         </IconButton>
       </CardActions>

@@ -31,31 +31,31 @@ const Routess = () => {
         user_id: `${user_id}`
       });
       return;
-    }else{
+    } else {
       console.log("sfas");
     }
-  },[])
+  }, [])
   return (
-      <Store.Provider value={[state, dispatch]}>
+    <Store.Provider value={[state, dispatch]}>
       <Routes>
-      <Route exact path="/" element={<Login />} />
-      <Route exact path="/signup" element={<Signup />} />
-      <Route exact path="/feed" element={<Homepage />} />
-      <Route exact path="/feed/:id" element={<AuctionProductDetail />} />
-      <Route exact path="/feed/:id/biding" element={< BiddingPage />} />
-      
+        <Route exact path="/" element={<Login />} />
+        <Route exact path="/signup" element={<Signup />} />
+        <Route exact path="/feed" element={<Homepage />} />
+        <Route exact path="/feed/:id" element={<AuctionProductDetail />} />
+        <Route exact path="/feed/:id/biding" element={< BiddingPage />} />
+
       </Routes>
       {/* <Signup/> */}
       {/* <Login /> */}
       {/* <Header/> */}
       {/* <CreatedAuction/> */}
-      <RegisteredAuction/>
-     
+      {/*<RegisteredAuction/>*/}
+
       {/* <BiddingPage/> */}
       {/* <UserProfile/> */}
       {/* <Homepage/> */}
       {/* <AuctionProductDetail/> */}
-      </Store.Provider>
+    </Store.Provider>
   )
 }
 export default Routess;

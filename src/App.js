@@ -40,11 +40,11 @@ const App = () => {
        {/* <Signup/>
       <Login />
       <Header/> */}
-      <CreatedAuction/> 
+      {/* <CreatedAuction/>  */}
       {/* <RegisteredAuction/> */}
      
        {/* <BiddingPage/> */}
-      {/* <UserProfile/>  */}
+      <UserProfile/> 
       {/* <Homepage/>  */}
       {/* <AuctionProductDetail/> */}
     </Store.Provider>

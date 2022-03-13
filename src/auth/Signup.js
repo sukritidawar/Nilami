@@ -6,8 +6,10 @@ import Keys from "../config";
 import { LOGIN } from "../store/Types";
 import Cookies from 'js-cookie';
 import { makeStyles } from "@material-ui/core/styles";
-
+import {Link,useNavigate} from "react-router-dom";
 axios.defaults.withCredentials = true;
+
+
 
 const defaultuser = {
   name: "",
@@ -44,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Signup = () => {
 
+  const navigate = useNavigate();
   const [state, dispatch] = useContext(Store);
   const [user, setUser] = useState(defaultuser);
 
@@ -89,8 +92,11 @@ const Signup = () => {
       console.log(await dispatch({
         type: LOGIN,
         user_id: `${res.data.user_id}`,
+        
       }));
+
       console.log(state);
+      navigate("/feed");
     } catch (error) {
       console.log(error);
     }
@@ -253,7 +259,8 @@ const Signup = () => {
                 <Typography variant='body1'>Already on Nilami <Button
                   variant="text"
                   color="primary"
-                  type="submit" onClick={handleSubmit}
+                  component={Link} to="/"
+
                   mt={1}>
                   Signin
                 </Button></Typography>

@@ -6,6 +6,7 @@ import Keys from "../config";
 import { LOGIN } from "../store/Types";
 import Cookies from 'js-cookie';
 import { makeStyles } from "@material-ui/core/styles";
+import {Link,useNavigate} from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const Login = () => {
+  const navigate = useNavigate();
   const styles = useStyles();
 
   const [state, dispatch] = useContext(Store);
@@ -67,6 +69,8 @@ const Login = () => {
           isAuth: `${res.data.success}`,
           user_id: `${res.data.user_id}`,
         }));
+
+        navigate("/feed");
       }
 
     } catch (error) {
@@ -107,7 +111,7 @@ const Login = () => {
                   required
                 />
 
-                <Typography><Button variant='contained' onClick = {handleLogin}>SIGNIN</Button> New to Nilami <Button variant='text'>SIGNUp</Button></Typography>
+                <Typography><Button variant='contained' onClick = {handleLogin}>SIGNIN</Button> New to Nilami <Button variant='text' component={Link} to= "/signup">SIGNUp</Button></Typography>
               </form>
             </Paper>
           </Container>

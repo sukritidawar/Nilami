@@ -11,10 +11,23 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import {Link} from "react-router-dom";
 
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Logout'];
 
+const pages = [{
+  name : "Home",
+  link : "/feed"
+},
+{
+  name : 'Regsitered Auctions',
+  link : "/registeredauction"
+},
+{
+  name : 'My created Auctions',
+  link : "/myauction"
+}
+]
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -79,9 +92,10 @@ const Header = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center"><Button component={Link} to={page.link}>{page.name}</Button></Typography>
                 </MenuItem>
               ))}
+
             </Menu>
           </Box>
           <Typography
@@ -95,11 +109,14 @@ const Header = () => {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-                key={page}
+                key={page.name}
+                component={Link}
+                to = {page.link}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                
               >
-                {page}
+                {page.name}
               </Button>
             ))}
           </Box>

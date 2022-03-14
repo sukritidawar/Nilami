@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import {Link} from "react-router-dom";
 import Keys from "../config";
 import { Grid, Typography, Button, Box, Container, CssBaseline } from '@mui/material'
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,7 +24,7 @@ const defaultAuctionDetails = {
 }
 
 const AuctionProductDetail = () => {
-  const styles = useStyles();
+  const theme = createTheme();
   const { id } = useParams();
   console.log(id);
   const [auctionDetails, setAuctionDetails] = useState(defaultAuctionDetails);
@@ -122,7 +123,10 @@ const AuctionProductDetail = () => {
                   Register
               </Button></span>
 
-                <Button variant="contained" href="/" style={{ backgroundColor: "rgb(231,111,81)" }} endIcon={<SendIcon />}>
+                <Button variant="contained"component={Link}
+                to = {`/feed/${id}/bidding`}
+                 style={{ backgroundColor: "rgb(231,111,81)" }} 
+                 endIcon={<SendIcon />}>
                   Go to bidding
               </Button>
               </Grid>

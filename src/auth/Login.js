@@ -8,7 +8,7 @@ import { LOGIN } from "../store/Types";
 import Cookies from 'js-cookie';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Image from '../images/Auction.jpg'
+import Image from '../images/Auction1.png'
 import { makeStyles } from "@material-ui/core/styles";
 import { useNavigate } from "react-router-dom";
 
@@ -81,6 +81,7 @@ const Login = () => {
       console.log(error);
     }
   };
+
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
@@ -96,11 +97,11 @@ const Login = () => {
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             textAlign: 'center',
-            paddingTop: 18
+            paddingTop: 18,
           }}
         >
           <Typography variant="h1" fontSize="180px" color="rgb(15,76,92)">Niलाmi</Typography>
-          <Typography fontSize="36px" color="rgb(231,111,81)">Lid it, Try it, Bid it, Buy it. </Typography>
+          <Typography fontSize="36px" color="rgb(231,111,81)">Like it, Try it, Bid it, Buy it. </Typography>
 
         </Grid>
         <Grid item xs={12} sm={4} md={6} component={Paper} elevation={6} square>

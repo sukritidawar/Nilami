@@ -52,7 +52,7 @@ const Feed = ({auction}) => {
   }
   
 
-  const linkedto = auction.auction_id;
+  const linkedto = `../feed/${auction.auction_id}`;
     
     return (
         <Card sx={{ maxWidth: 400}}>

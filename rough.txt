@@ -4,7 +4,7 @@
 // pending work
 
 
-Backend 
+// Backend 
 
 // Login correct
 // AUCTION PRODUCT DETAIL FROM BACKEND
@@ -26,7 +26,7 @@ Backend
 // ANY OTHER ALGO SHOULD BE THERE
 
 
-UI
+// UI
 // WINNER CHAT OPTION - ui
 // FEED UI
 // BIDDING PAGE

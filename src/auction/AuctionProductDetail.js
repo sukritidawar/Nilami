@@ -24,7 +24,6 @@ const defaultAuctionDetails = {
 }
 
 const AuctionProductDetail = () => {
-  const theme = createTheme();
   const { id } = useParams();
   console.log(id);
   const [auctionDetails, setAuctionDetails] = useState(defaultAuctionDetails);
@@ -34,7 +33,7 @@ const AuctionProductDetail = () => {
     try {
       const url = Keys.BASE_API + "auction/id/" + id;
      console.log(url);
-      const tempAuctionDetails = await axios.get(url);
+      const tempAuctionDetails = (await axios.get(url));
       console.log(tempAuctionDetails);
       const fetchedAuctionDetails = {
         productName: tempAuctionDetails.data.product_name,
@@ -50,6 +49,7 @@ const AuctionProductDetail = () => {
       }
       setAuctionDetails(fetchedAuctionDetails);
       setIsLoading(false);
+      console.log(auctionDetails);
 
     } catch (error) {
       console.log(error);
@@ -62,7 +62,7 @@ const AuctionProductDetail = () => {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
+      
         <Grid container component="main" sx={{
           backgroundColor: 'rgb(42,157,143)',
           padding: 10
@@ -145,7 +145,7 @@ const AuctionProductDetail = () => {
             </Grid>
           </Grid>
         </Grid>
-      </ThemeProvider>
+    
     </>
   )
 }

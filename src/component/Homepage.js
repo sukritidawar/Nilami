@@ -119,7 +119,7 @@ const Homepage = () => {
                         name="valueAcc"
                         required="required"
                         type="string"
-                        placeholder="address"
+                        placeholder="filter by"
                         onChange={handleChange}
                         style={{ width: 99 }}
                       />

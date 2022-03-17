@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import {Link} from "react-router-dom";
 import Keys from "../config";
 import { Grid, Typography, Button, Box, Container, CssBaseline } from '@mui/material'
 import { makeStyles } from "@material-ui/core/styles";
@@ -33,17 +34,18 @@ const AuctionProductDetail = () => {
       const url = Keys.BASE_API + "auction/id/" + id;
      console.log(url);
       const tempAuctionDetails = (await axios.get(url));
+      console.log(tempAuctionDetails);
       const fetchedAuctionDetails = {
-        productName: tempAuctionDetails.data[0].product_name,
-        productDescription: tempAuctionDetails.data[0].product_details,
-        startingBid: tempAuctionDetails.data[0].starting_price + "",
-        estimate: tempAuctionDetails.data[0].estimated_price + "",
-        startDate: tempAuctionDetails.data[0].start_date,
-        startTime: tempAuctionDetails.data[0].start_time,
-        auctioneerUserName: tempAuctionDetails.data[0].auctioneer_id,
-        auctionCategory: tempAuctionDetails.data[0].product_category,
-        city: tempAuctionDetails.data[0].city,
-        pincode: tempAuctionDetails.data[0].pincode
+        productName: tempAuctionDetails.data.product_name,
+        productDescription: tempAuctionDetails.data.product_details,
+        startingBid: tempAuctionDetails.data.starting_price + "",
+        estimate: tempAuctionDetails.data.estimated_price + "",
+        startDate: tempAuctionDetails.data.start_date,
+        startTime: tempAuctionDetails.data.start_time,
+        auctioneerUserName: tempAuctionDetails.data.auctioneer_id,
+        auctionCategory: tempAuctionDetails.data.product_category,
+        city: tempAuctionDetails.data.city,
+        pincode: tempAuctionDetails.data.pincode
       }
       setAuctionDetails(fetchedAuctionDetails);
       setIsLoading(false);
@@ -121,7 +123,10 @@ const AuctionProductDetail = () => {
                   Register
               </Button></span>
 
-                <Button variant="contained" href="/" style={{ backgroundColor: "rgb(231,111,81)" }} endIcon={<SendIcon />}>
+                <Button variant="contained"component={Link}
+                to = {`/feed/${id}/bidding`}
+                 style={{ backgroundColor: "rgb(231,111,81)" }} 
+                 endIcon={<SendIcon />}>
                   Go to bidding
               </Button>
               </Grid>

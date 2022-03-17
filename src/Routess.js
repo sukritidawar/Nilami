@@ -3,7 +3,7 @@ import { useContext, useReducer, useState } from "react";
 import { Route, Routes, Link } from 'react-router-dom';
 import AuctionProductDetail from './auction/AuctionProductDetail';
 import AddAddressModal from "./pages/userProfile/AddAddressModal";
-import BiddingPage from './auction/BiddingPage';
+import BiddingPage from './pages/BiddingPage';
 import CreatedAuction from './auction/CreatedAuction';
 import CreateAuctionModal from './pages/myAuctions/CreateAuctionModal';
 import Cookies from 'js-cookie';
@@ -45,9 +45,7 @@ const Routess = () => {
       <Route exact path="/signup" element={<Signup />} />
       <Route exact path="/feed" element={<Homepage />} />
       <Route exact path="/feed/:id" element={<AuctionProductDetail />} />
-      {/* <Route exact path="/myauction/:id" element={<AuctionProductDetail />} /> */}
-      {/* <Route exact path="/registeredauction/:id" element={<AuctionProductDetail />} /> */}
-      <Route exact path="/feed/product/biding" element={<BiddingPage />} />
+      <Route exact path="/feed/:id/biding" element={<BiddingPage />} />
       <Route exact path="/profile" element ={<UserProfile/>} />
       <Route exact path="/registeredauction" element ={<RegisteredAuction/>} />  
       <Route exact path="/myauction" element ={<CreatedAuction/>} />

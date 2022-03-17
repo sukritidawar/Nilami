@@ -7,6 +7,7 @@ import axios from "axios";
 import Keys from "../config";
 import dateFormat from "dateformat";
 import Feed from "../component/Feed"
+import CreateAuctionModal from "../pages/myAuctions/CreateAuctionModal";
 axios.defaults.withCredentials = true;
 
 const CreatedAuction = () => {
@@ -16,6 +17,11 @@ const CreatedAuction = () => {
   const [upAuctions,setUpAuctions] = useState(true);
   const [isLoading,setLoading] = useState(true);
   const [todayDate,setTodayDate] = useState(null);
+
+  //new auction modal visibility handelers
+  const [infoModalShow, setinfoModalShow] = useState(false);
+  const handleCloseInfoModal = () => setinfoModalShow(false);
+  const handleShowInfoModal = () => setinfoModalShow(true);
 
   const getUpcomingAuctions = () => {
       setUpAuctions(true);
@@ -47,6 +53,14 @@ const CreatedAuction = () => {
       // }
   },[isLoading]);
 
+  const newAuctionFunc = (formData) => {
+    console.log("gdgg");
+    setMyAuctions(prevAddress => {
+      return [formData,...prevAddress];
+    })
+  
+  }
+
   return (
     <>
       {/* {userAuth.isAuth ? */}
@@ -68,6 +82,14 @@ const CreatedAuction = () => {
                 {/* <Grid item xs={12} md={12}>
                   <Button variant="contained" fullWidth>CREATE NEW AUCTION</Button>
                 </Grid> */}
+
+                <Button onClick={handleShowInfoModal} style={{margin:"100px",backgroundColor:"red"}}>
+                  New Auction
+                </Button>
+                <CreateAuctionModal
+                  show={infoModalShow}
+                  onHide={handleCloseInfoModal} 
+                />
               </>
               )} 
           </>

@@ -6,6 +6,7 @@ axios.defaults.withCredentials = true;
 
 const CreateAuctionModal = (props) => {
   const [formData, setFormData] = useState({
+    inviteBidders: 'off',
     product_name: '',
     product_details: '',
     product_category: '',
@@ -14,6 +15,12 @@ const CreateAuctionModal = (props) => {
     starting_price: '',
     city: '',
     pincode: '',
+    is_private:'off',
+    start_date:'',
+    start_time:'',
+    end_date:'',
+    end_time:''
+
   });
 
   const [feedback, setFeedback] = useState({
@@ -32,6 +39,7 @@ const CreateAuctionModal = (props) => {
     console.log(formData);
     send(formData);
     setFormData({
+      inviteBidders: 'off',
       product_name: '',
       product_details: '',
       product_category: '',
@@ -40,6 +48,11 @@ const CreateAuctionModal = (props) => {
       starting_price: '',
       city: '',
       pincode: '',
+      is_private:'off',
+      start_date:'',
+      start_time:'',
+      end_date:'',
+      end_time:''
     });
     props.onHide();
   };
@@ -59,13 +72,13 @@ const CreateAuctionModal = (props) => {
       };
       const body = JSON.stringify(formData);
       console.log(body);
-      const response = await axios.put(
-        `${Keys.BASE_API}user/updateInfo`,
+      const response = await axios.post(
+        `${Keys.BASE_API}auction/new`,
         body,
         config
       );
 
-      console.log(response.data);
+      console.log(response);
 
       handleFeedback('update done');
     } catch (error) {
@@ -87,7 +100,7 @@ const CreateAuctionModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h5 style={{ textAlign: 'center' }}>Hi {props.user.name} !</h5>
+        <h5 style={{ textAlign: 'center' }}>Hi there !</h5>
         <h6 style={{ textAlign: 'center' }}>
           Please enter the following details.
         </h6>
@@ -96,6 +109,34 @@ const CreateAuctionModal = (props) => {
           onSubmit={handleSubmit}
           method="PUT"
         >
+          <div style={{ padding: '10px' }}>
+            {/* make chekbox of this */}
+            Invite Bidders: <input
+              name="inviteBidders"
+              required="required"
+              type="checkbox"
+              onChange={handleChange}
+            />
+          </div>
+          <div style={{ padding: '10px' }}>
+            Private:  <input
+              name="is_private"
+              required="required"
+              type="checkbox"
+              onChange={handleChange}
+            />
+          </div>
+          <div style={{ padding: '10px' }}>
+            Category:  <select
+              name="product_category"
+              required="required"
+              placeholder="Category"
+              onChange={handleChange}>
+              <option value = "art">Art</option>
+              <option value = "antique">Antique</option>
+              <option value = "antique">Religious</option>
+            </select>
+          </div>
           <div style={{ padding: '10px' }}>
             <input
               name="product_name"
@@ -111,15 +152,6 @@ const CreateAuctionModal = (props) => {
               required="required"
               type="string"
               placeholder="Product Details"
-              onChange={handleChange}
-            />
-          </div>
-          <div style={{ padding: '10px' }}>
-            <input
-              name="product_category"
-              required="required"
-              type="string"
-              placeholder="Category"
               onChange={handleChange}
             />
           </div>
@@ -165,6 +197,42 @@ const CreateAuctionModal = (props) => {
               required="required"
               type="string"
               placeholder="Pincode"
+              onChange={handleChange}
+            />
+          </div>
+          <div style={{ padding: '10px' }}>
+            Start Date:  <input
+              name="start_date"
+              required="required"
+              type="date"
+              placeholder="start date"
+              onChange={handleChange}
+            />
+          </div>
+          <div style={{ padding: '10px' }}>
+            Start Time:  <input
+              name="start_time"
+              required="required"
+              type="time"
+              placeholder="start time"
+              onChange={handleChange}
+            />
+          </div>
+          <div style={{ padding: '10px' }}>
+            End Date:  <input
+              name="end_date"
+              required="required"
+              type="date"
+              placeholder="end date"
+              onChange={handleChange}
+            />
+          </div>
+          <div style={{ padding: '10px' }}>
+            End Time:  <input
+              name="end_time"
+              required="required"
+              type="time"
+              placeholder="end time"
               onChange={handleChange}
             />
           </div>

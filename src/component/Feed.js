@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -15,15 +15,14 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import dateFormat from "dateformat";
 import Keys from "../config";
 import axios from "axios";
-import { useContext,useState,useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import store from "../store/Store";
 import FlashMessage from "react-flash-message";
 
 axios.defaults.withCredentials = true;
 
-
-const Feed = ({auction}) => {
-  const [feedLike,setfeedLike] = React.useState(`${auction.n_likes}`);
+const Feed = ({ auction }) => {
+  const [feedLike, setfeedLike] = React.useState(`${auction.n_likes}`);
   const [authInfo, setAuthInfo] = useContext(store);
   const [likeColor, setlikeColor] = useState("gray");
   const [clipboardMessage, setMessage] = useState(false);
@@ -44,61 +43,67 @@ const Feed = ({auction}) => {
       console.log("sf");
     }
   }
-  
-    
-  const handleShareClick = () =>{
-    navigator.clipboard.writeText("http://localhost:3001/"+ `feed/${auction.auction_id}`);
+
+  const handleShareClick = () => {
+    navigator.clipboard.writeText("http://localhost:3001/" + `feed/${auction.auction_id}`);
     setMessage(true);
   }
-  
 
   const linkedto = `../feed/${auction.auction_id}`;
-    
-    return (
-        <Card sx={{ maxWidth: 400}}>
-          <Link to = {linkedto}>
-          <CardHeader
-            // avatar={
-            //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            //     R
-            //   </Avatar>
-            // }
-            // action={
-            //   <IconButton aria-label="settings">
-            //     <MoreVertIcon />
-            //   </IconButton>
-            // }
-            title= {auction.product_name}
-            subheader= {auction.product_category}
-          />
-          
-          <p>Date: {dateFormat(auction.start_date,"dd/mm/yy")} - {dateFormat(auction.end_date,"dd/mm/yy")}</p>
-          <p>Time: {auction.start_time} - {auction.end_time}</p>
-          </Link>
-          <Link to = {linkedto}>
-          <CardMedia
-            component="img"
-            height="194"
-            image="https://cdn.pixabay.com/photo/2018/09/09/18/04/judge-3665164_960_720.jpg"
-            alt="Paella dish"
-          />
-          </Link>
-          <CardContent>
-            <Typography variant="body2" color="text.secondary">
-              {auction.product_details}
-            </Typography>
-          </CardContent>
-          <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites" onClick={updateLikes} style={{color:`${likeColor}`}}>
-              <FavoriteIcon />
-            </IconButton>
-            <p>{feedLike}</p>
-            <IconButton aria-label="share" onClick={handleShareClick}>
-              <ShareIcon />
-              {clipboardMessage && (
-                <FlashMessage duration={2000}>
-                  <p style={{fontSize:"0.8rem"}}>link copied to clipboard!</p>
-                </FlashMessage>
+
+  return (
+    <Card sx={{ margin: 2, width: { lg: '27vw', md: '36vw', xs: '66vw' }, padding: 2, border: '5px solid rgb(233, 196,106)', justifyContent: 'center', textAlign: 'center' }}>
+      <Link to={linkedto} style={{ color: 'rgb(0,0,0)', textDecoration: "none", }}>
+        <CardHeader
+          // avatar={
+          //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          //     R
+          //   </Avatar>
+          // }
+          // action={
+          //   <IconButton aria-label="settings">
+          //     <MoreVertIcon />
+          //   </IconButton>
+          // }
+          title={
+            <Typography style={{ fontFamily: 'serif', color: 'rgb(0,0,0)', fontSize: 36, textAlign: 'center', textTransform: 'uppercase' }}>
+              {auction.product_name}
+            </Typography>}
+          subheader={auction.product_category}
+        />
+        <CardMedia
+          component="img"
+          height="194"
+          image="https://cdn.pixabay.com/photo/2018/09/09/18/04/judge-3665164_960_720.jpg"
+          alt="Paella dish"
+          style={{ margin: '10px 2px' }}
+        />
+      </Link>
+      <Link to={linkedto} style={{ color: 'rgb(0,0,0)', textDecoration: "none", textAlign: 'left' }}>
+        <CardContent>
+          <Typography>
+            {auction.product_details}
+          </Typography>
+          <br>
+          </br>
+          <Typography style={{ fontSize: 14 }}>Date: {dateFormat(auction.start_date, "dd.mm.yy")} - {dateFormat(auction.end_date, "dd.mm.yy")}</Typography>
+          <Typography style={{ fontSize: 14 }}>Time: {auction.start_time} - {auction.end_time}</Typography>
+
+        </CardContent>
+      </Link>
+      <CardActions disableSpacing>
+        <div style={{ justifyContent: 'centre', display: 'inline', }}>
+          <IconButton aria-label="add to favorites" onClick={updateLikes} style={{ color: `${likeColor}` }}>
+            <FavoriteIcon />
+          </IconButton>
+          {feedLike}
+        </div>
+        <IconButton aria-label="share" onClick={handleShareClick} style={{ alignContent: 'right' }}>
+          <ShareIcon />
+          {clipboardMessage && (
+            <FlashMessage duration={2000}>
+              <p style={{ fontSize: "0.8rem" }}>link copied to clipboard!</p>
+            </FlashMessage>
 
           )}
         </IconButton>

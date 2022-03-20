@@ -9,7 +9,7 @@ import dateFormat from 'dateformat';
 import Feed from '../component/Feed';
 import Spinner from 'react-spinkit';
 import './RegsiteredAuction.css';
-import Header from '../component/header/Header';
+import Header from '../header/Header';
 axios.defaults.withCredentials = true;
 
 const RegisteredAuction = () => {
@@ -55,11 +55,11 @@ const RegisteredAuction = () => {
       {isLoading ? (
         <Spinner
           name="circle"
+          justify="center"
           style={{
             width: 100,
             height: 100,
-            justifyContent: 'center',
-            alignItems: 'center',
+            margin: 'auto',
           }}
         />
       ) : (

@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SendIcon from '@mui/icons-material/Send';
 import { useParams } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Header from '../component/header/Header'
 
 const imageee =
   'https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg';
@@ -69,12 +70,16 @@ const AuctionProductDetail = () => {
 
   return (
     <>
+      <Header />
       <Grid
         container
         component="main"
         sx={{
-          backgroundColor: 'rgb(42,157,143)',
-          padding: 10,
+          backgroundColor: 'rgb(38, 70, 83)'/*'rgb(42,157,143)'*/,
+
+          paddingLeft: 15,
+          paddingBottom: 5,
+          paddingRight: 15,
         }}
       >
         <CssBaseline />
@@ -106,7 +111,7 @@ const AuctionProductDetail = () => {
         >
           <Grid container spacing={3}>
             <Grid item xs={11} md={7}>
-              <Typography variant="h3" style={{ fontFamily: 'serif' }}>
+              <Typography variant="h3" style={{ fontFamily: 'serif', textTransform: 'uppercase' }}>
                 {auctionDetails.productName}
               </Typography>
             </Grid>
@@ -114,7 +119,7 @@ const AuctionProductDetail = () => {
               item
               xs={11}
               md={5}
-              sx={{ textAlign: 'right', alignItems: 'center' }}
+              sx={{ margin: 'auto', textAlign: 'right', alignItems: 'center' }}
             >
               <Typography variant="h7">
                 {' '}

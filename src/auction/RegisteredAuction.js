@@ -9,7 +9,7 @@ import dateFormat from 'dateformat';
 import Feed from '../component/Feed';
 import Spinner from 'react-spinkit';
 import './RegsiteredAuction.css';
-import Header from '../header/Header';
+import Header from '../component/header/Header';
 axios.defaults.withCredentials = true;
 
 const RegisteredAuction = () => {
@@ -63,47 +63,47 @@ const RegisteredAuction = () => {
           }}
         />
       ) : (
-        <div className="all">
-          <div className="registered">
-            <Typography variant="h4">My Registered Auctions</Typography>
-          </div>
-          <div className="container">
-            <div className="buttonWrap">
-              <Button
-                variant="contained"
-                onClick={getUpcomingAuctions}
-                className="upcoming"
-              >
-                Upcoming
-              </Button>
-              <Button
-                variant="contained"
-                onClick={getPastAuctions}
-                className="past"
-              >
-                Past
-              </Button>
+          <div className="all">
+            <div className="registered">
+              <Typography variant="h4">My Registered Auctions</Typography>
             </div>
-            <Grid container spacing={3}>
-              {upAuctions
-                ? regAuctions.map((auction) => (
+            <div className="container">
+              <div className="buttonWrap">
+                <Button
+                  variant="contained"
+                  onClick={getUpcomingAuctions}
+                  className="upcoming"
+                >
+                  Upcoming
+              </Button>
+                <Button
+                  variant="contained"
+                  onClick={getPastAuctions}
+                  className="past"
+                >
+                  Past
+              </Button>
+              </div>
+              <Grid container spacing={3}>
+                {upAuctions
+                  ? regAuctions.map((auction) => (
                     <>
                       {dateFormat(auction.end_date, 'dd/mm/yy') > todayDate && (
                         <Feed auction={auction} />
                       )}
                     </>
                   ))
-                : regAuctions.map((auction) => (
+                  : regAuctions.map((auction) => (
                     <>
                       {dateFormat(auction.end_date, 'dd/mm/yy') < todayDate && (
                         <Feed auction={auction} />
                       )}
                     </>
                   ))}
-            </Grid>
+              </Grid>
+            </div>
           </div>
-        </div>
-      )}
+        )}
       {/* : <h6>user not authorised</h6>} */}
     </>
   );

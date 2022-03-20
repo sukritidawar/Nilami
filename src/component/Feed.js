@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -15,15 +15,14 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import dateFormat from "dateformat";
 import Keys from "../config";
 import axios from "axios";
-import { useContext,useState,useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import store from "../store/Store";
 import FlashMessage from "react-flash-message";
 
 axios.defaults.withCredentials = true;
 
-
-const Feed = ({auction}) => {
-  const [feedLike,setfeedLike] = React.useState(`${auction.n_likes}`);
+const Feed = ({ auction }) => {
+  const [feedLike, setfeedLike] = React.useState(`${auction.n_likes}`);
   const [authInfo, setAuthInfo] = useContext(store);
   const [likeColor, setlikeColor] = useState("gray");
   const [clipboardMessage, setMessage] = useState(false);
@@ -46,10 +45,9 @@ const Feed = ({auction}) => {
       console.log("sf");
     }
   }
-  
-    
-  const handleShareClick = () =>{
-    navigator.clipboard.writeText("http://localhost:3001/"+ `feed/${auction.auction_id}`);
+
+  const handleShareClick = () => {
+    navigator.clipboard.writeText("http://localhost:3001/" + `feed/${auction.auction_id}`);
     setMessage(true);
   }
 

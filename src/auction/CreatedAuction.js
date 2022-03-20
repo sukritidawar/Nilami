@@ -1,22 +1,22 @@
-import React from 'react'
-import { useContext, useEffect, useState } from "react";
-import AuctionCommp from './AuctionCommp'
+import React from 'react';
+import { useContext, useEffect, useState } from 'react';
+import AuctionCommp from './AuctionCommp';
 import { Grid, Typography, Button } from '@mui/material';
-import Store from "../store/Store";
-import axios from "axios";
-import Keys from "../config";
-import dateFormat from "dateformat";
-import Feed from "../component/Feed"
-import CreateAuctionModal from "../pages/myAuctions/CreateAuctionModal";
+import Store from '../store/Store';
+import axios from 'axios';
+import Keys from '../config';
+import dateFormat from 'dateformat';
+import Feed from '../component/Feed';
+import CreateAuctionModal from '../pages/myAuctions/CreateAuctionModal';
+import Spinner from 'react-spinkit';
 axios.defaults.withCredentials = true;
 
 const CreatedAuction = () => {
-
   const [userAuth, setUserAuth] = useContext(Store);
-  const [myAuctions,setMyAuctions] = useState([]);
-  const [upAuctions,setUpAuctions] = useState(true);
-  const [isLoading,setLoading] = useState(true);
-  const [todayDate,setTodayDate] = useState(null);
+  const [myAuctions, setMyAuctions] = useState([]);
+  const [upAuctions, setUpAuctions] = useState(true);
+  const [isLoading, setLoading] = useState(true);
+  const [todayDate, setTodayDate] = useState(null);
 
   //new auction modal visibility handelers
   const [infoModalShow, setinfoModalShow] = useState(false);
@@ -24,17 +24,17 @@ const CreatedAuction = () => {
   const handleShowInfoModal = () => setinfoModalShow(true);
 
   const getUpcomingAuctions = () => {
-      setUpAuctions(true);
-  }
+    setUpAuctions(true);
+  };
   const getPastAuctions = () => {
-      setUpAuctions(false);
-  }
+    setUpAuctions(false);
+  };
 
   const getmyAuctions = async () => {
-      try {
-          const url = Keys.BASE_API + "user/myAuctions";
-          var res = await axios.get(url); 
-          setMyAuctions(res.data.myAuctions);
+    try {
+      const url = Keys.BASE_API + 'user/myAuctions';
+      var res = await axios.get(url);
+      setMyAuctions(res.data.myAuctions);
 
           var myDate = new Date();
           var x = dateFormat(myDate, "yyyy-mm-dd");
@@ -48,14 +48,26 @@ const CreatedAuction = () => {
       // if(userAuth.isAuth){
           getmyAuctions();
 
-      // }else{
-      //     console.log("user not authorised");
-      // }
-  },[isLoading]);
+    // }else{
+    //     console.log("user not authorised");
+    // }
+  }, [isLoading]);
 
   return (
     <>
       {/* {userAuth.isAuth ? */}
+      <>
+        {isLoading ? (
+          <Spinner
+            name="circle"
+            style={{
+              width: 100,
+              height: 100,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          />
+        ) : (
           <>
           {isLoading ? <h6>Loading...</h6> : (
               <>
@@ -85,10 +97,11 @@ const CreatedAuction = () => {
               </>
               )} 
           </>
+        )}
+      </>
       {/* : <h6>user not authorised</h6>} */}
     </>
-            
-  )
+  );
 };
 
-export default CreatedAuction
+export default CreatedAuction;

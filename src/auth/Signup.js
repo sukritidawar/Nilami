@@ -183,9 +183,9 @@ const Signup = () => {
               <Grid item xs={12}>
                 <TextField
                   id="outlined-basic"
-                  label="address"
+                  label="Address"
                   variant="outlined"
-                  placeholder='address'
+                  placeholder='Address'
                   name="address"
                   type="text"
                   value={user.address}
@@ -198,9 +198,9 @@ const Signup = () => {
               <Grid item xs={12} sm={6}>
                 <TextField
                   id="outlined-basic"
-                  label="city"
+                  label="City"
                   variant="outlined"
-                  placeholder='city'
+                  placeholder='City'
                   name="city"
                   type="text"
                   value={user.city}
@@ -230,7 +230,7 @@ const Signup = () => {
                   id="outlined-basic"
                   label="Mobile"
                   variant="outlined"
-                  placeholder='Mobile'
+                  placeholder='Mobile Number'
                   name="mobile"
                   type="number"
                   value={user.mobile}

@@ -31,7 +31,7 @@ const RegisteredAuction = () => {
             setRegAuctions(res.data.registeredAuctions);
 
             var myDate = new Date();
-            var x = dateFormat(myDate, "dd/mm/yy");
+            var x = dateFormat(myDate, "yyyy-mm-dd");
             setTodayDate(x);
             setLoading(false);
         } catch (error) {
@@ -59,10 +59,10 @@ const RegisteredAuction = () => {
                 <button onClick={getPastAuctions}>Past</button>
                 <Grid container spacing={3}>
                 {upAuctions ? regAuctions.map((auction) => (
-                    <>{(dateFormat(auction.end_date,"dd/mm/yy") > todayDate) && <Feed auction = {auction} />}</>
+                    <>{(dateFormat(auction.end_date,"yyyy-mm-dd") > todayDate) && <Feed auction = {auction} />}</>
                     
                 )):regAuctions.map((auction) => (
-                    <>{(dateFormat(auction.end_date,"dd/mm/yy") < todayDate) && <Feed auction = {auction} />}</>
+                    <>{(dateFormat(auction.end_date,"yyyy-mm-dd") < todayDate) && <Feed auction = {auction} />}</>
                     
                 ))}    
                 </Grid>

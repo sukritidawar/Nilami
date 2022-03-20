@@ -27,6 +27,8 @@ const Feed = ({auction}) => {
   const [authInfo, setAuthInfo] = useContext(store);
   const [likeColor, setlikeColor] = useState("gray");
   const [clipboardMessage, setMessage] = useState(false);
+  const [timeUp,setTimeUp] = useState(false);
+
 
   const updateLikes = async () => {
     if (authInfo.isAuth) {
@@ -50,6 +52,21 @@ const Feed = ({auction}) => {
     navigator.clipboard.writeText("http://localhost:3001/"+ `feed/${auction.auction_id}`);
     setMessage(true);
   }
+
+  const checkTimings = async() => {
+    var myDate = new Date();
+    var currentDate = dateFormat(myDate, "yyyy-mm-dd");
+    var currentTime = dateFormat(myDate, "hh:MM:ss");
+    console.log(currentDate);
+    console.log(currentTime);
+    if((dateFormat(auction.end_date,"yyyy-mm-dd") < currentDate) || ((dateFormat(auction.end_date,"yyyy-mm-dd") == currentDate)&& (currentTime > auction.end_time)) ) 
+      setTimeUp(true);
+  }
+
+  useEffect(async () =>{
+    await checkTimings();
+  },[timeUp])
+
   
 
   const linkedto = `../feed/${auction.auction_id}`;
@@ -72,8 +89,10 @@ const Feed = ({auction}) => {
             subheader= {auction.product_category}
           />
           
-          <p>Date: {dateFormat(auction.start_date,"dd/mm/yy")} - {dateFormat(auction.end_date,"dd/mm/yy")}</p>
-          <p>Time: {auction.start_time} - {auction.end_time}</p>
+          {timeUp ? <h6>Closed</h6> : (<>
+            <p>Date: {dateFormat(auction.start_date,"dd/mm/yy")} - {dateFormat(auction.end_date,"dd/mm/yy")}</p>
+            <p>Time: {auction.start_time} - {auction.end_time}</p>
+          </>)}
           </Link>
           <Link to = {linkedto}>
           <CardMedia

@@ -37,7 +37,7 @@ const CreatedAuction = () => {
           setMyAuctions(res.data.myAuctions);
 
           var myDate = new Date();
-          var x = dateFormat(myDate, "dd/mm/yy");
+          var x = dateFormat(myDate, "yyyy-mm-dd");
           setTodayDate(x);
           setLoading(false);
       } catch (error) {
@@ -53,14 +53,6 @@ const CreatedAuction = () => {
       // }
   },[isLoading]);
 
-  const newAuctionFunc = (formData) => {
-    console.log("gdgg");
-    setMyAuctions(prevAddress => {
-      return [formData,...prevAddress];
-    })
-  
-  }
-
   return (
     <>
       {/* {userAuth.isAuth ? */}
@@ -72,10 +64,10 @@ const CreatedAuction = () => {
                 <button onClick={getPastAuctions}>Past</button>
                 <Grid container spacing={3}>
                   {upAuctions ? myAuctions.map((auction) => (
-                      <>{(dateFormat(auction.end_date,"dd/mm/yy") > todayDate) && <Feed auction = {auction} />}</>
+                      <>{(dateFormat(auction.end_date,"yyyy-mm-dd") > todayDate) && <Feed auction = {auction} />}</>
                       
                   )):myAuctions.map((auction) => (
-                      <>{(dateFormat(auction.end_date,"dd/mm/yy") < todayDate) && <Feed auction = {auction} />}</>
+                      <>{(dateFormat(auction.end_date,"yyyy-mm-dd") < todayDate) && <Feed auction = {auction} />}</>
                       
                   ))}    
                 </Grid>
@@ -83,13 +75,13 @@ const CreatedAuction = () => {
                   <Button variant="contained" fullWidth>CREATE NEW AUCTION</Button>
                 </Grid> */}
 
-                <Button onClick={handleShowInfoModal} style={{margin:"100px",backgroundColor:"red"}}>
+                {/* <Button onClick={handleShowInfoModal} style={{margin:"100px",backgroundColor:"red"}}>
                   New Auction
                 </Button>
                 <CreateAuctionModal
                   show={infoModalShow}
                   onHide={handleCloseInfoModal} 
-                />
+                /> */}
               </>
               )} 
           </>

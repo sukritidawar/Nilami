@@ -88,7 +88,7 @@ const CreatedAuction = () => {
                   onHide={handleCloseInfoModal} 
                 /> */}
               </>
-              // )} 
+               {/* )}  */}
           </>
         {/* )} */}
       </>

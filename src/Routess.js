@@ -11,7 +11,7 @@ import EditUserInfoModal from "./pages/userProfile/EditUserInfoModal";
 import FrontPage from './auth/FrontPage';
 import Feed from "./component/Feed"
 import Homepage from './component/Homepage';
-import Header from './header/Header';
+import Header from './component/header/Header';
 import Login from './auth/Login';
 import { LOGIN } from "./store/Types";
 import RegisteredAuction from './auction/RegisteredAuction';
@@ -41,15 +41,15 @@ const Routess = () => {
   return (
     <Store.Provider value={[state, dispatch]}>
       <Routes>
-      <Route exact path="/" element={<Login />} />
-      <Route exact path="/signup" element={<Signup />} />
-      <Route exact path="/feed" element={<Homepage />} />
-      <Route exact path="/feed/:id" element={<AuctionProductDetail />} />
-      <Route exact path="/feed/:id/biding" element={<BiddingPage />} />
-      <Route exact path="/profile" element ={<UserProfile/>} />
-      <Route exact path="/registeredauction" element ={<RegisteredAuction/>} />  
-      <Route exact path="/myauction" element ={<CreatedAuction/>} />
-      
+        <Route exact path="/" element={<Login />} />
+        <Route exact path="/signup" element={<Signup />} />
+        <Route exact path="/feed" element={<Homepage />} />
+        <Route exact path="/feed/:id" element={<AuctionProductDetail />} />
+        <Route exact path="/feed/:id/biding" element={<BiddingPage />} />
+        <Route exact path="/profile" element={<UserProfile />} />
+        <Route exact path="/registeredauction" element={<RegisteredAuction />} />
+        <Route exact path="/myauction" element={<CreatedAuction />} />
+
       </Routes>
     </Store.Provider>
   )

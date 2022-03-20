@@ -70,8 +70,8 @@ const Feed = ({ auction }) => {
   const linkedto = `../feed/${auction.auction_id}`;
     
     return (
-        <Card sx={{ maxWidth: 400}}>
-          <Link to = {linkedto}>
+      <Card sx={{ margin: 2, width: { lg: '27vw', md: '36vw', xs: '66vw' }, padding: 2, border: '5px solid rgb(233, 196,106)', justifyContent: 'center', textAlign: 'center' }}>
+      <Link to={linkedto} style={{ color: 'rgb(0,0,0)', textDecoration: "none", }}>
           <CardHeader
             // avatar={
             //   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -83,11 +83,14 @@ const Feed = ({ auction }) => {
             //     <MoreVertIcon />
             //   </IconButton>
             // }
-            title= {auction.product_name}
-            subheader= {auction.product_category}
+            title={
+              <Typography style={{ fontFamily: 'serif', color: 'rgb(0,0,0)', fontSize: 36, textAlign: 'center', textTransform: 'uppercase' }}>
+                {auction.product_name}
+              </Typography>}
+            subheader= {<Typography>Category: {auction.product_category}</Typography>}
           />
           
-          {timeUp ? <h6>Closed</h6> : (<>
+          {timeUp ? <><p style={{color:"red", marginBottom:"55px"}}>Closed</p></> : (<>
             <p>Date: {dateFormat(auction.start_date,"dd/mm/yy")} - {dateFormat(auction.end_date,"dd/mm/yy")}</p>
             <p>Time: {auction.start_time} - {auction.end_time}</p>
           </>)}
@@ -98,18 +101,23 @@ const Feed = ({ auction }) => {
             height="194"
             image="https://cdn.pixabay.com/photo/2018/09/09/18/04/judge-3665164_960_720.jpg"
             alt="Paella dish"
+            style={{ margin: '10px 2px' }}
           />
           </Link>
           <CardContent>
-            <Typography variant="body2" color="text.secondary">
+            <Typography>
               {auction.product_details}
             </Typography>
+            <br>
+          </br>
           </CardContent>
           <CardActions disableSpacing>
+          <div style={{ justifyContent: 'centre', display: 'inline', }}>
             <IconButton aria-label="add to favorites" onClick={updateLikes} style={{color:`${likeColor}`}}>
               <FavoriteIcon />
             </IconButton>
-            <p>{feedLike}</p>
+            {feedLike}
+            </div>
             <IconButton aria-label="share" onClick={handleShareClick}>
               <ShareIcon />
               {clipboardMessage && (

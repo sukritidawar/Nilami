@@ -1,3 +1,5 @@
+//try promise tracker in this and also remove the credentials from here
+
 import { React, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button } from 'react-bootstrap';
@@ -83,11 +85,11 @@ const UserProfile = () => {
       {!isLoading ? (
         <Spinner
           name="circle"
+          justify="center"
           style={{
             width: 100,
             height: 100,
-            justifyContent: 'center',
-            alignItems: 'center',
+            margin: 'auto',
           }}
         />
       ) : (

@@ -3,6 +3,7 @@ import axios from "axios";
 import Keys from "../config";
 import Store from "../store/Store";
 import { useParams, useLocation } from 'react-router-dom';
+import { trackPromise } from 'react-promise-tracker';
 axios.defaults.withCredentials = true;
 
 
@@ -14,31 +15,30 @@ const TopBids = ({id}) => {
     const getTopBids = async() => {
         try {
             const url = Keys.BASE_API +"auction/bidDetails/id/"+ id;
-            console.log(url);
-            const res = await axios.get(url);
-            setTopBids(res.data.bidDetails);
-            setIsLoading(true);
+            trackPromise( axios.get(url).then((res)=>{
+                setTopBids(res.data.bidDetails);
+            }))
         } catch (error) {
             console.log(error);
         }
         }
         useEffect(async ()=>{
-        await getTopBids();
-        console.log(topBids);
+            await getTopBids();
+            console.log(topBids);
         },[isLoading]);
 
         return (
             
             <div className='topBids'>
-            {!isLoading ? 
+            {/* {!isLoading ? 
             <><h6>loading...</h6></>
-                : (
+                : ( */}
                     <div>
                     <p>Highest Bid:  {topBids[0].bid_amount}</p>
                     <p>Second highest Bid:  {topBids[1].bid_amount}</p>
                     <p>Third highest Bid:  {topBids[2].bid_amount}</p>
                 </div>
-                )}
+                {/* )} */}
             </div>
         )
 }

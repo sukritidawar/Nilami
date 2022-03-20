@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AuctionCommp from './AuctionCommp';
 import { ContentPasteOutlined, WifiChannelRounded } from '@mui/icons-material';
 import RegisterModal from './RegisterModal';
+import { trackPromise } from 'react-promise-tracker';
 
 const imageee =
   'https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg';
@@ -51,35 +52,43 @@ const AuctionProductDetail = () => {
   const getAuctionDetails = async () => {
     try {
       const url = Keys.BASE_API + "auction/id/" + id;
-      const tempAuctionDetails = (await axios.get(url));
-      const fetchedAuctionDetails = {
-        productName: tempAuctionDetails.data.product_name,
-        productDescription: tempAuctionDetails.data.product_details,
-        startingBid: tempAuctionDetails.data.starting_price + "",
-        estimate: tempAuctionDetails.data.estimated_price + "",
-        startDate: dateFormat(tempAuctionDetails.data.start_date,"yyyy-mm-dd"),
-        startTime: tempAuctionDetails.data.start_time,
-        endDate: dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"),
-        endTime: tempAuctionDetails.data.end_time,
-        auctioneerUserName: tempAuctionDetails.data.auctioneer_id,
-        auctionCategory: tempAuctionDetails.data.product_category,
-        city: tempAuctionDetails.data.city,
-        pincode: tempAuctionDetails.data.pincode,
-      };
-      setAuctionDetails(fetchedAuctionDetails);
-      setIsLoading(false);
+      trackPromise(axios.get(url).then((tempAuctionDetails) =>{
+        setAuctionDetails({
+          productName: tempAuctionDetails.data.product_name,
+          productDescription: tempAuctionDetails.data.product_details,
+          startingBid: tempAuctionDetails.data.starting_price + "",
+          estimate: tempAuctionDetails.data.estimated_price + "",
+          startDate: dateFormat(tempAuctionDetails.data.start_date,"yyyy-mm-dd"),
+          startTime: tempAuctionDetails.data.start_time,
+          endDate: dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"),
+          endTime: tempAuctionDetails.data.end_time,
+          auctioneerUserName: tempAuctionDetails.data.auctioneer_id,
+          auctionCategory: tempAuctionDetails.data.product_category,
+          city: tempAuctionDetails.data.city,
+          pincode: tempAuctionDetails.data.pincode,})
+          checkTimings(dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"),tempAuctionDetails.data.end_time);
+      }))
+      // const fetchedAuctionDetails = {
+        
+      // };
+      // setAuctionDetails(fetchedAuctionDetails);
+      // setIsLoading(false);
 
     } catch (error) {
       console.log(error);
     }
   }
-  const checkTimings = async() => {
+  const checkTimings = async(auctionEndDate,auctionEndTime) => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, "yyyy-mm-dd");
     var currentTime = dateFormat(myDate, "hh:MM:ss");
-    if(auctionDetails.endDate){
-      if((auctionDetails.endDate < currentDate) || ((auctionDetails.endDate == currentDate)&& (currentTime > auctionDetails.endTime)) ) 
+    console.log(auctionEndDate);
+    console.log(currentDate);
+    if(auctionEndDate){
+      if((auctionEndDate < currentDate) || ((auctionEndDate == currentDate)&& (currentTime > auctionEndTime)) ){ 
         setTimeUp(true);
+        console.log("ada");
+      }
     }
   }
   
@@ -103,11 +112,9 @@ const AuctionProductDetail = () => {
   const getWinnerName = async() => {
     try {
       const url = Keys.BASE_API + "auction/getWinnerName/id/" + id;
-      const res = await axios.get(url);
-      console.log(res);
-      if(res.data[0].user_name)
-        setWinnerName(res.data[0].user_name);
-      console.log(winnerName);
+      trackPromise(axios.get(url).then((res)=>{
+        setWinnerName(res.data[0].user_name)
+      }))
     } catch (error) {
         console.log(error);
     }
@@ -115,7 +122,6 @@ const AuctionProductDetail = () => {
 
   useEffect(async () => {
     await getAuctionDetails();
-    await checkTimings();
     await getRegAuctions();
     await getWinnerName();
     console.log(isRegistered);
@@ -175,9 +181,8 @@ const AuctionProductDetail = () => {
               md={5}
               sx={{ textAlign: 'right', alignItems: 'center' }}
             >
-              <Typography variant="h7">
-                {' '}
-                {auctionDetails.auctionCategory}
+              <Typography>
+                Category: {auctionDetails.auctionCategory}
               </Typography>
             </Grid>
             <Grid item xs={11} md={11}>
@@ -197,7 +202,7 @@ const AuctionProductDetail = () => {
               </Grid>
               
 
-              <>{!timeUp ?<><h6>Closed
+              <>{timeUp ?<><h6>Closed
               </h6><p>Winner: {winnerName}</p></> : (<>
                 <Grid item xs={11} md={8}>
                 <Typography variant='h6'>
@@ -217,7 +222,7 @@ const AuctionProductDetail = () => {
               </Grid>
                 <Grid item xs={11} md={8}>
                 
-                {!isRegistered ?
+                {isRegistered ?
                   <Link to = {`/feed/${id}/biding`} state={auctionDetails}><button>Go to bidding</button></Link>
                 :
                   <span style={{ marginRight: "20px" }}> 
@@ -257,11 +262,8 @@ const AuctionProductDetail = () => {
               <Grid container>
                 <Grid item md={7}></Grid>
                 <Box item xs={11} md={5} sx={{ marginTop: '3' }}>
-                  <Typography variant="h5">Auctioneer Details</Typography>
-                  <Typography variant="body1">
-                    {'Sold by - ' + auctionDetails.auctioneerUserName}
-                  </Typography>
-                  <Typography variant="body2">
+                  <Typography variant="h5">Location Details</Typography>
+                  <Typography>
                     {'Address - ' +
                       auctionDetails.city +
                       ', ' +

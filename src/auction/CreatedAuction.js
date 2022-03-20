@@ -9,6 +9,7 @@ import dateFormat from 'dateformat';
 import Feed from '../component/Feed';
 import CreateAuctionModal from '../pages/myAuctions/CreateAuctionModal';
 import Spinner from 'react-spinkit';
+import { trackPromise } from 'react-promise-tracker';
 axios.defaults.withCredentials = true;
 
 const CreatedAuction = () => {
@@ -33,13 +34,14 @@ const CreatedAuction = () => {
   const getmyAuctions = async () => {
     try {
       const url = Keys.BASE_API + 'user/myAuctions';
-      var res = await axios.get(url);
-      setMyAuctions(res.data.myAuctions);
+      trackPromise(axios.get(url).then((res)=>{
+        setMyAuctions(res.data.myAuctions);
+      }))
 
-          var myDate = new Date();
-          var x = dateFormat(myDate, "yyyy-mm-dd");
-          setTodayDate(x);
-          setLoading(false);
+        var myDate = new Date();
+        var x = dateFormat(myDate, "yyyy-mm-dd");
+        setTodayDate(x);
+        // setLoading(false);
       } catch (error) {
           console.log(error);
       }
@@ -57,19 +59,10 @@ const CreatedAuction = () => {
     <>
       {/* {userAuth.isAuth ? */}
       <>
-        {isLoading ? (
-          <Spinner
-            name="circle"
-            style={{
-              width: 100,
-              height: 100,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          />
-        ) : (
+        {/* {isLoading ? ( */}
+        {/* ) : ( */}
           <>
-          {isLoading ? <h6>Loading...</h6> : (
+          {/* {isLoading ? <h6>Loading...</h6> : ( */}
               <>
                 <Typography variant="h3">MY AUCTIONS</Typography>
                 <button onClick={getUpcomingAuctions}>Upcoming</button>
@@ -95,9 +88,9 @@ const CreatedAuction = () => {
                   onHide={handleCloseInfoModal} 
                 /> */}
               </>
-              )} 
+              // )} 
           </>
-        )}
+        {/* )} */}
       </>
       {/* : <h6>user not authorised</h6>} */}
     </>

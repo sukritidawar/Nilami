@@ -9,7 +9,8 @@ import dateFormat from 'dateformat';
 import Feed from '../component/Feed';
 import Spinner from 'react-spinkit';
 import './RegsiteredAuction.css';
-import Header from '../component/header/Header';
+import Header from '../header/Header';
+import { trackPromise } from 'react-promise-tracker';
 axios.defaults.withCredentials = true;
 
 const RegisteredAuction = () => {
@@ -29,13 +30,13 @@ const RegisteredAuction = () => {
   const getRegAuctions = async () => {
     try {
       const url = Keys.BASE_API + 'user/registeredAuctions';
-      var res = await axios.get(url);
-      setRegAuctions(res.data.registeredAuctions);
-
+      trackPromise(axios.get(url).then((res)=>{
+        setRegAuctions(res.data.registeredAuctions);
+      }))
       var myDate = new Date();
       var x = dateFormat(myDate, 'dd/mm/yy');
       setTodayDate(x);
-      setLoading(false);
+      // setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -50,41 +51,64 @@ const RegisteredAuction = () => {
   }, [isLoading]);
             
     
-    useEffect(async ()=>{
-        // if(userAuth.isAuth){
-            getRegAuctions();
+  return (
+    <>
+      {/* {isLoading ? (
+        <Spinner
+          name="circle"
+          justify="center"
+          style={{
+            width: 100,
+            height: 100,
+            margin: 'auto',
+          }}
+        />
+      ) : ( */}
+        <div className="all">
+          <div className="registered">
+            <Typography variant="h4">My Registered Auctions</Typography>
+          </div>
+          <div className="container">
+            <div className="buttonWrap">
+              <Button
+                variant="contained"
+                onClick={getUpcomingAuctions}
+                className="upcoming"
+              >
+                Upcoming
+              </Button>
+              <Button
+                variant="contained"
+                onClick={getPastAuctions}
+                className="past"
+              >
+                Past
+              </Button>
+            </div>
+            <Grid container spacing={3}>
+              {upAuctions
+                ? regAuctions.map((auction) => (
+                    <>
+                      {dateFormat(auction.end_date, 'dd/mm/yy') > todayDate && (
+                        <Feed auction={auction} />
+                      )}
+                    </>
+                  ))
+                : regAuctions.map((auction) => (
+                    <>
+                      {dateFormat(auction.end_date, 'dd/mm/yy') < todayDate && (
+                        <Feed auction={auction} />
+                      )}
+                    </>
+                  ))}
+            </Grid>
+          </div>
+        </div>
+      {/* )} */}
+      {/* : <h6>user not authorised</h6>} */}
+    </>
+  );
+};
 
-        // }else{
-        //     console.log("user not authorised");
-        // }
-    },[isLoading]);
-    
-
-    return (
-        <>
-        {/* {userAuth.isAuth ? */}
-            <>
-            {isLoading ? <h6>Loading...</h6> : (
-                <>
-                <Typography variant="h3">MY REGISTERED AUCTION</Typography>
-                <button onClick={getUpcomingAuctions}>Upcoming</button>
-                <button onClick={getPastAuctions}>Past</button>
-                <Grid container spacing={3}>
-                {upAuctions ? regAuctions.map((auction) => (
-                    <>{(dateFormat(auction.end_date,"yyyy-mm-dd") > todayDate) && <Feed auction = {auction} />}</>
-                    
-                )):regAuctions.map((auction) => (
-                    <>{(dateFormat(auction.end_date,"yyyy-mm-dd") < todayDate) && <Feed auction = {auction} />}</>
-                    
-                ))}    
-                </Grid>
-                </>
-                )} 
-            </>
-        {/* : <h6>user not authorised</h6>} */}
-        </>
-
-    )
-}
 
 export default RegisteredAuction

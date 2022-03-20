@@ -20,6 +20,7 @@ import Signup from './auth/Signup'
 import { SignpostOutlined } from '@mui/icons-material';
 import Store from "./store/Store";
 import UserProfile from './pages/userProfile/UserProfile';
+import LoadingIndicator from './component/LoadingIndicator';
 
 
 const Routess = () => {
@@ -40,6 +41,8 @@ const Routess = () => {
   }, [])
   return (
     <Store.Provider value={[state, dispatch]}>
+      <Header />
+      <LoadingIndicator />
       <Routes>
       <Route exact path="/" element={<Login />} />
       <Route exact path="/signup" element={<Signup />} />

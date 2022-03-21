@@ -11,21 +11,21 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const settings = ['Profile', 'Logout'];
 
 const pages = [{
-  name : "Home",
-  link : "/feed"
+  name: "Home",
+  link: "/feed"
 },
 {
-  name : 'Regsitered Auctions',
-  link : "/registeredauction"
+  name: 'Registered Auctions',
+  link: "/registeredauction"
 },
 {
-  name : 'My created Auctions',
-  link : "/myauction"
+  name: 'My Auctions',
+  link: "/myauction"
 }
 ]
 const Header = () => {
@@ -111,10 +111,10 @@ const Header = () => {
               <Button
                 key={page.name}
                 component={Link}
-                to = {page.link}
+                to={page.link}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
-                
+
               >
                 {page.name}
               </Button>

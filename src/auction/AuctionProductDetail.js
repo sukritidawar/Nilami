@@ -138,8 +138,11 @@ const AuctionProductDetail = () => {
         container
         component="main"
         sx={{
-          backgroundColor: 'rgb(42,157,143)',
-          padding: 10,
+          backgroundColor: 'rgb(38, 70, 83)'/*'rgb(42,157,143)'*/,
+
+          paddingLeft: 15,
+          paddingBottom: 5,
+          paddingRight: 15,
         }}
       >
         <CssBaseline />
@@ -171,7 +174,7 @@ const AuctionProductDetail = () => {
         >
           <Grid container spacing={3}>
             <Grid item xs={11} md={7}>
-              <Typography variant="h3" style={{ fontFamily: 'serif' }}>
+              <Typography variant="h3" style={{ fontFamily: 'serif', textTransform: 'uppercase' }}>
                 {auctionDetails.productName}
               </Typography>
             </Grid>
@@ -179,7 +182,7 @@ const AuctionProductDetail = () => {
               item
               xs={11}
               md={5}
-              sx={{ textAlign: 'right', alignItems: 'center' }}
+              sx={{ margin: 'auto', textAlign: 'right', alignItems: 'center' }}
             >
               <Typography>
                 Category: {auctionDetails.auctionCategory}

@@ -68,12 +68,6 @@ const AuctionProductDetail = () => {
           pincode: tempAuctionDetails.data.pincode,})
           checkTimings(dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"),tempAuctionDetails.data.end_time);
       }))
-      // const fetchedAuctionDetails = {
-        
-      // };
-      // setAuctionDetails(fetchedAuctionDetails);
-      // setIsLoading(false);
-
     } catch (error) {
       console.log(error);
     }
@@ -81,7 +75,7 @@ const AuctionProductDetail = () => {
   const checkTimings = async(auctionEndDate,auctionEndTime) => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, "yyyy-mm-dd");
-    var currentTime = dateFormat(myDate, "hh:MM:ss");
+    var currentTime = dateFormat(myDate, "HH:MM:ss");
     console.log(auctionEndDate);
     console.log(currentDate);
     if(auctionEndDate){
@@ -204,7 +198,7 @@ const AuctionProductDetail = () => {
                 </Typography>
               </Grid>
               
-
+              
               <>{timeUp ?<><h6>Closed
               </h6><p>Winner: {winnerName}</p></> : (<>
                 <Grid item xs={11} md={8}>

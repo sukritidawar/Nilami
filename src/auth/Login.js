@@ -72,14 +72,12 @@ const Login = () => {
       console.log(res);
 
       if (res.data.success) {
-        Cookies.set('isAuth', `${res.data.success}`);
         Cookies.set('user_id', `${res.data.user_id}`);
 
-        console.log(await dispatch({
+        await dispatch({
           type: LOGIN,
-          isAuth: `${res.data.success}`,
           user_id: `${res.data.user_id}`,
-        }));
+        });
 
         navigate("/feed");
       }

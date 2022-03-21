@@ -75,23 +75,18 @@ const CreatedAuction = () => {
       }
   }
   useEffect(async ()=>{
-      // if(userAuth.isAuth){
+      if(userAuth.isAuth){
           getmyAuctions();
 
-    // }else{
-    //     console.log("user not authorised");
-    // }
+    }else{
+        console.log("user not authorised");
+    }
   }, [isLoading]);
   const styles = useStyles();
 
   return (
     <Grid component="main" className={styles.feed_comp}>
-      {/* {userAuth.isAuth ? */}
-      <>
-        {/* {isLoading ? ( */}
-        {/* ) : ( */}
-          <>
-          {/* {isLoading ? <h6>Loading...</h6> : ( */}
+      {userAuth.isAuth ?
               <>
                 <Grid container margin='auto' justifyContent='center' alignContent='center' >
                   <Typography item xs={12} variant="h2" margin='auto' justifyContent='center' justifyText='center' style={{ fontStyle: 'serif' }}>MY AUCTIONS</Typography>
@@ -121,11 +116,7 @@ const CreatedAuction = () => {
                   onHide={handleCloseInfoModal} 
                 />
               </>
-               {/* )}  */}
-          </>
-        {/* )} */}
-      </>
-      {/* : <h6>user not authorised</h6>} */}
+      : <h6>You need to login to continue</h6>}
     </Grid>
   );
 };

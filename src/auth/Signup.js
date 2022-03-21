@@ -83,16 +83,21 @@ const Signup = () => {
 
       var res = await axios.post(url, body, config);
       console.log(res);
-      Cookies.set('user_id', `${res.data.user_id}`);
-      // console.log(state);
-      console.log(await dispatch({
-        type: LOGIN,
-        user_id: `${res.data.user_id}`,
+      
+      if (res.data.success) {
+        Cookies.set('user_id', `${res.data.user_id}`);
 
-      }));
+        await dispatch({
+          type: LOGIN,
+          user_id: `${res.data.user_id}`,
+        });
 
-      console.log(state);
-      navigate("/feed");
+        navigate("/feed");
+      }
+      else {
+        alert("wrong credentials");
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }

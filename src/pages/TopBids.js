@@ -14,8 +14,10 @@ const TopBids = ({id}) => {
 
     const getTopBids = async() => {
         try {
+            console.log(id);
             const url = Keys.BASE_API +"auction/bidDetails/id/"+ id;
             trackPromise( axios.get(url).then((res)=>{
+                console.log(res);
                 setTopBids(res.data.bidDetails);
             }))
         } catch (error) {
@@ -30,15 +32,15 @@ const TopBids = ({id}) => {
         return (
             
             <div className='topBids'>
-            {/* {!isLoading ? 
-            <><h6>loading...</h6></>
-                : ( */}
+            
                     <div>
-                    <p>Highest Bid:  {topBids[0].bid_amount}</p>
-                    <p>Second highest Bid:  {topBids[1].bid_amount}</p>
-                    <p>Third highest Bid:  {topBids[2].bid_amount}</p>
-                </div>
-                {/* )} */}
+                        {topBids ? <>
+                            <p>Highest Bid:  {topBids[0].bid_amount}</p>
+                            <p>Second highest Bid:  {topBids[1].bid_amount}</p>
+                            <p>Third highest Bid:  {topBids[2].bid_amount}</p>
+                        </>: <p>Loading...</p>}
+                    </div>
+                
             </div>
         )
 }

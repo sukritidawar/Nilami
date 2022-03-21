@@ -52,17 +52,9 @@ const RegisteredAuction = () => {
     
   return (
     <>
-      {/* {isLoading ? (
-        <Spinner
-          name="circle"
-          justify="center"
-          style={{
-            width: 100,
-            height: 100,
-            margin: 'auto',
-          }}
-        />
-      ) : ( */}
+      {!userAuth.isAuth ? (
+        <h6>You need to login to continue</h6>
+      ) : (
         <div className="all">
           <div className="registered">
             <Typography variant="h4">My Registered Auctions</Typography>
@@ -103,8 +95,7 @@ const RegisteredAuction = () => {
               </Grid>
             </div>
           </div>
-      {/* )} */}
-      {/* : <h6>user not authorised</h6>} */}
+       )} 
     </>
   );
 };

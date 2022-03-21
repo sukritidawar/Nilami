@@ -26,7 +26,7 @@ const BiddingPage = (props) => {
   const checkTimings = async() => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, "yyyy-mm-dd");
-    var currentTime = dateFormat(myDate, "hh:MM:ss");
+    var currentTime = dateFormat(myDate, "HH:MM:ss");
     if((auctionDetails.endDate < currentDate) || ((auctionDetails.endDate == currentDate)&& (currentTime > auctionDetails.endTime)) ) 
       setTimeUp(true);
   }

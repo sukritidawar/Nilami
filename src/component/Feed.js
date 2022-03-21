@@ -54,7 +54,7 @@ const Feed = ({ auction }) => {
   const checkTimings = async() => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, "yyyy-mm-dd");
-    var currentTime = dateFormat(myDate, "hh:MM:ss");
+    var currentTime = dateFormat(myDate, "HH:MM:ss");
     console.log(currentDate);
     console.log(currentTime);
     if((dateFormat(auction.end_date,"yyyy-mm-dd") < currentDate) || ((dateFormat(auction.end_date,"yyyy-mm-dd") == currentDate)&& (currentTime > auction.end_time)) ) 

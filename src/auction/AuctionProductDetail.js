@@ -224,7 +224,7 @@ const AuctionProductDetail = () => {
                 </Typography>
               </Grid>
                 <Grid item xs={11} md={8}>
-                
+                <Button component={Link} to = {`/feed/:${id}/chat`}>Chat</Button>
                 {isRegistered ?
                   <Link to = {`/feed/${id}/biding`} state={auctionDetails}><button>Go to bidding</button></Link>
                 :

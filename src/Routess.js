@@ -7,6 +7,7 @@ import BiddingPage from './pages/BiddingPage';
 import CreatedAuction from './auction/CreatedAuction';
 import CreateAuctionModal from './pages/myAuctions/CreateAuctionModal';
 import Cookies from 'js-cookie';
+import Chat from './auction/chat app/Chat'
 import EditUserInfoModal from "./pages/userProfile/EditUserInfoModal";
 import FrontPage from './auth/FrontPage';
 import Feed from "./component/Feed"
@@ -49,6 +50,7 @@ const Routess = () => {
         <Route exact path="/feed" element={<Homepage />} />
         <Route exact path="/feed/:id" element={<AuctionProductDetail />} />
         <Route exact path="/feed/:id/biding" element={<BiddingPage />} />
+        <Route exact path="/feed/:id/chat" element={<Chat />} />
         <Route exact path="/profile" element={<UserProfile />} />
         <Route exact path="/registeredauction" element={<RegisteredAuction />} />
         <Route exact path="/myauction" element={<CreatedAuction />} />

@@ -76,7 +76,9 @@ const BiddingPage = (props) => {
 
 
   return (
-    <>{timeUp ?<h6>this auction has ended</h6> : (
+   
+    <>
+    {timeUp ?<h6>this auction has ended</h6> : (
       <div>
 
         {/* //   Navbar */}

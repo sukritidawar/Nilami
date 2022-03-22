@@ -125,8 +125,12 @@ const AuctionProductDetail = () => {
   }, [isLoading]);
 
     const registerUser = async() => {
+      if(userAuth.isAuth){
         handleShowInfoModal();
         setIsRegistered(true);
+      }else{
+        alert("login to register");
+      }
     }
 
   return (

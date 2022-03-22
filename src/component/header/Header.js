@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,8 +10,11 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
+import Cookies from 'js-cookie';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Store from "../../store/Store"
+import { LOGOUT } from "../../store/Types";
 
 const settings = ['Profile', 'Logout'];
 
@@ -31,6 +34,9 @@ const pages = [{
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [userAuth,dispatch] = useContext(Store);
+  const navigate = useNavigate();
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -46,6 +52,15 @@ const Header = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleLogout = async() =>{
+    Cookies.remove("token");
+    Cookies.remove("user_id");
+    Cookies.remove("user_name");
+    await dispatch({
+      type: LOGOUT,
+    });
+  }
 
   return (
     <AppBar position="static" style={{ backgroundColor: 'rgb(38,70,83)' }}>
@@ -143,11 +158,19 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {userAuth.isAuth ?
+              <>
+                <MenuItem onClick={()=>{navigate("/profile")}}><Typography textAlign="center">Profile</Typography></MenuItem>
+                <MenuItem onClick={handleLogout}><Typography textAlign="center">Logout</Typography></MenuItem>
+              </>:(<>
+                <MenuItem onClick={()=>{navigate("/")}}><Typography textAlign="center">Login</Typography></MenuItem>
+                </>)
+              }
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
             </Menu>
           </Box>
         </Toolbar>

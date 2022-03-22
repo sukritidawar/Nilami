@@ -12,18 +12,17 @@ const image = "https://lh3.googleusercontent.com/-JVpfmGGJuO8/AAAAAAAAAAI/AAAAAA
 function SendMessage({ scroll, collectionName }) {
     const [msg, setMsg] = useState('')
     const [userAuth, setUserAuth] = useContext(Store);  
-    // const userid = userAuth.user_id;
-    const userid = "66f63f1d-9303-4e29-abba-c58be203c270"
+    const userid = userAuth.user_id;
     async function sendMessage(e) {
         e.preventDefault()
         //user id // photourl
         const uid = userid;
-        const photoURL = image;
+        const userName = userAuth.user_name;
 
         //messages - auction id + auctioneer id
         await Fire.collection(`${collectionName}`).add({
-            text: `${userAuth.user_name}: ` + msg,
-            photoURL,
+            text: msg,
+            userName,
             uid,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
@@ -44,13 +43,13 @@ function SendMessage({ scroll, collectionName }) {
                     />
 
                     <Button
-                        style={{ width: '18%', fontSize: '15px', fontWeight: '550', margin: '4px 5% -13px 5%', maxWidth: '200px' }}
-                        type="submit">Send
+                        style={{backgroundColor:"green",marginLeft:"20px"}}
+                        type="submit">Send 
                     </Button>
                 </div>
             </form>
         </div>
     )
 }
-
+ 
 export default SendMessage

@@ -73,7 +73,7 @@ const Login = () => {
 
       if (res.data.success) {
         Cookies.set('user_id', `${res.data.user_id}`);
-        Cookies.set('user_name',`${res.data.user_name}`)
+        Cookies.set('user_name',`${res.data.user_name}`);
 
         await dispatch({
           type: LOGIN,

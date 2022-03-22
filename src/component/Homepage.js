@@ -10,6 +10,7 @@ import {
   Box,
 } from '@mui/material';
 import Feed from './Feed';
+import LoadingIndicator from './LoadingIndicator';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import Keys from '../config';
@@ -52,7 +53,7 @@ const Homepage = () => {
       // setLoading(false);
       // console.log(res);
 
-      trackPromise(axios.get(url).then((res)=>{setAuctionFeed(res.data)}));
+      trackPromise(axios.get(url).then((res) => { setAuctionFeed(res.data) }));
     } catch (error) {
       console.log(error);
     }
@@ -98,9 +99,12 @@ const Homepage = () => {
   };
 
   return (
-    <Grid component="main">
-      {/* {!isLoading ? ( */}
-      {/* ) : ( */}
+    <>
+      <Header />
+      <LoadingIndicator />
+      <Grid component="main">
+        {/* {!isLoading ? ( */}
+        {/* ) : ( */}
         <Grid className={styles.feed_comp}>
           <form onSubmit={handleSubmit} method="POST">
             <Grid container spacing={2}>
@@ -152,8 +156,9 @@ const Homepage = () => {
             ))}
           </Grid>
         </Grid>
-      {/* )} */}
-    </Grid>
+        {/* )} */}
+      </Grid>
+    </>
   );
 };
 

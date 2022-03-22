@@ -44,8 +44,6 @@ const Routess = () => {
   }, [])
   return (
     <Store.Provider value={[state, dispatch]}>
-      <Header />
-      <LoadingIndicator />
       <Routes>
         <Route exact path="/" element={<Login />} />
         <Route exact path="/signup" element={<Signup />} />

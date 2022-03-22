@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Keys from '../config';
@@ -20,6 +20,8 @@ import { ContentPasteOutlined, WifiChannelRounded } from '@mui/icons-material';
 import RegisterModal from './RegisterModal';
 import { trackPromise } from 'react-promise-tracker';
 import Store from '../store/Store';
+import Header from '../component/header/Header';
+import LoadingIndicator from '../component/LoadingIndicator';
 
 const imageee =
   'https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg';
@@ -45,8 +47,8 @@ const AuctionProductDetail = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [auctionDetails, setAuctionDetails] = useState(defaultAuctionDetails);
   const [isLoading, setIsLoading] = useState(true);
-  const [timeUp,setTimeUp] = useState(false);
-  const [winnerName,setWinnerName] = useState("Anonymous");
+  const [timeUp, setTimeUp] = useState(false);
+  const [winnerName, setWinnerName] = useState("Anonymous");
   const [infoModalShow, setinfoModalShow] = useState(false);
   const handleCloseInfoModal = () => setinfoModalShow(false);
   const handleShowInfoModal = () => setinfoModalShow(true);
@@ -54,13 +56,13 @@ const AuctionProductDetail = () => {
   const getAuctionDetails = async () => {
     try {
       const url = Keys.BASE_API + "auction/id/" + id;
-      trackPromise(axios.get(url).then((tempAuctionDetails) =>{
+      trackPromise(axios.get(url).then((tempAuctionDetails) => {
         setAuctionDetails({
           productName: tempAuctionDetails.data.product_name,
           productDescription: tempAuctionDetails.data.product_details,
           startingBid: tempAuctionDetails.data.starting_price + "",
           estimate: tempAuctionDetails.data.estimated_price + "",
-          startDate: dateFormat(tempAuctionDetails.data.start_date,"yyyy-mm-dd"),
+          startDate: dateFormat(tempAuctionDetails.data.start_date, "yyyy-mm-dd"),
           startTime: tempAuctionDetails.data.start_time,
           endDate: dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"),
           endTime: tempAuctionDetails.data.end_time,
@@ -68,52 +70,53 @@ const AuctionProductDetail = () => {
           auctionCategory: tempAuctionDetails.data.product_category,
           city: tempAuctionDetails.data.city,
           pincode: tempAuctionDetails.data.pincode,
-          winner_user_id: tempAuctionDetails.data.winner_user_id})
-          checkTimings(dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"),tempAuctionDetails.data.end_time);
+          winner_user_id: tempAuctionDetails.data.winner_user_id
+        })
+        checkTimings(dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"), tempAuctionDetails.data.end_time);
       }))
     } catch (error) {
       console.log(error);
     }
   }
-  const checkTimings = async(auctionEndDate,auctionEndTime) => {
+  const checkTimings = async (auctionEndDate, auctionEndTime) => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, "yyyy-mm-dd");
     var currentTime = dateFormat(myDate, "HH:MM:ss");
     console.log(auctionEndDate);
     console.log(currentDate);
-    if(auctionEndDate){
-      if((auctionEndDate < currentDate) || ((auctionEndDate == currentDate)&& (currentTime > auctionEndTime)) ){ 
+    if (auctionEndDate) {
+      if ((auctionEndDate < currentDate) || ((auctionEndDate == currentDate) && (currentTime > auctionEndTime))) {
         setTimeUp(true);
         console.log("ada");
       }
     }
   }
-  
+
   const getRegAuctions = async () => {
     try {
-        const url = Keys.BASE_API + "user/registeredAuctions";
-        var res = await axios.get(url);
-        const regAuctions = res.data.registeredAuctions;
-        console.log(id);
-        if(regAuctions){
-          regAuctions.forEach(regAuction => {
-            if(regAuction.auction_id == id){
-              setIsRegistered(true);
-            }
-          });
-        }
+      const url = Keys.BASE_API + "user/registeredAuctions";
+      var res = await axios.get(url);
+      const regAuctions = res.data.registeredAuctions;
+      console.log(id);
+      if (regAuctions) {
+        regAuctions.forEach(regAuction => {
+          if (regAuction.auction_id == id) {
+            setIsRegistered(true);
+          }
+        });
+      }
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
-  const getWinnerName = async() => {
+  const getWinnerName = async () => {
     try {
       const url = Keys.BASE_API + "auction/getWinnerName/id/" + id;
-      trackPromise(axios.get(url).then((res)=>{
+      trackPromise(axios.get(url).then((res) => {
         setWinnerName(res.data[0].user_name)
       }))
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   }
 
@@ -135,6 +138,7 @@ const AuctionProductDetail = () => {
 
   return (
     <>
+      <Header />
       <Grid
         container
         component="main"
@@ -200,27 +204,27 @@ const AuctionProductDetail = () => {
                 {'Starting Bid : $' + auctionDetails.startingBid}
               </Typography>
 
-                <Typography variant='h6'>
-                  {"Estimated Price: $" + auctionDetails.estimate}
-                </Typography>
-              </Grid>
-              
-              
+              <Typography variant='h6'>
+                {"Estimated Price: $" + auctionDetails.estimate}
+              </Typography>
+            </Grid>
 
-              <>{!timeUp ?<><h6>Closed
+
+
+            <>{!timeUp ? <><h6>Closed
               </h6><p>Winner: {winnerName}</p>
               {userAuth.isAuth ?
                 <>
-                {(() => {
-                  if (userAuth.user_id == auctionDetails.auctioneerUserName || userAuth.user_id == auctionDetails.winner_user_id) {
-                    return (
-                      <Link to = {`/feed/${id}/chat`} state={auctionDetails}><button>CHAT</button></Link>
-                    )
-                  } 
-                })()}</>
-                :<h6></h6>}
-              </> : (<>
-                <Grid item xs={11} md={8}>
+                  {(() => {
+                    if (userAuth.user_id == auctionDetails.auctioneerUserName || userAuth.user_id == auctionDetails.winner_user_id) {
+                      return (
+                        <Link to={`/feed/${id}/chat`} state={auctionDetails}><button>CHAT</button></Link>
+                      )
+                    }
+                  })()}</>
+                : <h6></h6>}
+            </> : (<>
+              <Grid item xs={11} md={8}>
                 <Typography variant='h6'>
                   {"Start Date : " + auctionDetails.startDate}
                 </Typography>
@@ -238,24 +242,24 @@ const AuctionProductDetail = () => {
               </Grid>
 
 
-                <Grid item xs={11} md={8}>
-      
+              <Grid item xs={11} md={8}>
+
                 {isRegistered ?
-                  <Link to = {`/feed/${id}/biding`} state={auctionDetails}><button>Go to bidding</button></Link>
-                :
-                  <span style={{ marginRight: "20px" }}> 
-                  <Button variant="contained" style={{ backgroundColor: "rgb(38,70,83)" }} onClick={registerUser}>
-                    Register
+                  <Link to={`/feed/${id}/biding`} state={auctionDetails}><button>Go to bidding</button></Link>
+                  :
+                  <span style={{ marginRight: "20px" }}>
+                    <Button variant="contained" style={{ backgroundColor: "rgb(38,70,83)" }} onClick={registerUser}>
+                      Register
                   </Button>
-                  <RegisterModal
-                  id={id}
-                  show={infoModalShow}
-                  onHide={handleCloseInfoModal} 
-                  />
-                </span>
-                
+                    <RegisterModal
+                      id={id}
+                      show={infoModalShow}
+                      onHide={handleCloseInfoModal}
+                    />
+                  </span>
+
                 }
-              
+
                 {/* <Link
                   to={{
                     pathname: `/feed/${id}/biding`,
@@ -272,7 +276,7 @@ const AuctionProductDetail = () => {
               </Grid></>
               )}</>
 
-              
+
 
 
 

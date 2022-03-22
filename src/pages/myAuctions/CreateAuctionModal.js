@@ -15,11 +15,11 @@ const CreateAuctionModal = (props) => {
     starting_price: '',
     city: '',
     pincode: '',
-    is_private:'off',
-    start_date:'',
-    start_time:'',
-    end_date:'',
-    end_time:''
+    is_private: 'off',
+    start_date: '',
+    start_time: '',
+    end_date: '',
+    end_time: ''
 
   });
 
@@ -48,11 +48,11 @@ const CreateAuctionModal = (props) => {
       starting_price: '',
       city: '',
       pincode: '',
-      is_private:'off',
-      start_date:'',
-      start_time:'',
-      end_date:'',
-      end_time:''
+      is_private: 'off',
+      start_date: '',
+      start_time: '',
+      end_date: '',
+      end_time: ''
     });
     props.onHide();
   };
@@ -91,21 +91,19 @@ const CreateAuctionModal = (props) => {
     <Modal
       {...props}
       size="md"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
     >
       <Modal.Header closeButton>
-        <Modal.Title style={{ alignItems: 'center' }}>
+        <Modal.Title >
           Update User Info
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <h5 style={{ textAlign: 'center' }}>Hi there !</h5>
-        <h6 style={{ textAlign: 'center' }}>
+      <Modal.Body style={{ padding: '30px' }}>
+        <h5 >Hi there !</h5>
+        <h6 >
           Please enter the following details.
         </h6>
         <form
-          style={{ textAlign: 'center', padding: '10px' }}
+          style={{ padding: '10px' }}
           onSubmit={handleSubmit}
           method="PUT"
         >
@@ -132,9 +130,9 @@ const CreateAuctionModal = (props) => {
               required="required"
               placeholder="Category"
               onChange={handleChange}>
-              <option value = "art">Art</option>
-              <option value = "antique">Antique</option>
-              <option value = "antique">Religious</option>
+              <option value="art">Art</option>
+              <option value="antique">Antique</option>
+              <option value="antique">Religious</option>
             </select>
           </div>
           <div style={{ padding: '10px' }}>
@@ -236,10 +234,10 @@ const CreateAuctionModal = (props) => {
               onChange={handleChange}
             />
           </div>
-          <div style={{ padding: '10px' }}>
-            <button type="submit" onClick={handleSubmit}>
+          <div style={{ padding: '10px', alignContent: 'center' }}>
+            <Button type="submit" onClick={handleSubmit}>
               Submit
-            </button>
+            </Button>
           </div>
         </form>
       </Modal.Body>

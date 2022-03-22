@@ -10,6 +10,8 @@ import Feed from '../component/Feed';
 import Spinner from 'react-spinkit';
 import './RegsiteredAuction.css';
 import { trackPromise } from 'react-promise-tracker';
+import Header from '../component/header/Header'
+import LoadingIndicator from '../component/LoadingIndicator'
 axios.defaults.withCredentials = true;
 
 const RegisteredAuction = () => {
@@ -29,7 +31,7 @@ const RegisteredAuction = () => {
   const getRegAuctions = async () => {
     try {
       const url = Keys.BASE_API + 'user/registeredAuctions';
-      trackPromise(axios.get(url).then((res)=>{
+      trackPromise(axios.get(url).then((res) => {
         setRegAuctions(res.data.registeredAuctions);
       }))
       var myDate = new Date();
@@ -48,17 +50,19 @@ const RegisteredAuction = () => {
     //     console.log("user not authorised");
     // }
   }, [isLoading]);
-            
-    
+
+
   return (
     <>
+      <Header />
+      <LoadingIndicator />
       {!userAuth.isAuth ? (
         <h6>You need to login to continue</h6>
       ) : (
-        <div className="all">
-          <div className="registered">
-            <Typography variant="h4">My Registered Auctions</Typography>
-          </div>
+          <div className="all">
+            <div className="registered">
+              <Typography variant="h4">My Registered Auctions</Typography>
+            </div>
             <div className="container">
               <div className="buttonWrap">
                 <Button
@@ -95,7 +99,7 @@ const RegisteredAuction = () => {
               </Grid>
             </div>
           </div>
-       )} 
+        )}
     </>
   );
 };

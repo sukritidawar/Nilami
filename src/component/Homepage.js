@@ -10,7 +10,6 @@ import {
   Box,
 } from '@mui/material';
 import Feed from './Feed';
-import LoadingIndicator from './LoadingIndicator';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import Keys from '../config';
@@ -41,7 +40,7 @@ const Homepage = () => {
     filterBy: '',
     valueAcc: '',
   });
-  const [auctionFeed, setAuctionFeed] = useState([]);
+  const [auctionFeed, setAuctionFeed] = useState(null);
   const [isLoading, setLoading] = useState(true);
 
   const getDefaultAuctionFeed = async () => {
@@ -101,10 +100,9 @@ const Homepage = () => {
   return (
     <>
       <Header />
-      <LoadingIndicator />
       <Grid component="main">
-        {/* {!isLoading ? ( */}
-        {/* ) : ( */}
+        {!auctionFeed ?<p> </p>
+         : (
         <Grid className={styles.feed_comp}>
           <form onSubmit={handleSubmit} method="POST">
             <Grid container spacing={2}>
@@ -156,7 +154,7 @@ const Homepage = () => {
             ))}
           </Grid>
         </Grid>
-        {/* )} */}
+        )} 
       </Grid>
     </>
   );

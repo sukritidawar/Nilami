@@ -10,6 +10,8 @@ import EditUserInfoModal from './EditUserInfoModal';
 import AddAddressModal from './AddAddressModal';
 import Store from '../../store/Store';
 import Spinner from 'react-spinkit';
+import Header from '../../component/header/Header';
+import { trackPromise } from 'react-promise-tracker';
 axios.defaults.withCredentials = true;
 
 const UserProfile = () => {
@@ -54,17 +56,13 @@ const UserProfile = () => {
 
     try {
       const url = Keys.BASE_API + 'user/profile';
-      // const url2 = Keys.BASE_API + 'user/login';
-      // var res = await axios.post(url2, {
-      //   email: 'sho2@gmail.com',
-      //   password: '1234',
-      // });
-      // console.log(res);
-      const userInfo = await axios.get(url);
-      // console.log(userInfo.data.userData.user);
-      setUserDetails(userInfo.data.userData);
-      setUserAddress(userInfo.data.userAddress);
-      setIsLoading(true);
+    
+
+      trackPromise(axios.get(url).then((res) => {
+        setUserDetails(res.data.userData);
+        setUserAddress(res.data.userAddress);
+      }))
+      
     } catch (e) {
       console.log(e);
     }
@@ -82,16 +80,9 @@ const UserProfile = () => {
   return (
     // <div></div>
     <div>
-      {!isLoading ? (
-        <Spinner
-          name="circle"
-          justify="center"
-          style={{
-            width: 100,
-            height: 100,
-            margin: 'auto',
-          }}
-        />
+      <Header />
+      {!userDetails ? (
+        <p> </p>
       ) : (
         <Container className="container">
           <h1 style={{ textAlign: 'center', color: 'white' }}>Your Profile</h1>

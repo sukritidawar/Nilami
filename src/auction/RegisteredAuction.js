@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const RegisteredAuction = () => {
   const [userAuth, setUserAuth] = useContext(Store);
-  const [regAuctions, setRegAuctions] = useState([]);
+  const [regAuctions, setRegAuctions] = useState(null);
   const [upAuctions, setUpAuctions] = useState(true);
   const [isLoading, setLoading] = useState(true);
   const [todayDate, setTodayDate] = useState(null);
@@ -76,34 +76,35 @@ const RegisteredAuction = () => {
   return (
     <>
       <Header />
-      <LoadingIndicator />
-      <Grid component="main" className={styles.feed_comp}>
-        {userAuth.isAuth ?
-          <>
-            <Grid container margin='auto' justifyContent='center' alignContent='center' >
-              <Typography item xs={12} variant="h2" margin='auto' justifyContent='center' justifyText='center' style={{ fontStyle: 'serif' }}>
-                MY REGISTERED AUCTIONS
-              </Typography>
-            </Grid>
-            <Grid container spacing={2} paddingTop={5}>
-              <Grid item xs={0} md={3}></Grid>
-              <Grid item xs={12} md={6} margin='auto' >
-                <Button variant="contained" style={{ backgroundColor: 'rgb(231,111,81)' }} onClick={getUpcomingAuctions}>Upcoming Auctions</Button>
-                <Button variant="contained" style={{ backgroundColor: 'rgb(244,162,97)' }} onClick={getPastAuctions} >Past Auctions</Button>
+      {!regAuctions ? <p> </p>:
+        <Grid component="main" className={styles.feed_comp}>
+          {userAuth.isAuth ?
+            <>
+              <Grid container margin='auto' justifyContent='center' alignContent='center' >
+                <Typography item xs={12} variant="h2" margin='auto' justifyContent='center' justifyText='center' style={{ fontStyle: 'serif' }}>
+                  MY REGISTERED AUCTIONS
+                </Typography>
               </Grid>
-            </Grid>
-            <Grid container margin='auto' justifyContent='center' alignContent='center' paddingTop={5}>
-              {upAuctions ? regAuctions.map((auction) => (
-                <>{(dateFormat(auction.end_date, "yyyy-mm-dd") > todayDate) && <Feed auction={auction} />}</>
+              <Grid container spacing={2} paddingTop={5}>
+                <Grid item xs={0} md={3}></Grid>
+                <Grid item xs={12} md={6} margin='auto' >
+                  <Button variant="contained" style={{ backgroundColor: 'rgb(231,111,81)' }} onClick={getUpcomingAuctions}>Upcoming Auctions</Button>
+                  <Button variant="contained" style={{ backgroundColor: 'rgb(244,162,97)' }} onClick={getPastAuctions} >Past Auctions</Button>
+                </Grid>
+              </Grid>
+              <Grid container margin='auto' justifyContent='center' alignContent='center' paddingTop={5}>
+                {upAuctions ? regAuctions.map((auction) => (
+                  <>{(dateFormat(auction.end_date, "yyyy-mm-dd") > todayDate) && <Feed auction={auction} />}</>
 
-              )) : regAuctions.map((auction) => (
-                <>{(dateFormat(auction.end_date, "yyyy-mm-dd") < todayDate) && <Feed auction={auction} />}</>
+                )) : regAuctions.map((auction) => (
+                  <>{(dateFormat(auction.end_date, "yyyy-mm-dd") < todayDate) && <Feed auction={auction} />}</>
 
-              ))}
-            </Grid>
+                ))}
+              </Grid>
           </>
           : <h6>You need to login to continue</h6>}
       </Grid>
+      }
     </>
   );
 };

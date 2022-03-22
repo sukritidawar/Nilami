@@ -143,8 +143,8 @@ const AuctionProductDetail = () => {
         container
         component="main"
         sx={{
-          backgroundColor: 'rgb(38, 70, 83)'/*'rgb(42,157,143)'*/,
-
+          // backgroundColor: 'rgb(38, 70, 83)'/*'rgb(42,157,143)'*/,
+          marginTop: 10,
           paddingLeft: 15,
           paddingBottom: 5,
           paddingRight: 15,

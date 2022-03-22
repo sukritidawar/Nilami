@@ -8,6 +8,7 @@ import dateFormat from "dateformat";
 import axios from "axios";
 import Keys from "../config";
 import Store from "../store/Store";
+import Header from "../component/header/Header"
 import { useParams, useLocation } from 'react-router-dom';
 axios.defaults.withCredentials = true;
 
@@ -78,6 +79,7 @@ const BiddingPage = (props) => {
   return (
    
     <>
+    <Header/>
     {timeUp ?<h6>this auction has ended</h6> : (
       <div>
 

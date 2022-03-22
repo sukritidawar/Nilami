@@ -56,6 +56,7 @@ const Routess = () => {
         <Route exact path="/myauction" element={<CreatedAuction />} />
 
       </Routes>
+      <LoadingIndicator />
     </Store.Provider>
   )
 }

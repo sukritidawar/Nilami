@@ -272,10 +272,6 @@ const AuctionProductDetail = () => {
               </Grid></>
               )}</>
 
-
-
-
-
             <Grid item xs={11} md={12}>
               <Grid container>
                 <Grid item md={7}></Grid>

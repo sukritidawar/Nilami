@@ -33,7 +33,7 @@ function Chat() {
                     <div>
                         
                         <div key={id} className={`msg ${uid === userid ? 'sent' : 'received'}`}>
-                            <img src={photoURL} alt="NA" style={{height:"40px",width:"40px",borderRadius:"50%"}}/>
+                            {/* <img src={photoURL} alt="NA" style={{height:"40px",width:"40px",borderRadius:"50%"}}/> */}
                             {text}
                         </div>
                     </div>

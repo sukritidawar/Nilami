@@ -22,7 +22,7 @@ function SendMessage({ scroll, collectionName }) {
 
         //messages - auction id + auctioneer id
         await Fire.collection(`${collectionName}`).add({
-            text: msg,
+            text: `${userAuth.user_name}: ` + msg,
             photoURL,
             uid,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()

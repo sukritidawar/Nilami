@@ -10,6 +10,7 @@ import EditUserInfoModal from './EditUserInfoModal';
 import AddAddressModal from './AddAddressModal';
 import Store from '../../store/Store';
 import Spinner from 'react-spinkit';
+import Header from '../../component/header/Header';
 axios.defaults.withCredentials = true;
 
 const UserProfile = () => {
@@ -80,8 +81,7 @@ const UserProfile = () => {
   // },[]);
 
   return (
-    // <div></div>
-    <div>
+    <>
       {!isLoading ? (
         <Spinner
           name="circle"
@@ -94,6 +94,7 @@ const UserProfile = () => {
         />
       ) : (
         <Container className="container">
+          <Header className="header" />
           <h1 style={{ textAlign: 'center', color: 'white' }}>Your Profile</h1>
           <Row className="mainContent">
             <Col xl={12}>
@@ -118,7 +119,12 @@ const UserProfile = () => {
                         <p>Username: shobha9250</p>
                         <p>Mobile: 3333</p> */}
                 </div>
-                <Button onClick={handleShowInfoModal}>Edit</Button>
+                <Button
+                  onClick={handleShowInfoModal}
+                  style={{ backgroundColor: 'rgb(244,162,97)' }}
+                >
+                  Edit
+                </Button>
                 <EditUserInfoModal
                   show={infoModalShow}
                   onHide={handleCloseInfoModal}
@@ -131,7 +137,10 @@ const UserProfile = () => {
                 <h1>Your registered address:</h1>
               </div>
               <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                <Button onClick={handleShowAddressModal} color="red">
+                <Button
+                  onClick={handleShowAddressModal}
+                  style={{ backgroundColor: 'rgb(244,162,97)' }}
+                >
                   Add Address
                 </Button>
               </div>
@@ -175,7 +184,7 @@ const UserProfile = () => {
           </Row>
         </Container>
       )}
-    </div>
+    </>
   );
 };
 

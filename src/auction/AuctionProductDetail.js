@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Keys from '../config';
@@ -19,6 +19,7 @@ import AuctionCommp from './AuctionCommp';
 import { ContentPasteOutlined, WifiChannelRounded } from '@mui/icons-material';
 import RegisterModal from './RegisterModal';
 import { trackPromise } from 'react-promise-tracker';
+import Store from '../store/Store';
 
 const imageee =
   'https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg';
@@ -40,6 +41,7 @@ const defaultAuctionDetails = {
 
 const AuctionProductDetail = () => {
   const { id } = useParams();
+  const [userAuth, setUserAuth] = useContext(Store);
   const [isRegistered, setIsRegistered] = useState(false);
   const [auctionDetails, setAuctionDetails] = useState(defaultAuctionDetails);
   const [isLoading, setIsLoading] = useState(true);
@@ -65,7 +67,8 @@ const AuctionProductDetail = () => {
           auctioneerUserName: tempAuctionDetails.data.auctioneer_id,
           auctionCategory: tempAuctionDetails.data.product_category,
           city: tempAuctionDetails.data.city,
-          pincode: tempAuctionDetails.data.pincode,})
+          pincode: tempAuctionDetails.data.pincode,
+          winner_user_id: tempAuctionDetails.data.winner_user_id})
           checkTimings(dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"),tempAuctionDetails.data.end_time);
       }))
     } catch (error) {
@@ -199,8 +202,20 @@ const AuctionProductDetail = () => {
               </Grid>
               
               
-              <>{timeUp ?<><h6>Closed
-              </h6><p>Winner: {winnerName}</p></> : (<>
+
+              <>{!timeUp ?<><h6>Closed
+              </h6><p>Winner: {winnerName}</p>
+              {userAuth.isAuth ?
+                <>
+                {(() => {
+                  if (userAuth.user_id == auctionDetails.auctioneerUserName || userAuth.user_id == auctionDetails.winner_user_id) {
+                    return (
+                      <Link to = {`/feed/${id}/chat`} state={auctionDetails}><button>CHAT</button></Link>
+                    )
+                  } 
+                })()}</>
+                :<h6></h6>}
+              </> : (<>
                 <Grid item xs={11} md={8}>
                 <Typography variant='h6'>
                   {"Start Date : " + auctionDetails.startDate}
@@ -217,8 +232,10 @@ const AuctionProductDetail = () => {
                   {"End time : " + auctionDetails.endTime}
                 </Typography>
               </Grid>
+
+
                 <Grid item xs={11} md={8}>
-                <Button component={Link} to = {`/feed/:${id}/chat`}>Chat</Button>
+      
                 {isRegistered ?
                   <Link to = {`/feed/${id}/biding`} state={auctionDetails}><button>Go to bidding</button></Link>
                 :

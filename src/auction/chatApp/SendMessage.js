@@ -7,7 +7,7 @@ import 'firebase/compat/firestore';
 import { Input, Button } from '@material-ui/core'
 import Store from "../../store/Store"
 
-const image = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F42893664%2Ffirebase-photourl-from-a-google-auth-provider-returns-a-jpg-with-colors-inverted&psig=AOvVaw16j3mpSbRBigHDcaAi9ARQ&ust=1647667711613000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPCBpNn2zvYCFQAAAAAdAAAAABAD"
+const image = "https://lh3.googleusercontent.com/-JVpfmGGJuO8/AAAAAAAAAAI/AAAAAAAAAME/sMJVq9F8gec/photo.jpg"
 
 function SendMessage({ scroll, collectionName }) {
     const [msg, setMsg] = useState('')
@@ -21,7 +21,7 @@ function SendMessage({ scroll, collectionName }) {
         const photoURL = image;
 
         //messages - auction id + auctioneer id
-        await Fire.collection({collectionName}).add({
+        await Fire.collection(`${collectionName}`).add({
             text: msg,
             photoURL,
             uid,

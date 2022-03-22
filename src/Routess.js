@@ -7,7 +7,7 @@ import BiddingPage from './pages/BiddingPage';
 import CreatedAuction from './auction/CreatedAuction';
 import CreateAuctionModal from './pages/myAuctions/CreateAuctionModal';
 import Cookies from 'js-cookie';
-import Chat from './auction/chat app/Chat'
+import Chat from './auction/chatApp/Chat'
 import EditUserInfoModal from "./pages/userProfile/EditUserInfoModal";
 import FrontPage from './auth/FrontPage';
 import Feed from "./component/Feed"
@@ -31,9 +31,11 @@ const Routess = () => {
   useEffect(() => {
     if (Cookies.get("token")) {
       const user_id = Cookies.get("user_id");
+      const user_name = Cookies.get("user_name");
       dispatch({
         type: LOGIN,
-        user_id: `${user_id}`
+        user_id: `${user_id}`,
+        user_name: `${user_name}`
       });
       return;
     } else {

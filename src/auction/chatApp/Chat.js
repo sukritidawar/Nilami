@@ -15,15 +15,16 @@ function Chat() {
     const auctioneerID = auctionDetails.auctioneerUserName;
     const winnerId = auctionDetails.winnerid;
     const collectionName = auctionId +"_" + auctioneerID +"_" + winnerId;
+    console.log(collectionName);
     useEffect(() => {
         // auction id + auctioneer id + winner id;
-        Fire.collection({collectionName}).orderBy('createdAt').limit(50).onSnapshot(snapshot => {
+        Fire.collection(`${collectionName}`).orderBy('createdAt').limit(50).onSnapshot(snapshot => {
             setMessages(snapshot.docs.map(doc => doc.data()))
         })
     }, [])
     
-    // const userid = userAuth.user_id;
-    const userid = "66f63f1d-9303-4e29-abba-c58be203c270";
+    const userid = userAuth.user_id;
+    // const userid = "66f63f1d-9303-4e29-abba-c58be203c270";
     
     return (
         <div>
@@ -32,8 +33,8 @@ function Chat() {
                     <div>
                         
                         <div key={id} className={`msg ${uid === userid ? 'sent' : 'received'}`}>
-                            <img src={photoURL} alt="" />
-                            <p>{text}</p>
+                            <img src={photoURL} alt="NA" style={{height:"40px",width:"40px",borderRadius:"50%"}}/>
+                            {text}
                         </div>
                     </div>
                 ))}

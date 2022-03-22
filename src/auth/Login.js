@@ -73,10 +73,12 @@ const Login = () => {
 
       if (res.data.success) {
         Cookies.set('user_id', `${res.data.user_id}`);
+        Cookies.set('user_name',`${res.data.user_name}`)
 
         await dispatch({
           type: LOGIN,
           user_id: `${res.data.user_id}`,
+          user_name: `${res.data.user_name}`
         });
 
         navigate("/feed");
@@ -92,7 +94,9 @@ const Login = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
+    {state.isAuth ? <>{navigate("/feed")}</> :
+      <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -178,6 +182,9 @@ const Login = () => {
         </Grid>
       </Grid>
     </ThemeProvider >
+  
+  }
+  </>
   )
 }
 

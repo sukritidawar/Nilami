@@ -1,7 +1,7 @@
 import { LOGIN, LOGOUT} from "./Types";
 
 const Reducer = (state, action) => {
-  const { type,user_id} = action;
+  const { type,user_id,user_name} = action;
   switch (type) {
     case LOGIN:
       console.log(action);
@@ -9,6 +9,7 @@ const Reducer = (state, action) => {
         ...state,
         isAuth: true,
         user_id,
+        user_name
       };
 
     case LOGOUT:
@@ -16,6 +17,7 @@ const Reducer = (state, action) => {
         ...state,
         isAuth: false,
         user_id:null,
+        user_name:null
       };
 
     default:

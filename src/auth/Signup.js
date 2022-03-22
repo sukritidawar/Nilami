@@ -86,10 +86,12 @@ const Signup = () => {
       
       if (res.data.success) {
         Cookies.set('user_id', `${res.data.user_id}`);
+        Cookies.set('user_name',`${res.data.user_name}`)
 
         await dispatch({
           type: LOGIN,
           user_id: `${res.data.user_id}`,
+          user_name: `${res.data.user_name}`
         });
 
         navigate("/feed");

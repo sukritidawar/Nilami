@@ -1,4 +1,4 @@
-import {React,useState,useEffect} from 'react';
+import {React,useState,useEffect, useContext} from 'react';
 import Chat from '../UIComponents/BiddingChat/Chat';
 import Comments from '../UIComponents/Comments/Comments';
 import TopBids from './TopBids';
@@ -17,7 +17,7 @@ const imageee =
 
 
 const BiddingPage = (props) => {
-  const [userAuth, setUserAuth] = useState(false);
+  const [userAuth, setUserAuth] = useContext(Store);
   const { id } = useParams();
   const [formData, setFormData] = useState({
     bid_amount: 0
@@ -37,6 +37,7 @@ const BiddingPage = (props) => {
   }
   useEffect(async ()=>{
     await checkTimings();
+    console.log(userAuth.user_id)
     },[]);
 
   const handleChange = (e) => {
@@ -77,6 +78,16 @@ const BiddingPage = (props) => {
       handleFeedback(error);
     }
   }
+  const handleCloseAuction = async() => {
+    try {
+      const url = Keys.BASE_API + "auction/close/" +id;
+      const res = await axios.put(url);
+      setTimeUp(true);
+      console.log(res); 
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 
 
@@ -84,7 +95,7 @@ const BiddingPage = (props) => {
    
     <>
     <Header/>
-    {!timeUp ?<h6>this auction has ended</h6> : (
+    {timeUp ?<h6>this auction has ended</h6> : (
       <>
       <Grid
         container
@@ -153,6 +164,9 @@ const BiddingPage = (props) => {
                 {"Estimated Price: $" + auctionDetails.estimate}
               </Typography>
             </Grid>
+            {auctionDetails.auctioneerUserName == userAuth.user_id ?<Grid item xs={11} md={8}>
+              <Button onClick={handleCloseAuction}>Close Auction</Button>
+            </Grid> :<></>}
 
             <Grid item xs={11} md={8}>
               <div><TopBids id={id} /></div>

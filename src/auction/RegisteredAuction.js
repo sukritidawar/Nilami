@@ -39,7 +39,8 @@ const RegisteredAuction = () => {
   const [regAuctions, setRegAuctions] = useState(null);
   const [upAuctions, setUpAuctions] = useState(true);
   const [isLoading, setLoading] = useState(true);
-  const [todayDate, setTodayDate] = useState(null);
+  const [currentDate, setCurrentDate] = useState(null);
+  const [currentTime, setCurrentTime] = useState(null);
 
   const getUpcomingAuctions = () => {
     setUpAuctions(true);
@@ -55,8 +56,10 @@ const RegisteredAuction = () => {
         setRegAuctions(res.data.registeredAuctions);
       }))
       var myDate = new Date();
-      var x = dateFormat(myDate, 'dd/mm/yy');
-      setTodayDate(x);
+      var x = dateFormat(myDate, 'yyyy-mm-dd');
+      setCurrentDate(x);
+      x= dateFormat(myDate, "HH:MM:ss");
+      setCurrentTime(x); 
       // setLoading(false);
     } catch (error) {
       console.log(error);
@@ -93,13 +96,13 @@ const RegisteredAuction = () => {
               </Grid>
             </Grid>
             <Grid container margin='auto' justifyContent='center' alignContent='center' paddingTop={5}>
-              {upAuctions ? regAuctions.map((auction) => (
-                <>{(dateFormat(auction.end_date, "yyyy-mm-dd") > todayDate) && <Feed auction={auction} />}</>
+                  {upAuctions ? regAuctions.map((auction) => (
+                    <>{((dateFormat(auction.end_date, "yyyy-mm-dd") > currentDate) || ((dateFormat(auction.end_date, "yyyy-mm-dd") == currentDate)&&(auction.end_time > currentTime))) && <Feed auction={auction} />}</>
 
-              )) : regAuctions.map((auction) => (
-                <>{(dateFormat(auction.end_date, "yyyy-mm-dd") < todayDate) && <Feed auction={auction} />}</>
+                  )) : regAuctions.map((auction) => (
+                    <>{((dateFormat(auction.end_date, "yyyy-mm-dd") < currentDate) || ((dateFormat(auction.end_date, "yyyy-mm-dd") == currentDate)&&(auction.end_time < currentTime))) && <Feed auction={auction} />}</>
 
-              ))}
+                  ))}
             </Grid>
           </>
           : <h6>You need to login to continue</h6>}

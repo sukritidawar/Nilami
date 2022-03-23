@@ -70,7 +70,8 @@ const AuctionProductDetail = () => {
           auctionCategory: tempAuctionDetails.data.product_category,
           city: tempAuctionDetails.data.city,
           pincode: tempAuctionDetails.data.pincode,
-          winner_user_id: tempAuctionDetails.data.winner_user_id
+          winner_user_id: tempAuctionDetails.data.winner_user_id,
+          isPrivate: tempAuctionDetails.data.is_private
         })
         checkTimings(dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"), tempAuctionDetails.data.end_time);
       }))
@@ -129,8 +130,7 @@ const AuctionProductDetail = () => {
 
     const registerUser = async() => {
       if(userAuth.isAuth){
-        handleShowInfoModal();
-        setIsRegistered(true);
+        handleShowInfoModal().then(()=>{setIsRegistered(true)});
       }else{
         alert("login to register");
       }
@@ -195,6 +195,7 @@ const AuctionProductDetail = () => {
             </Grid>
             <Grid item xs={11} md={11}>
               <Typography variant="body1" style={{ fontFamily: 'lato' }}>
+              {auctionDetails.isPrivate?<><p style={{color:'green'}}>(Private Auction)</p></>:<></>}
                 {auctionDetails.productDescription}
               </Typography>
             </Grid>
@@ -210,8 +211,8 @@ const AuctionProductDetail = () => {
             </Grid>
 
 
-
-            <>{!timeUp ? <><h6>Closed
+            {/* remove exclamation mark */}
+            <>{timeUp ? <><h6>Closed
               </h6><p>Winner: {winnerName}</p>
               {userAuth.isAuth ?
                 <>
@@ -244,8 +245,12 @@ const AuctionProductDetail = () => {
 
               <Grid item xs={11} md={8}>
 
+                {/* remove this exclamation mark */}
                 {isRegistered ?
-                  <Link to={`/feed/${id}/biding`} state={auctionDetails}><button>Go to bidding</button></Link>
+                  <>
+                    <p>Registered!!</p>
+                    <Link to={`/feed/${id}/biding`} state={auctionDetails}><button>Go to bidding</button></Link>
+                  </>
                   :
                   <span style={{ marginRight: "20px" }}>
                     <Button variant="contained" style={{ backgroundColor: "rgb(38,70,83)" }} onClick={registerUser}>

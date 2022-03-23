@@ -2,6 +2,7 @@ import React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import AuctionCommp from './AuctionCommp';
 import { Grid, Typography, Button } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Store from '../store/Store';
 import axios from 'axios';
 import Keys from '../config';
@@ -102,6 +103,13 @@ const CreatedAuction = () => {
                     <Button variant="contained" style={{ backgroundColor: 'rgb(231,111,81)' }} onClick={getUpcomingAuctions}>Upcoming Auctions</Button>
                     <Button variant="contained" style={{ backgroundColor: 'rgb(244,162,97)' }} onClick={getPastAuctions} >Past Auctions</Button>
                   </Grid>
+                    <Button variant="contained" onClick={handleShowInfoModal} style={{backgroundColor:"green"}}>
+                      <AddCircleIcon></AddCircleIcon>
+                      </Button>
+                    <CreateAuctionModal
+                    show={infoModalShow}
+                    onHide={handleCloseInfoModal}
+                  />
                 </Grid>
                 <Grid container margin='auto' justifyContent='center' alignContent='center' paddingTop={5}>
                   {upAuctions ? myAuctions.map((auction) => (
@@ -112,14 +120,6 @@ const CreatedAuction = () => {
 
                   ))}
                 </Grid>
-
-                <Button onClick={handleShowInfoModal} style={{ margin: "1000px", backgroundColor: "red" }}>
-                  New Auction
-                    </Button>
-                <CreateAuctionModal
-                  show={infoModalShow}
-                  onHide={handleCloseInfoModal}
-                />
               </>
             )}
             

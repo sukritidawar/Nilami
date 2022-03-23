@@ -7,6 +7,8 @@ const LoadingIndicator = props => {
     
        return (
          promiseInProgress && 
+         <>
+         <div style={{width:"100vw",height:"100vh",backgroundColor:"white",opacity:"50%",position:'fixed',zIndex:100,top:'0%',left:'0%'}}></div>
          <Spinner
          name="circle"
          justify="center"
@@ -14,8 +16,13 @@ const LoadingIndicator = props => {
            width: 100,
            height: 100,
            margin: 'auto',
+           position:'absolute',
+           zIndex:400,
+           top: "40%",
+          left:"50%",
          }}
        />
+       </>
       );  
     }
 export default LoadingIndicator;

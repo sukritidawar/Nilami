@@ -2,9 +2,14 @@ import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import Keys from '../../config';
+import TimeSuggestion from "./TimeSuggestion";
 axios.defaults.withCredentials = true;
 
 const CreateAuctionModal = (props) => {
+  const [timeSuggestionShow, settimeSuggestionShow] = useState(false);
+  const handleClosetimeSuggestion = () => settimeSuggestionShow(false);
+  const handleShowtimeSuggestion = () => settimeSuggestionShow(true);
+
   const [formData, setFormData] = useState({
     inviteBidders: 'off',
     product_name: '',
@@ -94,7 +99,7 @@ const CreateAuctionModal = (props) => {
     >
       <Modal.Header closeButton>
         <Modal.Title >
-          Update User Info
+          Create Auction
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ padding: '30px' }}>
@@ -197,6 +202,12 @@ const CreateAuctionModal = (props) => {
               placeholder="Pincode"
               onChange={handleChange}
             />
+          </div>
+          <div style={{ padding: '10px' }}>
+            <Button onClick={handleShowtimeSuggestion} style={{backgroundColor: "green" }}>
+                Suggest Time
+            </Button>
+            <TimeSuggestion show={timeSuggestionShow} onHide={handleClosetimeSuggestion} />
           </div>
           <div style={{ padding: '10px' }}>
             Start Date:  <input

@@ -109,7 +109,12 @@ const UserProfile = () => {
                         <p>Username: shobha9250</p>
                         <p>Mobile: 3333</p> */}
                 </div>
-                <Button onClick={handleShowInfoModal}>Edit</Button>
+                <Button
+                  onClick={handleShowInfoModal}
+                  style={{ backgroundColor: 'rgb(244,162,97)' }}
+                >
+                  Edit
+                </Button>
                 <EditUserInfoModal
                   show={infoModalShow}
                   onHide={handleCloseInfoModal}
@@ -122,7 +127,10 @@ const UserProfile = () => {
                 <h1>Your registered address:</h1>
               </div>
               <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                <Button onClick={handleShowAddressModal} color="red">
+                <Button
+                  onClick={handleShowAddressModal}
+                  style={{ backgroundColor: 'rgb(244,162,97)' }}
+                >
                   Add Address
                 </Button>
               </div>
@@ -166,7 +174,7 @@ const UserProfile = () => {
           </Row>
         </Container>
       )}
-    </div>
+      </div>
   );
 };
 

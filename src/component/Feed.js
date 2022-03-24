@@ -27,6 +27,7 @@ const Feed = ({ auction }) => {
   const [likeColor, setlikeColor] = useState("gray");
   const [clipboardMessage, setMessage] = useState(false);
   const [timeUp,setTimeUp] = useState(false);
+  const [hasStarted,setHasStarted] = useState(false);
   const updateLikes = async () => {
     if (authInfo.isAuth) {
       try {
@@ -53,10 +54,11 @@ const Feed = ({ auction }) => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, "yyyy-mm-dd");
     var currentTime = dateFormat(myDate, "HH:MM:ss");
-    console.log(currentDate);
-    console.log(currentTime);
+    console.log(dateFormat(auction.end_date,"yyyy-mm-dd") < currentDate);
     if((dateFormat(auction.end_date,"yyyy-mm-dd") < currentDate) || ((dateFormat(auction.end_date,"yyyy-mm-dd") == currentDate)&& (currentTime > auction.end_time)) ) 
       setTimeUp(true);
+    if((dateFormat(auction.start_date,"yyyy-mm-dd") < currentDate) || ((dateFormat(auction.start_date,"yyyy-mm-dd") == currentDate)&& (currentTime > auction.start_time)) ) 
+      setHasStarted(true);
   }
 
   useEffect(async () =>{
@@ -89,8 +91,12 @@ const Feed = ({ auction }) => {
           />
           
           {timeUp ? <><p style={{color:"red", marginBottom:"55px"}}>Closed</p></> : (<>
-            <p>Date: {dateFormat(auction.start_date,"dd/mm/yy")} - {dateFormat(auction.end_date,"dd/mm/yy")}</p>
-            <p>Time: {auction.start_time} - {auction.end_time}</p>
+            {hasStarted?<p style={{color:"green",marginBottom:"55px"}}>Auction is live!!</p>:
+              <>
+                <p>Date: {dateFormat(auction.start_date,"dd/mm/yy")} - {dateFormat(auction.end_date,"dd/mm/yy")}</p>
+                <p>Time: {auction.start_time} - {auction.end_time}</p>
+              </>
+            }
           </>)}
           </Link>
           <Link to = {linkedto}>

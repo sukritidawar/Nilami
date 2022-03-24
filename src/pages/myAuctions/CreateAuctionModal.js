@@ -137,7 +137,7 @@ const CreateAuctionModal = (props) => {
               onChange={handleChange}>
               <option value="art">Art</option>
               <option value="antique">Antique</option>
-              <option value="antique">Religious</option>
+              <option value="religious">Religious</option>
             </select>
           </div>
           <div style={{ padding: '10px' }}>

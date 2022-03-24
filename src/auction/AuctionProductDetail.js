@@ -48,6 +48,7 @@ const AuctionProductDetail = () => {
   const [auctionDetails, setAuctionDetails] = useState(defaultAuctionDetails);
   const [isLoading, setIsLoading] = useState(true);
   const [timeUp, setTimeUp] = useState(false);
+  const [hasStarted,setHasStarted] = useState(false);
   const [winnerName, setWinnerName] = useState("Anonymous");
   const [infoModalShow, setinfoModalShow] = useState(false);
   const handleCloseInfoModal = () => setinfoModalShow(false);
@@ -73,13 +74,13 @@ const AuctionProductDetail = () => {
           winner_user_id: tempAuctionDetails.data.winner_user_id,
           isPrivate: tempAuctionDetails.data.is_private
         })
-        checkTimings(dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"), tempAuctionDetails.data.end_time);
+        checkTimings(dateFormat(tempAuctionDetails.data.start_date, "yyyy-mm-dd"),tempAuctionDetails.data.start_time,dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"), tempAuctionDetails.data.end_time);
       }))
     } catch (error) {
       console.log(error);
     }
   }
-  const checkTimings = async (auctionEndDate, auctionEndTime) => {
+  const checkTimings = async (auctionStartDate,auctionStartTime,auctionEndDate, auctionEndTime) => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, "yyyy-mm-dd");
     var currentTime = dateFormat(myDate, "HH:MM:ss");
@@ -88,7 +89,11 @@ const AuctionProductDetail = () => {
     if (auctionEndDate) {
       if ((auctionEndDate < currentDate) || ((auctionEndDate == currentDate) && (currentTime > auctionEndTime))) {
         setTimeUp(true);
-        console.log("ada");
+      }
+    }
+    if (auctionStartDate) {
+      if ((auctionStartDate < currentDate) || ((auctionStartDate == currentDate) && (currentTime > auctionStartTime))) {
+        setHasStarted(true);
       }
     }
   }
@@ -249,7 +254,9 @@ const AuctionProductDetail = () => {
                 {isRegistered ?
                   <>
                     <p>Registered!!</p>
-                    <Link to={`/feed/${id}/biding`} state={auctionDetails}><button>Go to bidding</button></Link>
+                    {hasStarted?<>
+                      <Link to={`/feed/${id}/biding`} state={auctionDetails}><button>Go to bidding</button></Link>
+                    </>:<></>}
                   </>
                   :
                   <span style={{ marginRight: "20px" }}>

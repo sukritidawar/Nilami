@@ -78,6 +78,7 @@ const Homepage = () => {
       if (formData.filterBy == 1) {
         url = Keys.BASE_API + `auction/location_filter/${formData.valueAcc}`;
       } else {
+        console.log(formData.valueAcc);
         url = Keys.BASE_API + `auction/category_filter/${formData.valueAcc}`;
       }
       const res = await axios.get(url);
@@ -115,6 +116,7 @@ const Homepage = () => {
                     labelId="demo-simple-select-label"
                     label="Filter by"
                     name="filterBy"
+                    value={formData.filterBy}
                     onChange={handleChange}
                   >
                     <MenuItem value={1}>Location</MenuItem>
@@ -128,6 +130,7 @@ const Homepage = () => {
                   required="required"
                   type="string"
                   placeholder="Filter by"
+                  value={formData.valueAcc}
                   onChange={handleChange}
                   size="50"
                   style={{ height: '54px' }}
@@ -150,7 +153,7 @@ const Homepage = () => {
           <Grid></Grid>
           <Grid container>
             {auctionFeed.map((auction) => (
-              <Feed auction={auction} />
+              <Feed key={auction.auction_id} auction={auction} />
             ))}
           </Grid>
         </Grid>

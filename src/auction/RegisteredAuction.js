@@ -97,10 +97,10 @@ const RegisteredAuction = () => {
             </Grid>
             <Grid container margin='auto' justifyContent='center' alignContent='center' paddingTop={5}>
                   {upAuctions ? regAuctions.map((auction) => (
-                    <>{((dateFormat(auction.end_date, "yyyy-mm-dd") > currentDate) || ((dateFormat(auction.end_date, "yyyy-mm-dd") == currentDate)&&(auction.end_time > currentTime))) && <Feed auction={auction} />}</>
+                    <>{((dateFormat(auction.end_date, "yyyy-mm-dd") > currentDate) || ((dateFormat(auction.end_date, "yyyy-mm-dd") == currentDate)&&(auction.end_time > currentTime))) && <Feed key={auction.auction_id} auction={auction} />}</>
 
                   )) : regAuctions.map((auction) => (
-                    <>{((dateFormat(auction.end_date, "yyyy-mm-dd") < currentDate) || ((dateFormat(auction.end_date, "yyyy-mm-dd") == currentDate)&&(auction.end_time < currentTime))) && <Feed auction={auction} />}</>
+                    <>{((dateFormat(auction.end_date, "yyyy-mm-dd") < currentDate) || ((dateFormat(auction.end_date, "yyyy-mm-dd") == currentDate)&&(auction.end_time < currentTime))) && <Feed key={auction.auction_id} auction={auction} />}</>
 
                   ))}
             </Grid>

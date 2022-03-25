@@ -40,7 +40,9 @@ const CreatedAuction = () => {
   const [myAuctions, setMyAuctions] = useState(null);
   const [upAuctions, setUpAuctions] = useState(true);
   const [isLoading, setLoading] = useState(true);
-  const [todayDate, setTodayDate] = useState(null);
+  const [currentDate, setCurrentDate] = useState(null);
+  const [currentTime, setCurrentTime] = useState(null);
+
 
   //new auction modal visibility handelers
   const [infoModalShow, setinfoModalShow] = useState(false);
@@ -70,7 +72,9 @@ const CreatedAuction = () => {
 
       var myDate = new Date();
       var x = dateFormat(myDate, "yyyy-mm-dd");
-      setTodayDate(x);
+      setCurrentDate(x);
+      x= dateFormat(myDate, "HH:MM:ss");
+      setCurrentTime(x);
       // setLoading(false);
     } catch (error) {
       console.log(error);
@@ -113,10 +117,10 @@ const CreatedAuction = () => {
                 </Grid>
                 <Grid container margin='auto' justifyContent='center' alignContent='center' paddingTop={5}>
                   {upAuctions ? myAuctions.map((auction) => (
-                    <>{(dateFormat(auction.end_date, "yyyy-mm-dd") > todayDate) && <Feed auction={auction} />}</>
+                    <>{((dateFormat(auction.end_date, "yyyy-mm-dd") > currentDate) || ((dateFormat(auction.end_date, "yyyy-mm-dd") == currentDate)&&(auction.end_time > currentTime))) && <Feed auction={auction} />}</>
 
                   )) : myAuctions.map((auction) => (
-                    <>{(dateFormat(auction.end_date, "yyyy-mm-dd") < todayDate) && <Feed auction={auction} />}</>
+                    <>{((dateFormat(auction.end_date, "yyyy-mm-dd") < currentDate) || ((dateFormat(auction.end_date, "yyyy-mm-dd") == currentDate)&&(auction.end_time < currentTime))) && <Feed auction={auction} />}</>
 
                   ))}
                 </Grid>

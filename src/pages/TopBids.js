@@ -34,21 +34,27 @@ const TopBids = ({ id }) => {
         <div className='topBids'>
 
             <div>
-                {topBids[0] ?
-                    <p>Highest Bid:  {topBids[0].bid_amount}</p>
-                    :
-                    <p>No Bid Yet. Be the First One to Bid.</p>
-                }
-                {topBids[1] ?
-                    <p>Second Highest Bid:  {topBids[1].bid_amount}</p>
-                    :
-                    <></>
-                }
-                {topBids[2] ?
-                    <p>Third highest Bid:  {topBids[2].bid_amount}</p>
-                    :
-                    <></>
-                }
+                {topBids ? <>
+                    {topBids[0].bid_amount == 0 ? <p>No Bid Yet. Be the First One to Bid.</p>:
+                        <>
+                            {topBids[0] ?
+                                <p>Highest Bid:  {topBids[0].bid_amount}</p>
+                                :
+                                <></>
+                            }
+                            {topBids[1] ?
+                                <p>Second Highest Bid:  {topBids[1].bid_amount}</p>
+                                :
+                                <></>
+                            }
+                            {topBids[2] ?
+                                <p>Third highest Bid:  {topBids[2].bid_amount}</p>
+                                :
+                                <></>
+                            }
+                        </>
+                    }
+                </>:<>Loading...</>}
             </div>
 
         </div>

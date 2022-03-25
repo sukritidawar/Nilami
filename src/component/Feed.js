@@ -27,8 +27,6 @@ const Feed = ({ auction }) => {
   const [likeColor, setlikeColor] = useState("gray");
   const [clipboardMessage, setMessage] = useState(false);
   const [timeUp,setTimeUp] = useState(false);
-
-
   const updateLikes = async () => {
     if (authInfo.isAuth) {
       try {
@@ -106,6 +104,7 @@ const Feed = ({ auction }) => {
           </Link>
           <CardContent>
             <Typography>
+              {auction.is_private?<><p style={{color:'green'}}>(Private Auction)</p></>:<></>}
               {auction.product_details}
             </Typography>
             <br>

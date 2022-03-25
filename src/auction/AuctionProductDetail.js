@@ -21,10 +21,8 @@ import RegisterModal from './RegisterModal';
 import { trackPromise } from 'react-promise-tracker';
 import Store from '../store/Store';
 import Header from '../component/header/Header';
-import LoadingIndicator from '../component/LoadingIndicator';
 
-const imageee =
-  'https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg';
+const image = 'https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg';
 
 const defaultAuctionDetails = {
   productName: "Loading..",
@@ -70,7 +68,8 @@ const AuctionProductDetail = () => {
           auctionCategory: tempAuctionDetails.data.product_category,
           city: tempAuctionDetails.data.city,
           pincode: tempAuctionDetails.data.pincode,
-          winner_user_id: tempAuctionDetails.data.winner_user_id
+          winner_user_id: tempAuctionDetails.data.winner_user_id,
+          isPrivate: tempAuctionDetails.data.is_private
         })
         checkTimings(dateFormat(tempAuctionDetails.data.end_date, "yyyy-mm-dd"), tempAuctionDetails.data.end_time);
       }))
@@ -127,14 +126,13 @@ const AuctionProductDetail = () => {
     console.log(isRegistered);
   }, [isLoading]);
 
-    const registerUser = async() => {
-      if(userAuth.isAuth){
-        handleShowInfoModal();
-        setIsRegistered(true);
-      }else{
-        alert("login to register");
-      }
+  const registerUser = async () => {
+    if (userAuth.isAuth) {
+      handleShowInfoModal().then(() => { setIsRegistered(true) });
+    } else {
+      alert("login to register");
     }
+  }
 
   return (
     <>
@@ -143,10 +141,8 @@ const AuctionProductDetail = () => {
         container
         component="main"
         sx={{
-          // backgroundColor: 'rgb(38, 70, 83)'/*'rgb(42,157,143)'*/,
-          marginTop: 10,
+          marginTop: 5,
           paddingLeft: 15,
-          paddingBottom: 5,
           paddingRight: 15,
         }}
       >
@@ -154,30 +150,31 @@ const AuctionProductDetail = () => {
         <Grid
           item
           xs={12}
-          md={5}
+          lg={5}
           sx={{
             /*border: '5px solid rgb(42,157,143);',*/
-            backgroundImage: `url(${imageee})`,
+            backgroundImage: `url(${image})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             textAlign: 'center',
             paddingTop: 2,
+            minHeight: 330,
           }}
         ></Grid>
         <Grid
           item
           xs={12}
-          md={7}
+          lg={7}
           elevation={6}
           sx={{
-            padding: 10,
-            paddingLeft: 20,
+            padding: 5,
+            paddingLeft: 15,
             backgroundColor: 'rgb(233,196,106)',
             fontFamily: 'Montserrat',
           }}
         >
-          <Grid container spacing={3}>
+          <Grid container spacing={2}>
             <Grid item xs={11} md={7}>
               <Typography variant="h3" style={{ fontFamily: 'serif', textTransform: 'uppercase' }}>
                 {auctionDetails.productName}
@@ -195,6 +192,7 @@ const AuctionProductDetail = () => {
             </Grid>
             <Grid item xs={11} md={11}>
               <Typography variant="body1" style={{ fontFamily: 'lato' }}>
+                {auctionDetails.isPrivate ? <><p style={{ color: 'green' }}>(Private Auction)</p></> : <></>}
                 {auctionDetails.productDescription}
               </Typography>
             </Grid>
@@ -210,8 +208,8 @@ const AuctionProductDetail = () => {
             </Grid>
 
 
-
-            <>{!timeUp ? <><h6>Closed
+            {/* remove exclamation mark */}
+            <>{timeUp ? <><h6>Closed
               </h6><p>Winner: {winnerName}</p>
               {userAuth.isAuth ?
                 <>
@@ -224,7 +222,7 @@ const AuctionProductDetail = () => {
                   })()}</>
                 : <h6></h6>}
             </> : (<>
-              <Grid item xs={11} md={8}>
+              <Grid item xs={11} md={8} >
                 <Typography variant='h6'>
                   {"Start Date : " + auctionDetails.startDate}
                 </Typography>
@@ -244,8 +242,14 @@ const AuctionProductDetail = () => {
 
               <Grid item xs={11} md={8}>
 
+                {/* remove this exclamation mark */}
                 {isRegistered ?
-                  <Link to={`/feed/${id}/biding`} state={auctionDetails}><button>Go to bidding</button></Link>
+                  <>
+                    <p>Registered!!</p>
+                    <Link to={`/feed/${id}/biding`} state={auctionDetails} style={{ textDecoration: 'none' }}>
+                      <Button variant="contained" style={{ backgroundColor: "rgb(38,70,83)" }}>Go to bidding</Button>
+                    </Link>
+                  </>
                   :
                   <span style={{ marginRight: "20px" }}>
                     <Button variant="contained" style={{ backgroundColor: "rgb(38,70,83)" }} onClick={registerUser}>

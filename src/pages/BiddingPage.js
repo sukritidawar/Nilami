@@ -1,6 +1,6 @@
 import {React,useState,useEffect} from 'react';
 import Chat from '../UIComponents/BiddingChat/Chat';
-import Comments from '../UIComponents/Comments/Comments';
+import ShowComments from "../UIComponents/Comments/ShowComments"
 import TopBids from './TopBids';
 import { Grid,Avatar, Typography,CssBaseline,Button } from '@mui/material';
 import './BiddingPage.css';
@@ -8,6 +8,7 @@ import dateFormat from "dateformat";
 import axios from "axios";
 import Keys from "../config";
 import Store from "../store/Store";
+import Announcement from '../UIComponents/Announcements/Announcement';
 import Header from "../component/header/Header"
 import { useParams, useLocation } from 'react-router-dom';
 axios.defaults.withCredentials = true;
@@ -192,6 +193,8 @@ const BiddingPage = (props) => {
           </Grid>
         </Grid>
       </Grid>
+          <Announcement/>
+          <ShowComments/>
     </>
     )}</>
   );

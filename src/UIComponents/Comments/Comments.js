@@ -1,14 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react'
+import { Fire } from "../../auction/chatApp/firebasee"
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import Store from "../../store/Store"
 
-const Comments = () => {
-  const [comments, setComments] = useState([]);
+const Comments = ({ scroll, collectionName }) => {
+  //const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
-
-  const postComment = (event) => {
+  const [userAuth, setUserAuth] = useContext(Store);
+  const userid = userAuth.user_id;
+  const postComment =  async (event) => {
     event.preventDefault();
     // backend part will come here
+
+    const uid = userid;
+    const userName = userAuth.user_name;
+    await Fire.collection(`${collectionName}`).add({
+      //Fire.collection(`${collectionName}`).add({
+      text: comment,
+      userName,
+      uid,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    })
+    scroll.current.scrollIntoView({ behavior: 'smooth' })
     setComment('');
   };
+
   return (
     <div className="comments">
       <form className="commentBox">
@@ -28,7 +46,7 @@ const Comments = () => {
           Comment
         </button>
       </form>
-      <div className="postComments">
+      {/* <div className="postComments">
         <p>
           <strong>x1</strong> 123
         </p>
@@ -37,7 +55,7 @@ const Comments = () => {
             <strong>{comment.username}</strong> {comment.text}
           </p>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -42,7 +42,10 @@ const RegisterModal = (props) => {
       const url = Keys.BASE_API + "user/register/auction";
       const response = await axios.post(url, body, config);
       console.log(response.data);
-      alert("successfully registered!!");
+      if(response.data.success){
+        props.onRegister();
+        alert("successfully registered!!");
+      }
     } catch (error) {
       console.log(error);
     }

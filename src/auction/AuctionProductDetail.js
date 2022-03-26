@@ -51,6 +51,7 @@ const AuctionProductDetail = () => {
   const [infoModalShow, setinfoModalShow] = useState(false);
   const handleCloseInfoModal = () => setinfoModalShow(false);
   const handleShowInfoModal = () => setinfoModalShow(true);
+  const updateRegisterInfo = () => {setIsRegistered(true); console.log("in update reg ingo")};
 
   const getAuctionDetails = async () => {
     try {
@@ -133,7 +134,7 @@ const AuctionProductDetail = () => {
 
   const registerUser = async () => {
     if (userAuth.isAuth) {
-      handleShowInfoModal().then(() => { setIsRegistered(true) });
+      handleShowInfoModal();
     } else {
       alert("login to register");
     }
@@ -265,6 +266,7 @@ const AuctionProductDetail = () => {
                       id={id}
                       show={infoModalShow}
                       onHide={handleCloseInfoModal}
+                      onRegister={updateRegisterInfo}
                     />
                   </span>
 

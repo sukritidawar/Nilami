@@ -89,10 +89,10 @@ const UserProfile = () => {
           <Row className="mainContent">
             <Col xl={12}>
               <div className="userInfo">
-                <div className="userImage">
+                {/* <div className="userImage">
                   <img src={userDetails.user.profile_pic}></img>
-                </div>
-                {/* <div className='userImage'><img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU"></img></div> */}
+                </div> */}
+                <div className='userImage'><img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU"></img></div>
 
                 <div className="userDesc">
                   <p style={{ fontSize: '2rem' }}>
@@ -109,9 +109,9 @@ const UserProfile = () => {
                         <p>Username: shobha9250</p>
                         <p>Mobile: 3333</p> */}
                 </div>
-                <Button
+                <Button variant="contained"
                   onClick={handleShowInfoModal}
-                  style={{ backgroundColor: 'rgb(244,162,97)' }}
+                  style={{ backgroundColor: 'rgb(233, 196,106)' }}
                 >
                   Edit
                 </Button>
@@ -122,14 +122,16 @@ const UserProfile = () => {
                 />
               </div>
             </Col>
+            
             <Col>
+            <hr></hr>
               <div className="address-heading">
                 <h1>Your registered address:</h1>
               </div>
               <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                <Button
+                <Button variant="contained"
                   onClick={handleShowAddressModal}
-                  style={{ backgroundColor: 'rgb(244,162,97)' }}
+                  style={{ backgroundColor: 'rgb(233, 196,106)' }}
                 >
                   Add Address
                 </Button>

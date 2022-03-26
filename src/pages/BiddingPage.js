@@ -1,8 +1,8 @@
-import {React,useState,useEffect, useContext} from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import Chat from '../UIComponents/BiddingChat/Chat';
 import Comments from '../UIComponents/Comments/Comments';
 import TopBids from './TopBids';
-import { Grid,Avatar, Typography,CssBaseline,Button } from '@mui/material';
+import { Grid, Avatar, Typography, CssBaseline, Button } from '@mui/material';
 import './BiddingPage.css';
 import dateFormat from "dateformat";
 import axios from "axios";
@@ -10,9 +10,11 @@ import Keys from "../config";
 import Store from "../store/Store";
 import Header from "../component/header/Header"
 import { useParams, useLocation } from 'react-router-dom';
+import FlashMessage from "react-flash-message";
+
 axios.defaults.withCredentials = true;
 
-const imageee =
+const image =
   'https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg';
 
 
@@ -27,23 +29,23 @@ const BiddingPage = (props) => {
   const [feedback, setFeedback] = useState({
     feedback: "",
   });
-  const auctionDetails = useLocation().state; 
+  const auctionDetails = useLocation().state;
 
-  const checkTimings = async() => {
+  const checkTimings = async () => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, "yyyy-mm-dd");
     var currentTime = dateFormat(myDate, "HH:MM:ss");
-    if((auctionDetails.endDate < currentDate) || ((auctionDetails.endDate == currentDate)&& (currentTime > auctionDetails.endTime)) ) 
+    if ((auctionDetails.endDate < currentDate) || ((auctionDetails.endDate == currentDate) && (currentTime > auctionDetails.endTime)))
       setTimeUp(true);
     if((auctionDetails.startDate < currentDate) || ((auctionDetails.startDate == currentDate)&& (currentTime > auctionDetails.startTime)) ) 
       setHasStarted(true);
 
     console.log(hasStarted);
   }
-  useEffect(async ()=>{
+  useEffect(async () => {
     await checkTimings();
     console.log(userAuth.user_id)
-    },[]);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -60,13 +62,14 @@ const BiddingPage = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   send(formData);
+    send(formData);
+    setFeedback("")
     // setFormData({
     //     bid_amount : 0
     // });
-  }; 
+  };
 
-  const send = async(formData) =>{
+  const send = async (formData) => {
     try {
       const config = {
         headers: {
@@ -76,19 +79,23 @@ const BiddingPage = (props) => {
       const body = JSON.stringify(formData);
       console.log(body);
       const url = Keys.BASE_API + "user/bid/auction/" + id;
-      const res = await axios.post(url,body,config);
-      console.log(res); 
-      handleFeedback(res.data.message);
+      const res = await axios.post(url, body, config);
+      console.log(res);
+      if(res.data.message)
+        handleFeedback(res.data.message);
+      else
+        handleFeedback("something went wrong, try again");
     } catch (error) {
-      handleFeedback(error);
+      console.log(error);
+      handleFeedback("something went wrong, try again");
     }
   }
-  const handleCloseAuction = async() => {
+  const handleCloseAuction = async () => {
     try {
-      const url = Keys.BASE_API + "auction/close/" +id;
+      const url = Keys.BASE_API + "auction/close/" + id;
       const res = await axios.put(url);
       setTimeUp(true);
-      console.log(res); 
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -97,7 +104,7 @@ const BiddingPage = (props) => {
 
 
   return (
-   
+
     <>
     <Header/>
     {userAuth.isAuth ?<>
@@ -109,10 +116,10 @@ const BiddingPage = (props) => {
                 container
                 component="main"
                 sx={{
-                  backgroundColor: 'rgb(38, 70, 83)',
+                  marginTop: 5,
                   paddingLeft: 15,
-                  paddingBottom: 5,
                   paddingRight: 15,
+                  paddingBottom: 15,
                 }}
               >
                 <CssBaseline />
@@ -121,12 +128,13 @@ const BiddingPage = (props) => {
                   xs={12}
                   md={5}
                   sx={{
-                    backgroundImage: `url(${imageee})`,
+                    backgroundImage: `url(${image})`,
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     textAlign: 'center',
                     paddingTop: 2,
+                    minHeight: 330,
                   }}
                 ></Grid>
                 <Grid
@@ -135,8 +143,8 @@ const BiddingPage = (props) => {
                   md={7}
                   elevation={6}
                   sx={{
-                    padding: 10,
-                    paddingLeft: 20,
+                    padding: 5,
+                    paddingLeft: 15,
                     backgroundColor: 'rgb(233,196,106)',
                     fontFamily: 'Montserrat',
                   }}
@@ -207,7 +215,11 @@ const BiddingPage = (props) => {
                             />
                           </div>
                           <Button type="submit" onClick={handleSubmit} variant="contained" style={{ backgroundColor: "rgb(38,70,83)" }} >Bid</Button>
-                          <Typography className="feedback-box"> {feedback.feedback} </Typography>
+                          {feedback.feedback ? 
+                            
+                            <Typography className="feedback-box"> {feedback.feedback} </Typography>
+                          
+                          :<></>}
                         </form>
                       </Grid>
                     </Grid>

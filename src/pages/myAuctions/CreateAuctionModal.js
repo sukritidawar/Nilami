@@ -141,7 +141,7 @@ const CreateAuctionModal = (props) => {
             </select>
           </div>
           <div style={{ padding: '10px' }}>
-            <input
+            Product Name: <input
               name="product_name"
               required="required"
               type="string"

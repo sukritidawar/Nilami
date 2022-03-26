@@ -2,15 +2,16 @@ import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import Keys from '../../config';
+import dateFormat from "dateformat";
 axios.defaults.withCredentials = true;
 
 const TimeSuggestion = (props) => {
   const [formData, setFormData] = useState({
-    start_date: '',
-    start_time: '',
-    end_date: '',
-    end_time: '',
-    estimated_price: '',
+    freeStartDate: '',
+    freeStartTime: '',
+    freeEndDate: '',
+    freeEndTime: '',
+    estimatedPrice: '',
     category: '',
     city: '',
     duration: null,
@@ -30,11 +31,11 @@ const TimeSuggestion = (props) => {
     console.log(formData);
     send(formData);
     setFormData({
-        start_date: '',
-        start_time: '',
-        end_date: '',
-        end_time: '',
-        estimated_price: '',
+        freeStartDate: '',
+        freeStartTime: '',
+        freeEndDate: '',
+        freeEndTime: '',
+        estimatedPrice: '',
         category: '',
         city: '',
         duration: '',
@@ -75,8 +76,7 @@ const TimeSuggestion = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ padding: '30px' }}>
-        {showSuggestion?<p>Time Suggested is: {timeSuggested}</p> : <>
-            <h5 >Hi there !</h5>
+        {showSuggestion?<p>Time Suggested is: {dateFormat(timeSuggested,"yyyy-mm-dd")}  {dateFormat(timeSuggested,"HH:MM:ss")}</p> : <>
             <h6 >
             Please enter the following details.
             </h6>
@@ -98,7 +98,7 @@ const TimeSuggestion = (props) => {
             </div>
             <div style={{ padding: '10px' }}>
                 <input
-                name="estimated_price"
+                name="estimatedPrice"
                 required="required"
                 type="string"
                 placeholder="Estimated Price"
@@ -114,10 +114,10 @@ const TimeSuggestion = (props) => {
                 onChange={handleChange}
                 />
             </div>
-            Enter the time range, when you want to host the auction:
+            Enter the time range, when you are available to host the auction:
             <div style={{ padding: '10px' }}>
-                Start Date:  <input
-                name="start_date"
+                Availability Start Date:  <input
+                name="freeStartDate"
                 required="required"
                 type="date"
                 placeholder="start date"
@@ -125,8 +125,8 @@ const TimeSuggestion = (props) => {
                 />
             </div>
             <div style={{ padding: '10px' }}>
-                Start Time:  <input
-                name="start_time"
+                Availability Start Time:  <input
+                name="freeStartTime"
                 required="required"
                 type="time"
                 placeholder="start time"
@@ -134,8 +134,8 @@ const TimeSuggestion = (props) => {
                 />
             </div>
             <div style={{ padding: '10px' }}>
-                End Date:  <input
-                name="end_date"
+                Availability End Date:  <input
+                name="freeEndDate"
                 required="required"
                 type="date"
                 placeholder="end date"
@@ -143,8 +143,8 @@ const TimeSuggestion = (props) => {
                 />
             </div>
             <div style={{ padding: '10px' }}>
-                End Time:  <input
-                name="end_time"
+                Availability End Time:  <input
+                name="freeEndTime"
                 required="required"
                 type="time"
                 placeholder="end time"

@@ -36,18 +36,20 @@ body {
 }
 
 .userImage {
-  height: 30vh;
-  border-radius: 50%;
+  /* height: 30vh; */
+  /* border-radius: 50%; */
   width: 30vh;
+  object-fit: cover;
   margin: auto;
+  background-color: white !important;
   margin-top: -35vh;
   z-index: 5;
 }
 
 .userImage img {
-  height: 30vh;
-  border-radius: 50%;
+  border-radius:100%;
   width: 30vh;
+  object-fit: cover;
   z-index: 10 !important;
 }
 

@@ -118,9 +118,9 @@ const BiddingPage = (props) => {
                 component="main"
                 sx={{
                   marginTop: 5,
-                  paddingLeft: 15,
-                  paddingRight: 15,
-                  paddingBottom: 15,
+                  paddingLeft: 5,
+                  paddingRight: 5,
+                  paddingBottom: 5,
                 }}
               >
                 <CssBaseline />
@@ -131,7 +131,7 @@ const BiddingPage = (props) => {
                   sx={{
                     backgroundImage: `url(${image})`,
                     backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
+                    backgroundSize: '25',
                     backgroundPosition: 'center',
                     textAlign: 'center',
                     paddingTop: 2,

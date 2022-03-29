@@ -92,7 +92,7 @@ const UserProfile = () => {
                 {/* <div className="userImage">
                   <img src={userDetails.user.profile_pic}></img>
                 </div> */}
-                <div className='userImage'><img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU"></img></div>
+                <div className='userImage'><img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU" /></div>
 
                 <div className="userDesc">
                   <p style={{ fontSize: '2rem' }}>

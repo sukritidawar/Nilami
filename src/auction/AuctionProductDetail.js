@@ -173,7 +173,6 @@ const AuctionProductDetail = () => {
               minHeight: 330,
             }}
           ></Grid>
-
           <Grid
             item
             xs={12}
@@ -288,7 +287,6 @@ const AuctionProductDetail = () => {
                         onRegister={updateRegisterInfo}
                       />
                     </span>
-
                   }
 
                   {/* <Link
@@ -307,7 +305,7 @@ const AuctionProductDetail = () => {
                 </Grid></>
                 )}</>
 
-              <Grid item xs={11} md={12}>
+              <Grid item xs={12}>
                 <Grid container>
                   <Grid item md={7}></Grid>
                   <Box item xs={11} md={5} sx={{ marginTop: '5' }}>

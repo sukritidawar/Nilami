@@ -4,6 +4,7 @@ import Keys from "../config";
 import Store from "../store/Store";
 import { useParams, useLocation } from 'react-router-dom';
 import { trackPromise } from 'react-promise-tracker';
+import { Typography } from '@mui/material';
 axios.defaults.withCredentials = true;
 
 
@@ -32,29 +33,28 @@ const TopBids = ({ id }) => {
     return (
 
         <div className='topBids'>
-
             <div>
                 {topBids ? <>
-                    {topBids[0].bid_amount == 0 ? <p>No Bid Yet. Be the First One to Bid.</p>:
+                    {topBids[0].bid_amount == 0 ? <Typography>No Bid Yet. Be the First One to Bid.</Typography> :
                         <>
                             {topBids[0] ?
-                                <p>Highest Bid:  {topBids[0].bid_amount}</p>
+                                <Typography variant='h6'>Highest Bid: $ {topBids[0].bid_amount}</Typography>
                                 :
                                 <></>
                             }
                             {topBids[1] ?
-                                <p>Second Highest Bid:  {topBids[1].bid_amount}</p>
+                                <Typography variant='h6'>Second Highest Bid: $ {topBids[1].bid_amount}</Typography>
                                 :
                                 <></>
                             }
                             {topBids[2] ?
-                                <p>Third highest Bid:  {topBids[2].bid_amount}</p>
+                                <Typography variant='h6'>Third highest Bid: $ {topBids[2].bid_amount}</Typography>
                                 :
                                 <></>
                             }
                         </>
                     }
-                </>:<>Loading...</>}
+                </> : <>Loading...</>}
             </div>
 
         </div>

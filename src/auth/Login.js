@@ -132,7 +132,7 @@ const Login = () => {
               <Typography variant="h1" fontSize="180px" color="rgb(15,76,92)">
                 Niलाmi
               </Typography>
-              <Typography fontSize="36px" color="rgb(231,111,81)">
+              <Typography fontSize="36px" color="#ff4200">
                 Like it, Bid it, Buy it.{' '}
               </Typography>
             </Grid>

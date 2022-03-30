@@ -132,7 +132,7 @@ const Signup = () => {
           <Typography variant="h2" color="rgb(15,76,92)">
             Niलाmi
           </Typography>
-          <Typography variant="h5" color="rgb(231,111,81)">
+          <Typography variant="h5" color="#ff4200">
             Like it, Bid it, Buy it.
           </Typography>
 
@@ -286,11 +286,13 @@ const Signup = () => {
 
               <Button
                 variant="contained"
+                fullWidth
                 color="primary"
                 type="submit"
                 onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
-                fullWidth
+                alignSelf='center'
+                maxWidth='64px'
               >
                 Sign Up
               </Button>

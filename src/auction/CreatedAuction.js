@@ -147,6 +147,7 @@ const CreatedAuction = () => {
                   <CreateAuctionModal
                     show={infoModalShow}
                     onHide={handleCloseInfoModal}
+                    style={{top:'20px'}}
                   />
                 </Grid>
                 <Grid

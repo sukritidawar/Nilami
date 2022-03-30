@@ -1,4 +1,4 @@
-import React,{useContext} from 'react';
+import React, { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,31 +12,31 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import Cookies from 'js-cookie';
 import MenuItem from '@mui/material/MenuItem';
-import { Link, useNavigate } from "react-router-dom";
-import Store from "../../store/Store"
-import { LOGOUT } from "../../store/Types";
+import { Link, useNavigate } from 'react-router-dom';
+import Store from '../../store/Store';
+import { LOGOUT } from '../../store/Types';
 
 const settings = ['Profile', 'Logout'];
 
-const pages = [{
-  name: "Home",
-  link: "/feed"
-},
-{
-  name: 'Registered Auctions',
-  link: "/registeredauction"
-},
-{
-  name: 'My Auctions',
-  link: "/myauction"
-}
-]
+const pages = [
+  {
+    name: 'Home',
+    link: '/feed',
+  },
+  {
+    name: 'Registered Auctions',
+    link: '/registeredauction',
+  },
+  {
+    name: 'My Auctions',
+    link: '/myauction',
+  },
+];
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [userAuth,dispatch] = useContext(Store);
+  const [userAuth, dispatch] = useContext(Store);
   const navigate = useNavigate();
-
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -53,14 +53,14 @@ const Header = () => {
     setAnchorElUser(null);
   };
 
-  const handleLogout = async() =>{
-    Cookies.remove("token");
-    Cookies.remove("user_id");
-    Cookies.remove("user_name");
+  const handleLogout = async () => {
+    Cookies.remove('token');
+    Cookies.remove('user_id');
+    Cookies.remove('user_name');
     await dispatch({
       type: LOGOUT,
     });
-  }
+  };
 
   return (
     <AppBar position="sticky" style={{ backgroundColor: 'rgb(38,70,83)' }}>
@@ -107,10 +107,13 @@ const Header = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><Button component={Link} to={page.link}>{page.name}</Button></Typography>
+                  <Typography textAlign="center">
+                    <Button component={Link} to={page.link}>
+                      {page.name}
+                    </Button>
+                  </Typography>
                 </MenuItem>
               ))}
-
             </Menu>
           </Box>
           <Typography
@@ -129,7 +132,6 @@ const Header = () => {
                 to={page.link}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
-
               >
                 {page.name}
               </Button>
@@ -158,14 +160,30 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {userAuth.isAuth ?
-              <>
-                <MenuItem onClick={()=>{navigate("/profile")}}><Typography textAlign="center">Profile</Typography></MenuItem>
-                <MenuItem onClick={handleLogout}><Typography textAlign="center">Logout</Typography></MenuItem>
-              </>:(<>
-                <MenuItem onClick={()=>{navigate("/")}}><Typography textAlign="center">Login</Typography></MenuItem>
-                </>)
-              }
+              {userAuth.isAuth ? (
+                <>
+                  <MenuItem
+                    onClick={() => {
+                      navigate('/profile');
+                    }}
+                  >
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                </>
+              ) : (
+                <>
+                  <MenuItem
+                    onClick={() => {
+                      navigate('/');
+                    }}
+                  >
+                    <Typography textAlign="center">Login</Typography>
+                  </MenuItem>
+                </>
+              )}
               {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">{setting}</Typography>

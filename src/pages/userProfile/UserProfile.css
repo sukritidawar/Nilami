@@ -32,7 +32,7 @@ body {
   background-color: rgba(182, 186, 194, 0.25);
   border: 2px solid rgba(255, 255, 255, 0.175); */
   border-radius: 12px;
-  border: 5px solid rgb(233, 196,106);
+  border: 5px solid rgb(233, 196, 106);
 }
 
 .userImage {
@@ -47,14 +47,14 @@ body {
 }
 
 .userImage img {
-  border-radius:100%;
+  border-radius: 100%;
   width: 30vh;
   object-fit: cover;
   z-index: 10 !important;
 }
 
 .userInfo {
-  padding-bottom:50px;
+  padding-bottom: 50px;
   /* padding-top:100px; */
   /* margin-top: 200px; */
   margin-left: 20px;
@@ -93,7 +93,7 @@ body {
   background-color: rgba(182, 186, 194, 0.25); */
   border-radius: 12px;
   /* box-shadow: 2px 4px black; */
-  border: 2px solid rgb(38,70,83);
+  border: 2px solid rgb(38, 70, 83);
   text-align: center;
   padding: 10px;
   align-items: center;

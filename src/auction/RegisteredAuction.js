@@ -10,8 +10,8 @@ import Feed from '../component/Feed';
 import Spinner from 'react-spinkit';
 import './RegsiteredAuction.css';
 import { trackPromise } from 'react-promise-tracker';
-import Header from '../component/header/Header'
-import LoadingIndicator from '../component/LoadingIndicator'
+import Header from '../component/header/Header';
+import LoadingIndicator from '../component/LoadingIndicator';
 import { makeStyles } from '@material-ui/core/styles';
 
 axios.defaults.withCredentials = true;
@@ -52,14 +52,16 @@ const RegisteredAuction = () => {
   const getRegAuctions = async () => {
     try {
       const url = Keys.BASE_API + 'user/registeredAuctions';
-      trackPromise(axios.get(url).then((res) => {
-        setRegAuctions(res.data.registeredAuctions);
-      }))
+      trackPromise(
+        axios.get(url).then((res) => {
+          setRegAuctions(res.data.registeredAuctions);
+        })
+      );
       var myDate = new Date();
       var x = dateFormat(myDate, 'yyyy-mm-dd');
       setCurrentDate(x);
-      x= dateFormat(myDate, "HH:MM:ss");
-      setCurrentTime(x); 
+      x = dateFormat(myDate, 'HH:MM:ss');
+      setCurrentTime(x);
       // setLoading(false);
     } catch (error) {
       console.log(error);
@@ -75,41 +77,91 @@ const RegisteredAuction = () => {
   }, [isLoading]);
   const styles = useStyles();
 
-
   return (
     <>
       <Header />
-      {!regAuctions ? <p> </p>:
+      {!regAuctions ? (
+        <p> </p>
+      ) : (
         <Grid component="main" className={styles.feed_comp}>
-        {userAuth.isAuth ?
-          <>
-            <Grid container margin='auto' justifyContent='center' alignContent='center' >
-              <Typography item xs={12} variant="h2" margin='auto' justifyContent='center' justifyText='center' style={{ fontStyle: 'serif' }}>
-                MY REGISTERED AUCTIONS
-              </Typography>
-            </Grid>
-            <Grid container spacing={2} paddingTop={5}>
-              <Grid item xs={0} md={3}></Grid>
-              <Grid item xs={12} md={6} margin='auto' >
-                <Button variant="contained" style={{ backgroundColor: 'rgb(231,111,81)' }} onClick={getUpcomingAuctions}>Upcoming Auctions</Button>
-                <Button variant="contained" style={{ backgroundColor: 'rgb(244,162,97)' }} onClick={getPastAuctions} >Past Auctions</Button>
+          {userAuth.isAuth ? (
+            <>
+              <Grid
+                container
+                margin="auto"
+                justifyContent="center"
+                alignContent="center"
+              >
+                <Typography
+                  item
+                  xs={12}
+                  variant="h2"
+                  margin="auto"
+                  justifyContent="center"
+                  justifyText="center"
+                  style={{ fontStyle: 'serif' }}
+                >
+                  MY REGISTERED AUCTIONS
+                </Typography>
               </Grid>
-            </Grid>
-            <Grid container margin='auto' justifyContent='center' alignContent='center' paddingTop={5}>
-                  {upAuctions ? regAuctions.map((auction) => (
-                    <>{((dateFormat(auction.end_date, "yyyy-mm-dd") > currentDate) || ((dateFormat(auction.end_date, "yyyy-mm-dd") == currentDate)&&(auction.end_time > currentTime))) && <Feed key={auction.auction_id} auction={auction} />}</>
-
-                  )) : regAuctions.map((auction) => (
-                    <>{((dateFormat(auction.end_date, "yyyy-mm-dd") < currentDate) || ((dateFormat(auction.end_date, "yyyy-mm-dd") == currentDate)&&(auction.end_time < currentTime))) && <Feed key={auction.auction_id} auction={auction} />}</>
-
-                  ))}
-            </Grid>
-          </>
-          : <h6>You need to login to continue</h6>}
-      </Grid>
-      }
+              <Grid container spacing={2} paddingTop={5}>
+                <Grid item xs={0} md={3}></Grid>
+                <Grid item xs={12} md={6} margin="auto">
+                  <Button
+                    variant="contained"
+                    style={{ backgroundColor: 'rgb(231,111,81)' }}
+                    onClick={getUpcomingAuctions}
+                  >
+                    Upcoming Auctions
+                  </Button>
+                  <Button
+                    variant="contained"
+                    style={{ backgroundColor: 'rgb(244,162,97)' }}
+                    onClick={getPastAuctions}
+                  >
+                    Past Auctions
+                  </Button>
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                margin="auto"
+                justifyContent="center"
+                alignContent="center"
+                paddingTop={5}
+              >
+                {upAuctions
+                  ? regAuctions.map((auction) => (
+                      <>
+                        {(dateFormat(auction.end_date, 'yyyy-mm-dd') >
+                          currentDate ||
+                          (dateFormat(auction.end_date, 'yyyy-mm-dd') ==
+                            currentDate &&
+                            auction.end_time > currentTime)) && (
+                          <Feed key={auction.auction_id} auction={auction} />
+                        )}
+                      </>
+                    ))
+                  : regAuctions.map((auction) => (
+                      <>
+                        {(dateFormat(auction.end_date, 'yyyy-mm-dd') <
+                          currentDate ||
+                          (dateFormat(auction.end_date, 'yyyy-mm-dd') ==
+                            currentDate &&
+                            auction.end_time < currentTime)) && (
+                          <Feed key={auction.auction_id} auction={auction} />
+                        )}
+                      </>
+                    ))}
+              </Grid>
+            </>
+          ) : (
+            <h6>You need to login to continue</h6>
+          )}
+        </Grid>
+      )}
     </>
   );
 };
 
-export default RegisteredAuction
+export default RegisteredAuction;

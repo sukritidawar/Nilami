@@ -56,13 +56,13 @@ const UserProfile = () => {
 
     try {
       const url = Keys.BASE_API + 'user/profile';
-    
 
-      trackPromise(axios.get(url).then((res) => {
-        setUserDetails(res.data.userData);
-        setUserAddress(res.data.userAddress);
-      }))
-      
+      trackPromise(
+        axios.get(url).then((res) => {
+          setUserDetails(res.data.userData);
+          setUserAddress(res.data.userAddress);
+        })
+      );
     } catch (e) {
       console.log(e);
     }
@@ -92,7 +92,9 @@ const UserProfile = () => {
                 {/* <div className="userImage">
                   <img src={userDetails.user.profile_pic}></img>
                 </div> */}
-                <div className='userImage'><img src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU" /></div>
+                <div className="userImage">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU" />
+                </div>
 
                 <div className="userDesc">
                   <p style={{ fontSize: '2rem' }}>
@@ -109,7 +111,8 @@ const UserProfile = () => {
                         <p>Username: shobha9250</p>
                         <p>Mobile: 3333</p> */}
                 </div>
-                <Button variant="contained"
+                <Button
+                  variant="contained"
                   onClick={handleShowInfoModal}
                   style={{ backgroundColor: 'rgb(233, 196,106)' }}
                 >
@@ -122,14 +125,15 @@ const UserProfile = () => {
                 />
               </div>
             </Col>
-            
+
             <Col>
-            <hr></hr>
+              <hr></hr>
               <div className="address-heading">
                 <h1>Your registered address:</h1>
               </div>
               <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                <Button variant="contained"
+                <Button
+                  variant="contained"
                   onClick={handleShowAddressModal}
                   style={{ backgroundColor: 'rgb(233, 196,106)' }}
                 >
@@ -176,7 +180,7 @@ const UserProfile = () => {
           </Row>
         </Container>
       )}
-      </div>
+    </div>
   );
 };
 

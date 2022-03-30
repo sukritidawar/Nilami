@@ -29,7 +29,7 @@ const AuctionnerAnnouncement = () => {
     return (
         <div style={{margin:"30px"}}>
             <div className="msgs">
-                <h2 style={{textAlign:"center"}}>Welcome {userAuth.user_name}!!</h2>
+                <h2 style={{textAlign:"center"}}>Announcements</h2>
                 {messages.map(({ id, text, userName, uid }) => (
                     <div>
                         

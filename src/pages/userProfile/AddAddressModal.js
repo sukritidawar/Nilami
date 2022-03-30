@@ -74,11 +74,7 @@ const AddAddressModal = (props) => {
       style={{ borderRadius: '4px', borderColor: 'rgb(244,162,97)' }}
     >
       <Modal.Header closeButton>
-        <Modal.Title
-          style={{ alignItems: 'center'}}
-        >
-          Add Address
-        </Modal.Title>
+        <Modal.Title style={{ alignItems: 'center' }}>Add Address</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h5 style={{ textAlign: 'center' }}>Hi {props.user.name} !</h5>

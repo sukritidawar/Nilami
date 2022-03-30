@@ -1,16 +1,16 @@
-import React, { useState, useContext } from 'react'
-import { Fire } from "../../auction/chatApp/firebasee"
+import React, { useState, useContext } from 'react';
+import { Fire } from '../../auction/chatApp/firebasee';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import Store from "../../store/Store"
+import Store from '../../store/Store';
 
 const Comments = ({ scroll, collectionName }) => {
   //const [comments, setComments] = useState([]);
   const [comment, setComment] = useState('');
   const [userAuth, setUserAuth] = useContext(Store);
   const userid = userAuth.user_id;
-  const postComment =  async (event) => {
+  const postComment = async (event) => {
     event.preventDefault();
     // backend part will come here
 
@@ -21,9 +21,9 @@ const Comments = ({ scroll, collectionName }) => {
       text: comment,
       userName,
       uid,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    })
-    scroll.current.scrollIntoView({ behavior: 'smooth' })
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+    scroll.current.scrollIntoView({ behavior: 'smooth' });
     setComment('');
   };
 
@@ -33,7 +33,7 @@ const Comments = ({ scroll, collectionName }) => {
         <input
           className="input"
           type="text"
-          placeholder="Add a comment..."
+          placeholder="Write something..."
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
@@ -43,7 +43,7 @@ const Comments = ({ scroll, collectionName }) => {
           type="submit"
           onClick={postComment}
         >
-          Comment
+          Post
         </button>
       </form>
       {/* <div className="postComments">

@@ -9,11 +9,6 @@ const Chat = ({ auctionId }) => {
 
   const postBid = (event, value) => {
     event.preventDefault();
-    // db.collection("posts").doc(postId).collection("bids").add({
-    //     text: bid,
-    //     username: user.displayName,
-    //     timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    // });
     setBids(bids.concat(value));
     updateBids(event, value);
     setBid('');

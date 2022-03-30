@@ -52,7 +52,11 @@ const Homepage = () => {
       // setLoading(false);
       // console.log(res);
 
-      trackPromise(axios.get(url).then((res) => { setAuctionFeed(res.data) }));
+      trackPromise(
+        axios.get(url).then((res) => {
+          setAuctionFeed(res.data);
+        })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -102,62 +106,66 @@ const Homepage = () => {
     <>
       <Header />
       <Grid component="main">
-        {!auctionFeed ?<p> </p>
-         : (
-        <Grid className={styles.feed_comp}>
-          <form onSubmit={handleSubmit} method="POST">
-            <Grid container spacing={2}>
-              <Grid item xs={12} md={2}>
-                <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">
-                    Filter by
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    label="Filter by"
-                    name="filterBy"
-                    value={formData.filterBy}
+        {!auctionFeed ? (
+          <p> </p>
+        ) : (
+          <Grid className={styles.feed_comp}>
+            <form onSubmit={handleSubmit} method="POST">
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={2}>
+                  <FormControl fullWidth>
+                    <InputLabel id="demo-simple-select-label">
+                      Filter by
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      label="Filter by"
+                      name="filterBy"
+                      value={formData.filterBy}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={1}>Location</MenuItem>
+                      <MenuItem value={2}>Category</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item xs={12} md={4} style={{ alignItems: 'center' }}>
+                  <input
+                    name="valueAcc"
+                    required="required"
+                    type="string"
+                    placeholder="Filter by"
+                    value={formData.valueAcc}
                     onChange={handleChange}
+                    size="50"
+                    style={{ height: '54px' }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={1}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    onClick={handleSubmit}
+                    fullWidth
+                    style={{
+                      height: '54px',
+                      backgroundColor: 'rgb(231,111,81)',
+                    }}
                   >
-                    <MenuItem value={1}>Location</MenuItem>
-                    <MenuItem value={2}>Category</MenuItem>
-                  </Select>
-                </FormControl>
+                    Search
+                  </Button>
+                </Grid>
               </Grid>
-              <Grid item xs={12} md={4} style={{ alignItems: 'center' }}>
-                <input
-                  name="valueAcc"
-                  required="required"
-                  type="string"
-                  placeholder="Filter by"
-                  value={formData.valueAcc}
-                  onChange={handleChange}
-                  size="50"
-                  style={{ height: '54px' }}
-                />
-              </Grid>
-              <Grid item xs={12} md={1}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  onClick={handleSubmit}
-                  fullWidth
-                  style={{ height: '54px', backgroundColor: 'rgb(231,111,81)' }}
-                >
-                  Search
-                </Button>
-              </Grid>
+            </form>
+            <Grid></Grid>
+            <Grid container>
+              {auctionFeed.map((auction) => (
+                <Feed key={auction.auction_id} auction={auction} />
+              ))}
             </Grid>
-          </form>
-          <Grid></Grid>
-          <Grid container>
-            {auctionFeed.map((auction) => (
-              <Feed key={auction.auction_id} auction={auction} />
-            ))}
           </Grid>
-        </Grid>
-        )} 
+        )}
       </Grid>
     </>
   );

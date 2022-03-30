@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import Keys from '../../config';
-import TimeSuggestion from "./TimeSuggestion";
+import TimeSuggestion from './TimeSuggestion';
 axios.defaults.withCredentials = true;
 
 const CreateAuctionModal = (props) => {
@@ -24,8 +24,7 @@ const CreateAuctionModal = (props) => {
     start_date: '',
     start_time: '',
     end_date: '',
-    end_time: ''
-
+    end_time: '',
   });
 
   const [feedback, setFeedback] = useState({
@@ -57,7 +56,7 @@ const CreateAuctionModal = (props) => {
       start_date: '',
       start_time: '',
       end_date: '',
-      end_time: ''
+      end_time: '',
     });
     props.onHide();
   };
@@ -93,60 +92,62 @@ const CreateAuctionModal = (props) => {
   };
 
   return (
-    <Modal
-      {...props}
-      size="md"
-    >
+    <Modal {...props} size="md">
       <Modal.Header closeButton>
-        <Modal.Title >
-          Create Auction
-        </Modal.Title>
+        <Modal.Title>Create Auction</Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ padding: '30px' }}>
-        <h5 >Hi there !</h5>
-        <h6 >
-          Please enter the following details.
-        </h6>
-        <form
-          style={{ padding: '10px' }}
-          onSubmit={handleSubmit}
-          method="PUT"
-        >
-          <div style={{ padding: '10px' }}>
-            {/* make chekbox of this */}
-            Invite Bidders: <input
-              name="inviteBidders"
-              required="required"
-              type="checkbox"
-              onChange={handleChange}
-            />
+      <Modal.Body style={{ padding: '30px', margin: '10px' }}>
+        <h5>Hi there !</h5>
+        <h6>Please enter the following details.</h6>
+        <form style={{ padding: '10px' }} onSubmit={handleSubmit} method="PUT">
+          <div
+            style={{
+              padding: '10px',
+              display: 'flex',
+              gap: '10px',
+              alignItems: 'center',
+            }}
+          >
+            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+              <input
+                name="inviteBidders"
+                required="required"
+                type="checkbox"
+                onChange={handleChange}
+              />
+              Invite Bidders{' '}
+            </div>
+            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+              <input
+                name="is_private"
+                required="required"
+                type="checkbox"
+                onChange={handleChange}
+              />
+              Private
+            </div>
+            <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+              <select
+                name="product_category"
+                required="required"
+                placeholder="Category"
+                onChange={handleChange}
+              >
+                <option value="art">Art</option>
+                <option value="antique">Antique</option>
+                <option value="religious">Religious</option>
+              </select>
+              Category
+            </div>
           </div>
           <div style={{ padding: '10px' }}>
-            Private:  <input
-              name="is_private"
-              required="required"
-              type="checkbox"
-              onChange={handleChange}
-            />
-          </div>
-          <div style={{ padding: '10px' }}>
-            Category:  <select
-              name="product_category"
-              required="required"
-              placeholder="Category"
-              onChange={handleChange}>
-              <option value="art">Art</option>
-              <option value="antique">Antique</option>
-              <option value="religious">Religious</option>
-            </select>
-          </div>
-          <div style={{ padding: '10px' }}>
-            Product Name: <input
+            <input
               name="product_name"
               required="required"
               type="string"
               placeholder="Product Name"
               onChange={handleChange}
+              style={{width: '100%'}}
             />
           </div>
           <div style={{ padding: '10px' }}>
@@ -156,6 +157,7 @@ const CreateAuctionModal = (props) => {
               type="string"
               placeholder="Product Details"
               onChange={handleChange}
+              style={{width: '100%'}}
             />
           </div>
           <div style={{ padding: '10px' }}>
@@ -165,6 +167,7 @@ const CreateAuctionModal = (props) => {
               type="string"
               placeholder="Image Link"
               onChange={handleChange}
+              style={{width: '100%'}}
             />
           </div>
           <div style={{ padding: '10px' }}>
@@ -174,6 +177,7 @@ const CreateAuctionModal = (props) => {
               type="string"
               placeholder="Starting Price"
               onChange={handleChange}
+              style={{width: '100%'}}
             />
           </div>
           <div style={{ padding: '10px' }}>
@@ -183,6 +187,7 @@ const CreateAuctionModal = (props) => {
               type="string"
               placeholder="Estimated Price"
               onChange={handleChange}
+              style={{width: '100%'}}
             />
           </div>
           <div style={{ padding: '10px' }}>
@@ -192,6 +197,7 @@ const CreateAuctionModal = (props) => {
               type="string"
               placeholder="City"
               onChange={handleChange}
+              style={{width: '100%'}}
             />
           </div>
           <div style={{ padding: '10px' }}>
@@ -201,48 +207,63 @@ const CreateAuctionModal = (props) => {
               type="string"
               placeholder="Pincode"
               onChange={handleChange}
+              style={{width: '100%'}}
             />
           </div>
           <div style={{ padding: '10px' }}>
-            <Button onClick={handleShowtimeSuggestion} style={{backgroundColor: "green" }}>
-                Suggest Time
+            <Button
+              onClick={handleShowtimeSuggestion}
+              style={{ backgroundColor: 'green' }}
+            >
+              Suggest Time
             </Button>
-            <TimeSuggestion show={timeSuggestionShow} onHide={handleClosetimeSuggestion} />
+            <TimeSuggestion
+              show={timeSuggestionShow}
+              onHide={handleClosetimeSuggestion}
+            />
           </div>
           <div style={{ padding: '10px' }}>
-            Start Date:  <input
+            Start Date:{' '}
+            <input
               name="start_date"
               required="required"
               type="date"
               placeholder="start date"
               onChange={handleChange}
+              style={{width: '78%'}}
             />
           </div>
           <div style={{ padding: '10px' }}>
-            Start Time:  <input
+            Start Time:{' '}
+            <input
               name="start_time"
               required="required"
               type="time"
               placeholder="start time"
               onChange={handleChange}
+              style={{width: '77%'}}
             />
           </div>
           <div style={{ padding: '10px' }}>
-            End Date:  <input
+            End Date:{' '}
+            <input
               name="end_date"
               required="required"
               type="date"
               placeholder="end date"
               onChange={handleChange}
+              style={{width: '80%'}}
             />
           </div>
           <div style={{ padding: '10px' }}>
-            End Time:  <input
+            End Time:{' '}
+            <input
               name="end_time"
               required="required"
               type="time"
               placeholder="end time"
               onChange={handleChange}
+              style={{width: '79%'}}
             />
           </div>
           <div style={{ padding: '10px', alignContent: 'center' }}>

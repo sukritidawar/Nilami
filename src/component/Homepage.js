@@ -70,10 +70,10 @@ const Homepage = () => {
     e.preventDefault();
     console.log(formData);
     filterFunction(formData);
-    setFormData({
-      filterBy: '',
-      valueAcc: '',
-    });
+    // setFormData({
+    //   filterBy: '',
+    //   valueAcc: '',
+    // });
   };
 
   const filterFunction = async (formData) => {

@@ -132,8 +132,8 @@ const Login = () => {
               <Typography variant="h1" fontSize="180px" color="rgb(15,76,92)">
                 Niलाmi
               </Typography>
-              <Typography fontSize="36px" color="#ff4200">
-                Like it, Bid it, Buy it.{' '}
+              <Typography fontSize="36px" color="#ff4200"><i>
+                Like it, Bid for it, Buy it.{' '}</i>
               </Typography>
             </Grid>
             <Grid
@@ -154,7 +154,7 @@ const Login = () => {
                   alignItems: 'center',
                 }}
               >
-                <Avatar sx={{ m: 1, bgcolor: '#e9c46a' }}>
+                <Avatar sx={{ m: 1, bgcolor: '#1976d2' }}>
                   <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">

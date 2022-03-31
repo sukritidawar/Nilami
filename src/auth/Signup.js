@@ -7,7 +7,6 @@ import {
   CssBaseline,
   Grid,
   Box,
-  Paper,
   Link,
   TextField,
   Typography,
@@ -16,9 +15,6 @@ import Store from '../store/Store';
 import Keys from '../config';
 import { LOGIN } from '../store/Types';
 import Cookies from 'js-cookie';
-import { makeStyles } from '@material-ui/core/styles';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
@@ -52,7 +48,7 @@ const Signup = () => {
         {...props}
       >
         {'Copyright © '}
-        <Link color="inherit" href="https://mui.com/">
+        <Link color="inherit" href="https://github.com/sukritidawar/Nilami">
           Niलाmi
         </Link>{' '}
         {new Date().getFullYear()}
@@ -132,12 +128,12 @@ const Signup = () => {
           <Typography variant="h2" color="rgb(15,76,92)">
             Niलाmi
           </Typography>
-          <Typography variant="h5" color="#ff4200">
-            Like it, Bid it, Buy it.
-          </Typography>
+          <Typography variant="h5" color="#ff4200"><i>
+            Like it, Bid for it, Buy it.
+            </i></Typography>
 
-          <Avatar sx={{ m: 1, bgcolor: 'rgb(233,196,106)' }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: '#1976d2'}}>
+            <LockOutlinedIcon/>
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -198,7 +194,7 @@ const Signup = () => {
               <Grid item xs={12}>
                 <TextField
                   id="outlined-basic"
-                  label="Profile url"
+                  label="Profile picture url"
                   variant="outlined"
                   placeholder="Profile url"
                   name="profile_url"
@@ -292,7 +288,7 @@ const Signup = () => {
                 onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
                 alignSelf='center'
-                maxWidth='64px'
+                style={{marginLeft: '14px'}}
               >
                 Sign Up
               </Button>

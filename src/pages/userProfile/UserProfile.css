@@ -16,34 +16,18 @@ body {
 }
 
 .mainContent {
-  padding-top: 60px;
+  padding: 10px;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
-  padding-bottom: 100px;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  min-height: 70vh;
-  padding-top: 20vh;
-  text-align: center;
-  /* backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(182, 186, 194, 0.25);
-  border: 2px solid rgba(255, 255, 255, 0.175); */
   border-radius: 12px;
-  border: 5px solid rgb(233, 196, 106);
+  border: 3px solid #00B9F1;
+  display: flex;
+  gap: 10px;
 }
 
 .userImage {
-  /* height: 30vh; */
-  /* border-radius: 50%; */
-  width: 30vh;
   object-fit: cover;
-  margin: auto;
   background-color: white !important;
-  margin-top: -35vh;
-  z-index: 5;
 }
 
 .userImage img {
@@ -54,19 +38,11 @@ body {
 }
 
 .userInfo {
-  padding-bottom: 50px;
-  /* padding-top:100px; */
-  /* margin-top: 200px; */
+  padding: 20px 0;
   margin-left: 20px;
   margin-right: 20px;
   min-height: 30vh;
-  padding-top: 20vh;
   text-align: center;
-  /* backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgb(233, 196,106,0.25);
-  border-radius: 12px; */
-  /* border: 2px solid rgba(255, 255, 255, 0.175); */
 }
 .userDesc {
   margin-top: 50px;
@@ -97,4 +73,10 @@ body {
   text-align: center;
   padding: 10px;
   align-items: center;
+}
+
+.address{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

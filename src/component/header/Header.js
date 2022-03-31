@@ -63,8 +63,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="sticky" style={{ backgroundColor: 'rgb(38,70,83)' }}>
-      {/* <AppBar> */}
+    <AppBar position="sticky" style={{ backgroundColor: '#002E6E' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -141,7 +140,7 @@ const Header = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="User">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ m: 1, bgcolor: '#e9c46a' }} />
+                <Avatar sx={{ m: 1, bgcolor: '#00B9F1' }} />
               </IconButton>
             </Tooltip>
             <Menu

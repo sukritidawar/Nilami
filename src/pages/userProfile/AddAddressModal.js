@@ -71,7 +71,7 @@ const AddAddressModal = (props) => {
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      style={{ borderRadius: '4px', borderColor: 'rgb(244,162,97)' }}
+      style={{ borderRadius: '4px' }}
     >
       <Modal.Header closeButton>
         <Modal.Title style={{ alignItems: 'center' }}>Add Address</Modal.Title>
@@ -130,10 +130,7 @@ const AddAddressModal = (props) => {
             <button
               type="submit"
               onClick={handleSubmit}
-              style={{
-                borderRadius: '4px',
-                backgroundColor: 'rgb(244,162,97)',
-              }}
+              style={{ backgroundColor: '#00B9F1', color: 'white' }}
             >
               Add
             </button>

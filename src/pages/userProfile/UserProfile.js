@@ -86,67 +86,42 @@ const UserProfile = () => {
       ) : (
         <Container className="container">
           <h1 style={{ textAlign: 'center', color: 'white' }}>Your Profile</h1>
-          <Row className="mainContent">
-            <Col xl={12}>
-              <div className="userInfo">
-                {/* <div className="userImage">
-                  <img src={userDetails.user.profile_pic}></img>
-                </div> */}
-                <div className="userImage">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU" />
-                </div>
+          {/* <Row className="mainContent"> */}
+          {/* <Col xl={12}> */}
+          <div className="mainContent">
+            <div className="userInfo">
+              <div className="userImage">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU" />
+              </div>
 
-                <div className="userDesc">
-                  <p style={{ fontSize: '2rem' }}>
-                    <b>{userDetails.user.name}</b>
-                  </p>
-                  <p>
-                    <b>Email:</b> {userDetails.user.email}
-                  </p>
-                  <p>
-                    <b>Phone:</b> {userDetails.user.primary_mobile}
-                  </p>
-                  {/* <p style={{fontSize:"2rem"}}><b>Shobha</b></p>
-                        <p>Email: shobha@gmail.com</p>
-                        <p>Username: shobha9250</p>
-                        <p>Mobile: 3333</p> */}
-                </div>
-                <Button
-                  variant="contained"
-                  onClick={handleShowInfoModal}
-                  style={{ backgroundColor: 'rgb(233, 196,106)' }}
-                >
-                  Edit
-                </Button>
-                <EditUserInfoModal
-                  show={infoModalShow}
-                  onHide={handleCloseInfoModal}
-                  user={userDetails.user}
-                />
+              <div className="userDesc">
+                <p style={{ fontSize: '2rem' }}>
+                  <b>{userDetails.user.name}</b>
+                </p>
+                <p>
+                  <b>Email:</b> {userDetails.user.email}
+                </p>
+                <p>
+                  <b>Phone:</b> {userDetails.user.primary_mobile}
+                </p>
               </div>
-            </Col>
-
-            <Col>
-              <hr></hr>
-              <div className="address-heading">
-                <h1>Your registered address:</h1>
-              </div>
-              <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-                <Button
-                  variant="contained"
-                  onClick={handleShowAddressModal}
-                  style={{ backgroundColor: 'rgb(233, 196,106)' }}
-                >
-                  Add Address
-                </Button>
-              </div>
-              <AddAddressModal
-                show={addressModalShow}
-                onHide={handleCloseAddressModal}
+              <Button
+                variant="contained"
+                onClick={handleShowInfoModal}
+                style={{ backgroundColor: '#00B9F1', color: 'white' }}
+              >
+                Edit
+              </Button>
+              <EditUserInfoModal
+                show={infoModalShow}
+                onHide={handleCloseInfoModal}
                 user={userDetails.user}
-                addAddressFunc={addAddressFunc}
               />
-
+            </div>
+            <div className='address'>
+              <div className="address-heading">
+                <h3>Your registered addresses:</h3>
+              </div>
               <div className="userAddresses">
                 <Row>
                   {userAddress &&
@@ -167,6 +142,7 @@ const UserProfile = () => {
                               onClick={() =>
                                 deleteAddress(addressElement.address_id)
                               }
+                              style={{backgroundColor: '#002E6E'}}
                             >
                               X
                             </Button>
@@ -176,8 +152,23 @@ const UserProfile = () => {
                     ))}
                 </Row>
               </div>
-            </Col>
-          </Row>
+              <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+                <Button
+                  variant="contained"
+                  onClick={handleShowAddressModal}
+                  style={{ backgroundColor: '#00B9F1', color: 'white' }}
+                >
+                  Add Address
+                </Button>
+              </div>
+              <AddAddressModal
+                show={addressModalShow}
+                onHide={handleCloseAddressModal}
+                user={userDetails.user}
+                addAddressFunc={addAddressFunc}
+              />
+            </div>
+          </div>
         </Container>
       )}
     </div>

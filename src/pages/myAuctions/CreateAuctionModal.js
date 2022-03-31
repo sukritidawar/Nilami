@@ -92,13 +92,14 @@ const CreateAuctionModal = (props) => {
   };
 
   return (
-    <Modal {...props} size="md">
+    <Modal {...props} size="lg">
       <Modal.Header closeButton>
         <Modal.Title>Create Auction</Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ padding: '30px', margin: '10px' }}>
-        <h5>Hi there !</h5>
-        <h6>Please enter the following details.</h6>
+        <div style={{ marginLeft: '20px' }}>
+          <h5>Hi there! Please enter the following details.</h5>
+        </div>
         <form style={{ padding: '10px' }} onSubmit={handleSubmit} method="PUT">
           <div
             style={{
@@ -141,79 +142,91 @@ const CreateAuctionModal = (props) => {
             </div>
           </div>
           <div style={{ padding: '10px' }}>
+            Product Name:{' '}
             <input
               name="product_name"
               required="required"
               type="string"
               placeholder="Product Name"
               onChange={handleChange}
-              style={{width: '100%'}}
+              style={{ width: '75%' }}
             />
           </div>
           <div style={{ padding: '10px' }}>
+            Product Details:{' '}
             <input
               name="product_details"
               required="required"
               type="string"
               placeholder="Product Details"
               onChange={handleChange}
-              style={{width: '100%'}}
+              style={{ width: '75%' }}
             />
           </div>
           <div style={{ padding: '10px' }}>
+            Image link:{' '}
             <input
               name="product_pic"
               required="required"
               type="string"
               placeholder="Image Link"
               onChange={handleChange}
-              style={{width: '100%'}}
+              style={{ width: '75%' }}
             />
           </div>
-          <div style={{ padding: '10px' }}>
-            <input
-              name="starting_price"
-              required="required"
-              type="string"
-              placeholder="Starting Price"
-              onChange={handleChange}
-              style={{width: '100%'}}
-            />
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <div style={{ padding: '10px' }}>
+              Starting Price:{' '}
+              <input
+                name="starting_price"
+                required="required"
+                type="string"
+                placeholder="Starting Price"
+                onChange={handleChange}
+                style={{ width: '45%' }}
+              />
+            </div>
+            <div style={{ padding: '10px' }}>
+              Estimated Price:{' '}
+              <input
+                name="estimated_price"
+                required="required"
+                type="string"
+                placeholder="Estimated Price"
+                onChange={handleChange}
+                style={{ width: '45%' }}
+              />
+            </div>
           </div>
-          <div style={{ padding: '10px' }}>
-            <input
-              name="estimated_price"
-              required="required"
-              type="string"
-              placeholder="Estimated Price"
-              onChange={handleChange}
-              style={{width: '100%'}}
-            />
-          </div>
-          <div style={{ padding: '10px' }}>
-            <input
-              name="city"
-              required="required"
-              type="string"
-              placeholder="City"
-              onChange={handleChange}
-              style={{width: '100%'}}
-            />
-          </div>
-          <div style={{ padding: '10px' }}>
-            <input
-              name="pincode"
-              required="required"
-              type="string"
-              placeholder="Pincode"
-              onChange={handleChange}
-              style={{width: '100%'}}
-            />
+
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <div style={{ padding: '10px' }}>
+              City:{' '}
+              <input
+                name="city"
+                required="required"
+                type="string"
+                placeholder="City"
+                onChange={handleChange}
+                style={{ width: '45%', marginLeft: '64px' }}
+              />
+            </div>
+            <div style={{ padding: '10px' }}>
+              Pincode:{' '}
+              <input
+                name="pincode"
+                required="required"
+                type="string"
+                placeholder="Pincode"
+                onChange={handleChange}
+                style={{ width: '45%' }}
+              />
+            </div>
           </div>
           <div style={{ padding: '10px' }}>
             <Button
               onClick={handleShowtimeSuggestion}
-              style={{ backgroundColor: 'green' }}
+              style={{ backgroundColor: '#00B9F1', alignSelf: 'center' }}
             >
               Suggest Time
             </Button>
@@ -222,52 +235,56 @@ const CreateAuctionModal = (props) => {
               onHide={handleClosetimeSuggestion}
             />
           </div>
-          <div style={{ padding: '10px' }}>
-            Start Date:{' '}
-            <input
-              name="start_date"
-              required="required"
-              type="date"
-              placeholder="start date"
-              onChange={handleChange}
-              style={{width: '78%'}}
-            />
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <div style={{ padding: '10px' }}>
+              Start Date:{' '}
+              <input
+                name="start_date"
+                required="required"
+                type="date"
+                placeholder="start date"
+                onChange={handleChange}
+                style={{ width: '45%' }}
+              />
+            </div>
+            <div style={{ padding: '10px' }}>
+              Start Time:{' '}
+              <input
+                name="start_time"
+                required="required"
+                type="time"
+                placeholder="start time"
+                onChange={handleChange}
+                style={{ width: '45%' }}
+              />
+            </div>
           </div>
-          <div style={{ padding: '10px' }}>
-            Start Time:{' '}
-            <input
-              name="start_time"
-              required="required"
-              type="time"
-              placeholder="start time"
-              onChange={handleChange}
-              style={{width: '77%'}}
-            />
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+            <div style={{ padding: '10px' }}>
+              End Date:{' '}
+              <input
+                name="end_date"
+                required="required"
+                type="date"
+                placeholder="end date"
+                onChange={handleChange}
+                style={{ width: '45%' }}
+              />
+            </div>
+            <div style={{ padding: '10px' }}>
+              End Time:{' '}
+              <input
+                name="end_time"
+                required="required"
+                type="time"
+                placeholder="end time"
+                onChange={handleChange}
+                style={{ width: '45%' }}
+              />
+            </div>
           </div>
-          <div style={{ padding: '10px' }}>
-            End Date:{' '}
-            <input
-              name="end_date"
-              required="required"
-              type="date"
-              placeholder="end date"
-              onChange={handleChange}
-              style={{width: '80%'}}
-            />
-          </div>
-          <div style={{ padding: '10px' }}>
-            End Time:{' '}
-            <input
-              name="end_time"
-              required="required"
-              type="time"
-              placeholder="end time"
-              onChange={handleChange}
-              style={{width: '79%'}}
-            />
-          </div>
-          <div style={{ padding: '10px', alignContent: 'center' }}>
-            <Button type="submit" onClick={handleSubmit}>
+          <div style={{ padding: '10px', alignContent: 'center', alignItems: 'center' }}>
+            <Button type="submit" onClick={handleSubmit} style={{backgroundColor: '#00B9F1'}}>
               Submit
             </Button>
           </div>

@@ -139,7 +139,7 @@ const Header = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="User">
+            <Tooltip title={userAuth.user_name}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar sx={{ m: 1, bgcolor: '#e9c46a' }} />
               </IconButton>

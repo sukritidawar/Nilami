@@ -1,5 +1,4 @@
 import { React, useState, useEffect, useContext } from 'react';
-import Chat from '../UIComponents/BiddingChat/Chat';
 import ShowComments from '../UIComponents/Comments/ShowComments';
 import TopBids from './TopBids';
 import {

@@ -139,7 +139,7 @@ const BiddingPage = (props) => {
                         <Grid
                           container
                           sx={{
-                            border: '5px solid rgb(233, 196,106)',
+                            border: '2px solid #00B9F1',
                             padding: 2,
                           }}
                         >

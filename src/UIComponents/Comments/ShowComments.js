@@ -25,14 +25,12 @@ const ShowComments = () => {
   }, []);
 
   const userid = userAuth.user_id;
-  // const userid = "66f63f1d-9303-4e29-abba-c58be203c270";
-
   return (
-    <div style={{ margin: '30px' }}>
+    <div style={{ margin: '30px', alignContent: 'center', textAlign: 'center' }}>
       <div className="msgs">
-        <h2 style={{ textAlign: 'center' }}>Comments</h2>
+        <h2>Comments</h2>
         {messages.map(({ id, text, userName, uid }) => (
-          <div>
+          <div style={{ textAlign: 'left' }}>
             <div
               key={id}
               className={`msg ${uid === userid ? 'sent' : 'received'}`}

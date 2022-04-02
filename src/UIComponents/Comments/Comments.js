@@ -4,6 +4,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import Store from '../../store/Store';
+import { Button, Grid } from '@mui/material'
 
 const Comments = ({ scroll, collectionName }) => {
   //const [comments, setComments] = useState([]);
@@ -28,23 +29,28 @@ const Comments = ({ scroll, collectionName }) => {
   };
 
   return (
-    <div className="comments">
+    <Grid className="comments" style={{ aligncontent: 'center', }}>
       <form className="commentBox">
-        <input
-          className="input"
-          type="text"
-          placeholder="Write something..."
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
-        <button
-          disabled={!comment}
-          className="postComment"
-          type="submit"
-          onClick={postComment}
-        >
-          Post
-        </button>
+        <Grid conatiner>
+          <input
+            item xs={12}
+            className="input"
+            type="text"
+            placeholder="Write something..."
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+          <Button
+            item xs={12}
+            variant="outlined"
+            disabled={!comment}
+            className="postComment"
+            type="submit"
+            onClick={postComment}
+          >
+            Post
+        </Button>
+        </Grid>
       </form>
       {/* <div className="postComments">
         <p>
@@ -56,7 +62,7 @@ const Comments = ({ scroll, collectionName }) => {
           </p>
         ))}
       </div> */}
-    </div>
+    </Grid>
   );
 };
 

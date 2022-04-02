@@ -121,195 +121,195 @@ const BiddingPage = (props) => {
           {timeUp ? (
             <h6>The auction has ended.</h6>
           ) : (
-            <>
-              {!hasStarted ? (
-                <h6>Auction will start soon...</h6>
-              ) : (
-                <>
-                  <Announcement />
-                  <Grid
-                    component="main"
-                    sx={{
-                      marginTop: 10,
-                      marginBottom: 10,
-                      paddingLeft: 15,
-                      paddingRight: 25,
-                    }}
-                  >
-                    <Grid
-                      container
-                      sx={{
-                        border: '5px solid rgb(233, 196,106)',
-                        padding: 2,
-                      }}
-                    >
-                      <CssBaseline />
+              <>
+                {!hasStarted ? (
+                  <h6>Auction will start soon...</h6>
+                ) : (
+                    <>
+                      <Announcement />
                       <Grid
-                        item
-                        xs={12}
-                        lg={5}
+                        component="main"
                         sx={{
-                          /*border: '5px solid rgb(42,157,143);',*/
-                          backgroundImage: `url(${image})`,
-                          backgroundRepeat: 'no-repeat',
-                          backgroundSize: 'cover',
-                          backgroundPosition: 'center',
-                          textAlign: 'center',
-                          paddingTop: 2,
-                          minHeight: 330,
-                        }}
-                      ></Grid>
-                      <Grid
-                        item
-                        xs={12}
-                        lg={7}
-                        elevation={6}
-                        sx={{
-                          padding: 2,
-                          paddingLeft: 5,
-                          /*            backgroundColor: 'rgb(233,196,106)',*/
-                          fontFamily: 'Montserrat',
+                          marginTop: 5,
+                          marginBottom: 10,
+                          paddingLeft: 15,
+                          paddingRight: 25,
                         }}
                       >
-                        <Grid container spacing={2}>
-                          <Grid item xs={12}>
-                            <Typography
-                              variant="h3"
-                              style={{
-                                fontFamily: 'serif',
-                                textTransform: 'uppercase',
-                                textAlign: 'center',
-                              }}
-                            >
-                              {auctionDetails.productName}
-                            </Typography>
-                          </Grid>
-                          <Grid
-                            item
-                            xs={12}
-                            sx={{
-                              margin: 'auto',
-                              textAlign: 'right',
-                              alignItems: 'center',
-                            }}
-                          >
-                            <Typography variant="h5">
-                              Category: {auctionDetails.auctionCategory}
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={12}>
-                            <Typography
-                              variant="body1"
-                              style={{ fontFamily: 'lato' }}
-                            >
-                              {auctionDetails.isPrivate ? (
-                                <>
-                                  <p style={{ color: 'green' }}>
-                                    (Private Auction)
-                                  </p>
-                                </>
-                              ) : (
-                                <></>
-                              )}
-                              {auctionDetails.productDescription}
-                            </Typography>
-                          </Grid>
+                        <Grid
+                          container
+                          sx={{
+                            border: '2px solid #00B9F1',
 
-                          <Grid
-                            item
-                            xs={12}
-                            style={{
-                              textAlign: 'center',
-                              alignContent: 'center',
-                            }}
-                          >
-                            <Typography variant="h5">
-                              {'Starting Bid : $' + auctionDetails.startingBid}
-                            </Typography>
-
-                            <Typography variant="h5">
-                              {'Estimated Price: $' + auctionDetails.estimate}
-                            </Typography>
-                          </Grid>
-
-                          {auctionDetails.auctioneerUserName ==
-                          userAuth.user_id ? (
-                            <Grid item xs={12} md={8}>
-                              <Button onClick={handleCloseAuction}>
-                                Close Auction
-                              </Button>
-                            </Grid>
-                          ) : (
-                            <></>
-                          )}
-
-                          <Grid item xs={12}>
-                            <TopBids id={id} />
-                          </Grid>
-
-                          <Grid item xs={12}>
-                            <Grid
-                              className="bidding-form"
-                              alignContent="center"
-                              justifyContent="center"
-                              margin="auto"
-                              textAlign="center"
-                            >
-                              <form
-                                onSubmit={handleSubmit}
-                                method="POST"
-                                alignContent="center"
-                                justifyContent="center"
-                                textAlign="center"
+                          }}
+                        >
+                          <CssBaseline />
+                          <Grid item xs={12} md={7} lg={9}>
+                            <Grid container>
+                              <Grid
+                                item
+                                xs={12}
+                                lg={5}
+                                sx={{
+                                  /*border: '5px solid rgb(42,157,143);',*/
+                                  backgroundImage: `url(${image})`,
+                                  backgroundRepeat: 'no-repeat',
+                                  backgroundSize: 'cover',
+                                  backgroundPosition: 'center',
+                                  textAlign: 'center',
+                                  paddingTop: 2,
+                                  minHeight: 330,
+                                }}
+                              ></Grid>
+                              <Grid
+                                item
+                                xs={12}
+                                lg={7}
+                                elevation={6}
+                                sx={{
+                                  padding: 2,
+                                  paddingLeft: 5,
+                                  /*            backgroundColor: 'rgb(233,196,106)',*/
+                                  fontFamily: 'Montserrat',
+                                }}
                               >
-                                <Grid
-                                  alignContent="center"
-                                  justifyContent="center"
-                                  textAlign="center"
-                                >
-                                  <input
-                                    name="bid_amount"
-                                    required="required"
-                                    type="integer"
-                                    placeholder="Amount"
-                                    onChange={handleChange}
-                                  />
-                                </Grid>
-                                <Button
-                                  type="submit"
-                                  onClick={handleSubmit}
-                                  variant="contained"
-                                  style={{
-                                    backgroundColor: 'rgb(38,70,83)',
-                                    marginTop: 3,
-                                  }}
-                                >
-                                  Bid
+                                <Grid container spacing={2}>
+                                  <Grid item xs={12}>
+                                    <Typography
+                                      variant="h3"
+                                      style={{
+                                        fontFamily: 'serif',
+                                        textTransform: 'uppercase',
+                                        textAlign: 'center',
+                                      }}
+                                    >
+                                      {auctionDetails.productName}
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item xs={12}>
+                                    <Typography
+                                      variant="body1"
+                                      style={{ fontFamily: 'lato' }}
+                                    >
+                                      {auctionDetails.isPrivate ? (
+                                        <>
+                                          <p style={{ color: 'green' }}>
+                                            (Private Auction)
+                                  </p>
+                                        </>
+                                      ) : (
+                                          <></>
+                                        )}
+                                      {auctionDetails.productDescription}
+                                    </Typography>
+                                  </Grid>
+
+                                  <Grid
+                                    item
+                                    xs={12}
+                                    style={{
+                                      textAlign: 'center',
+                                      alignContent: 'center',
+                                    }}
+                                  >
+                                    <Typography variant="h5">
+                                      {'Starting Bid : $' + auctionDetails.startingBid}
+                                    </Typography>
+
+                                    <Typography variant="h5">
+                                      {'Estimated Price: $' + auctionDetails.estimate}
+                                    </Typography>
+                                  </Grid>
+
+                                  {auctionDetails.auctioneerUserName ==
+                                    userAuth.user_id ? (
+                                      <Grid item xs={12} md={8}>
+                                        <Button onClick={handleCloseAuction}>
+                                          Close Auction
+                              </Button>
+                                      </Grid>
+                                    ) : (
+                                      <></>
+                                    )}
+
+                                  <Grid item xs={12}>
+                                    <TopBids id={id} />
+                                  </Grid>
+
+                                  <Grid item xs={12}>
+                                    <Grid
+                                      className="bidding-form"
+                                      alignContent="center"
+                                      justifyContent="center"
+                                      margin="auto"
+                                      textAlign="center"
+                                    >
+                                      <form
+                                        onSubmit={handleSubmit}
+                                        method="POST"
+                                        alignContent="center"
+                                        justifyContent="center"
+                                        textAlign="center"
+                                      >
+                                        <Grid
+                                          alignContent="center"
+                                          justifyContent="center"
+                                          textAlign="center"
+                                        >
+                                          <input
+                                            name="bid_amount"
+                                            required="required"
+                                            type="integer"
+                                            placeholder="Amount"
+                                            onChange={handleChange}
+                                          />
+                                        </Grid>
+                                        <Button
+                                          type="submit"
+                                          onClick={handleSubmit}
+                                          variant="contained"
+                                          style={{
+                                            backgroundColor: 'rgb(38,70,83)',
+                                            marginTop: 3,
+                                          }}
+                                        >
+                                          Bid
                                 </Button>
-                                {feedback.feedback ? (
-                                  <Typography className="feedback-box">
-                                    {' '}
-                                    {feedback.feedback}{' '}
-                                  </Typography>
-                                ) : (
-                                  <></>
-                                )}
-                              </form>
+                                        {feedback.feedback ? (
+                                          <Typography className="feedback-box">
+                                            {' '}
+                                            {feedback.feedback}{' '}
+                                          </Typography>
+                                        ) : (
+                                            <></>
+                                          )}
+                                      </form>
+                                    </Grid>
+                                  </Grid>
+                                </Grid>
+                              </Grid>
                             </Grid>
                           </Grid>
+
+                          <Grid item xs={12} md={5} lg={3}
+                            sx={{ borderLeft: '2px solid #00B9F1', }}
+                          /*style={{
+                            height: 1500,
+                            overflowY: scroll,
+                          }}*/
+                          ><ShowComments /></Grid>
+
                         </Grid>
+
                       </Grid>
-                    </Grid>
-                  </Grid>
-                  <ShowComments />
-                </>
-              )}
-            </>
-          )}
+                    </>
+                  )}
+              </>
+            )}
         </>
       ) : (
-        <Typography>You need to login</Typography>
-      )}
+          <Typography>You need to login</Typography>
+        )}
     </>
   );
 };

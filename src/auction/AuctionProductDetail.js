@@ -10,8 +10,6 @@ import {
   Container,
   CssBaseline,
 } from '@mui/material';
-import { makeStyles } from '@material-ui/core/styles';
-import SendIcon from '@mui/icons-material/Send';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -175,15 +173,17 @@ const AuctionProductDetail = () => {
         sx={{
           marginTop: 10,
           marginBottom: 10,
-          paddingLeft: 15,
+          paddingLeft: 25,
           paddingRight: 25,
+          alignItems: 'center'
         }}
       >
         <Grid
           container
           sx={{
-            border: '5px solid rgb(233, 196,106)',
+            border: '3px solid #00B9F1',
             padding: 2,
+            borderRadius: 4
           }}
         >
           <CssBaseline />
@@ -192,7 +192,6 @@ const AuctionProductDetail = () => {
             xs={12}
             lg={5}
             sx={{
-              /*border: '5px solid rgb(42,157,143);',*/
               backgroundImage: `url(${image})`,
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
@@ -210,7 +209,6 @@ const AuctionProductDetail = () => {
             sx={{
               padding: 2,
               paddingLeft: 5,
-              /*            backgroundColor: 'rgb(233,196,106)',*/
               fontFamily: 'Montserrat',
             }}
           >
@@ -266,8 +264,7 @@ const AuctionProductDetail = () => {
                   {'Estimated Price: $' + auctionDetails.estimate}
                 </Typography>
               </Grid>
-
-              {/* remove exclamation mark */}
+              
               <>
                 {timeUp ? (
                   <>
@@ -303,7 +300,7 @@ const AuctionProductDetail = () => {
                               >
                                 <Button
                                   variant="contained"
-                                  style={{ backgroundColor: 'rgb(38,70,83)' }}
+                                  style={{ backgroundColor: '	#002E6E' }}
                                 >
                                   CHAT
                                 </Button>
@@ -360,7 +357,7 @@ const AuctionProductDetail = () => {
                         <>
                           {hasStarted ? (
                             <>
-                              <Typography style={{ color: 'rgb(42,157,143)' }}>
+                              <Typography style={{ color: '	#002E6E' }}>
                                 You have registered for the auction. Please
                                 proceed with bidding.
                               </Typography>
@@ -371,14 +368,14 @@ const AuctionProductDetail = () => {
                               >
                                 <Button
                                   variant="contained"
-                                  style={{ backgroundColor: 'rgb(38,70,83)' }}
+                                  style={{ backgroundColor: '	#002E6E' }}
                                 >
                                   Go to bidding
                                 </Button>
                               </Link>
                             </>
                           ) : (
-                            <Typography style={{ color: 'rgb(42,157,143)' }}>
+                            <Typography style={{ color: '	#002E6E' }}>
                               You have registered for the auction.
                             </Typography>
                           )}
@@ -387,7 +384,7 @@ const AuctionProductDetail = () => {
                         <span style={{ marginRight: '20px' }}>
                           <Button
                             variant="contained"
-                            style={{ backgroundColor: 'rgb(38,70,83)' }}
+                            style={{ backgroundColor: '	#002E6E' }}
                             onClick={registerUser}
                           >
                             Register

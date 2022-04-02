@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import Keys from '../../config';
-import TimeSuggestion from './TimeSuggestion';
+import TimeSuggestion from './TimeSuggestionModal';
 axios.defaults.withCredentials = true;
 
 const CreateAuctionModal = (props) => {
@@ -92,11 +92,11 @@ const CreateAuctionModal = (props) => {
   };
 
   return (
-    <Modal {...props} size="lg">
-      <Modal.Header closeButton>
+    <Modal {...props} size="lg" style={{marginTop: '50px'}}>
+      <Modal.Header closeButton >
         <Modal.Title>Create Auction</Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ padding: '30px', margin: '10px' }}>
+      <Modal.Body style={{ padding: '20px', margin: '10px' }}>
         <div style={{ marginLeft: '20px' }}>
           <h5>Hi there! Please enter the following details.</h5>
         </div>
@@ -199,7 +199,7 @@ const CreateAuctionModal = (props) => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '79px', alignItems: 'center' }}>
             <div style={{ padding: '10px' }}>
               City:{' '}
               <input
@@ -208,7 +208,7 @@ const CreateAuctionModal = (props) => {
                 type="string"
                 placeholder="City"
                 onChange={handleChange}
-                style={{ width: '45%', marginLeft: '64px' }}
+                style={{ width: '45%' }}
               />
             </div>
             <div style={{ padding: '10px' }}>
@@ -244,7 +244,7 @@ const CreateAuctionModal = (props) => {
                 type="date"
                 placeholder="start date"
                 onChange={handleChange}
-                style={{ width: '45%' }}
+                style={{ width: '50%' }}
               />
             </div>
             <div style={{ padding: '10px' }}>
@@ -255,7 +255,7 @@ const CreateAuctionModal = (props) => {
                 type="time"
                 placeholder="start time"
                 onChange={handleChange}
-                style={{ width: '45%' }}
+                style={{ width: '50%' }}
               />
             </div>
           </div>
@@ -268,7 +268,7 @@ const CreateAuctionModal = (props) => {
                 type="date"
                 placeholder="end date"
                 onChange={handleChange}
-                style={{ width: '45%' }}
+                style={{ width: '52%' }}
               />
             </div>
             <div style={{ padding: '10px' }}>
@@ -279,7 +279,7 @@ const CreateAuctionModal = (props) => {
                 type="time"
                 placeholder="end time"
                 onChange={handleChange}
-                style={{ width: '45%' }}
+                style={{ width: '50%' }}
               />
             </div>
           </div>

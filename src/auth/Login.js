@@ -129,7 +129,7 @@ const Login = () => {
                 paddingTop: 18,
               }}
             >
-              <Typography variant="h1" fontSize="180px" color="rgb(15,76,92)">
+              <Typography variant="h1" fontSize="180px" color="	#002E6E">
                 Niलाmi
               </Typography>
               <Typography fontSize="36px" color="#ff4200"><i>

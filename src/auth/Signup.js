@@ -125,7 +125,7 @@ const Signup = () => {
             alignItems: 'center',
           }}
         >
-          <Typography variant="h2" color="rgb(15,76,92)">
+          <Typography variant="h2" color="#002E6E">
             Niलाmi
           </Typography>
           <Typography variant="h5" color="#ff4200"><i>

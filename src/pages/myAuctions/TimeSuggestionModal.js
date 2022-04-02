@@ -69,13 +69,14 @@ const TimeSuggestion = (props) => {
     <Modal
       {...props}
       size="md"
+      style={{marginTop: '50px'}}
     >
       <Modal.Header closeButton>
         <Modal.Title >
           Time Sugggestion
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ padding: '30px' }}>
+      <Modal.Body style={{ padding: '20px' }}>
         {showSuggestion?<p>Time Suggested is: {dateFormat(timeSuggested,"yyyy-mm-dd")}  {dateFormat(timeSuggested,"HH:MM:ss")}</p> : <>
             <h6 >
             Please enter the following details.
@@ -161,7 +162,7 @@ const TimeSuggestion = (props) => {
                 />
             </div>
             <div style={{ padding: '10px', alignContent: 'center' }}>
-                <Button type="submit" onClick={handleSubmit}>
+                <Button type="submit" onClick={handleSubmit} style={{backgroundColor: '#00B9F1'}}>
                 Submit
                 </Button>
             </div>

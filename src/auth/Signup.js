@@ -33,6 +33,7 @@ const defaultuser = {
   city: '',
   pincode: '',
   mobile: '',
+  profile_url: '',
 };
 
 const Signup = () => {
@@ -81,6 +82,7 @@ const Signup = () => {
       city: '',
       pincode: '',
       mobile: '',
+      profile_url: '',
     });
   };
 
@@ -262,7 +264,7 @@ const Signup = () => {
                   variant="outlined"
                   placeholder="Mobile Number"
                   name="mobile"
-                  type="number"
+                  type="text"
                   value={user.mobile}
                   onChange={getUserData}
                   fullWidth

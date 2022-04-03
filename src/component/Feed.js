@@ -141,7 +141,8 @@ const Feed = ({ auction }) => {
         <CardMedia
           component="img"
           height="194"
-          image="https://cdn.pixabay.com/photo/2018/09/09/18/04/judge-3665164_960_720.jpg"
+          image={auction.product_pic.toString()}
+          // image="https://cdn.pixabay.com/photo/2018/09/09/18/04/judge-3665164_960_720.jpg"
           alt="Paella dish"
           style={{ margin: '6px 2px' }}
         />

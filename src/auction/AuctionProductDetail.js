@@ -28,6 +28,7 @@ const image =
 const defaultAuctionDetails = {
   productName: 'Loading..',
   productDescription: '',
+  productPic: '',
   startingBid: '',
   estimate: '',
   startDate: '',
@@ -65,6 +66,7 @@ const AuctionProductDetail = () => {
           setAuctionDetails({
             productName: tempAuctionDetails.data.product_name,
             productDescription: tempAuctionDetails.data.product_details,
+            productPic: tempAuctionDetails.data.product_pic,
             startingBid: tempAuctionDetails.data.starting_price + '',
             estimate: tempAuctionDetails.data.estimated_price + '',
             startDate: dateFormat(
@@ -193,7 +195,7 @@ const AuctionProductDetail = () => {
             lg={5}
             sx={{
               /*border: '5px solid rgb(42,157,143);',*/
-              backgroundImage: `url(${image})`,
+              backgroundImage: `url(${auctionDetails.productPic})`,
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
               backgroundPosition: 'center',

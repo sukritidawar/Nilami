@@ -29,6 +29,7 @@ const TopBids = ({ id }) => {
     await getTopBids();
     console.log(topBids);
   }, [isLoading]);
+  // setTimeout(function() { window.location=window.location;},5000);
 
   return (
     <div className="topBids">

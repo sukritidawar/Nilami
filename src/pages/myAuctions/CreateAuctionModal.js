@@ -83,6 +83,7 @@ const CreateAuctionModal = (props) => {
       );
 
       console.log(response);
+      console.log(body);
 
       handleFeedback('update done');
     } catch (error) {
@@ -133,9 +134,12 @@ const CreateAuctionModal = (props) => {
                 placeholder="Category"
                 onChange={handleChange}
               >
+                <option value="none" selected disabled hidden>Select</option>
                 <option value="art">Art</option>
                 <option value="antique">Antique</option>
                 <option value="religious">Religious</option>
+                <option value="electronics">Electronics</option>
+                <option value="other">Other</option>
               </select>
               Category
             </div>

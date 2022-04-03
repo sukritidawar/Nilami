@@ -29,7 +29,7 @@ const FrontPage = () => {
         <CssBaseline />
         <Grid container>
           <Grid item xs={12} md={7} className={styles.grid_styling}>
-            <img srcSet={require(`../images/logo.jpeg`)} alt="logo" />
+            {/* <img srcSet={require(`../images/logo.jpeg`)} alt="logo" /> */}
             <Typography
               variant="body1"
               style={{

@@ -128,7 +128,7 @@ const Signup = () => {
           <Typography variant="h2" color="#002E6E">
             Niलाmi
           </Typography>
-          <Typography variant="h5" color="#ff4200"><i>
+          <Typography variant="h5" color="#1976d2"><i>
             Like it, Bid for it, Buy it.
             </i></Typography>
 

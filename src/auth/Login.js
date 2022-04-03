@@ -20,8 +20,7 @@ import { LOGIN } from '../store/Types';
 import Cookies from 'js-cookie';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Image from '../images/Auction1.png';
-import { makeStyles } from '@material-ui/core/styles';
+import Image from '../images/Auction2.png';
 import { useNavigate } from 'react-router-dom';
 
 axios.defaults.withCredentials = true;
@@ -127,13 +126,16 @@ const Login = () => {
                 backgroundPosition: 'center',
                 textAlign: 'center',
                 paddingTop: 18,
+                alignItems: 'center',
+                justifyContent: 'center'
               }}
             >
-              <Typography variant="h1" fontSize="180px" color="	#002E6E">
-                Niलाmi
-              </Typography>
-              <Typography fontSize="36px" color="#ff4200"><i>
-                Like it, Bid for it, Buy it.{' '}</i>
+                <Typography variant="h1" fontSize="180px" color="	#002E6E">
+                  Ni<span color="#1976d2" impotant>ला</span>mi
+                </Typography>
+
+              <Typography fontSize="36px" color="#1976d2">
+                <i>Like it, Bid for it, Buy it. </i>
               </Typography>
             </Grid>
             <Grid

@@ -175,19 +175,15 @@ const AuctionProductDetail = () => {
           marginBottom: 10,
           paddingLeft: 25,
           paddingRight: 25,
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <Grid
           container
           sx={{
-<<<<<<< HEAD
             border: '3px solid #00B9F1',
-=======
-            border: '2px solid #00B9F1',
->>>>>>> 63fd12659b662862e7625ef899f001fc0f28d61f
             padding: 2,
-            borderRadius: 4
+            borderRadius: 4,
           }}
         >
           <CssBaseline />
@@ -249,8 +245,8 @@ const AuctionProductDetail = () => {
                       <p style={{ color: 'green' }}>(Private Auction)</p>
                     </>
                   ) : (
-                      <></>
-                    )}
+                    <></>
+                  )}
                   {auctionDetails.productDescription}
                 </Typography>
               </Grid>
@@ -268,7 +264,7 @@ const AuctionProductDetail = () => {
                   {'Estimated Price: $' + auctionDetails.estimate}
                 </Typography>
               </Grid>
-              
+
               <>
                 {timeUp ? (
                   <>
@@ -293,7 +289,7 @@ const AuctionProductDetail = () => {
                         {(() => {
                           if (
                             userAuth.user_id ==
-                            auctionDetails.auctioneerUserName ||
+                              auctionDetails.auctioneerUserName ||
                             userAuth.user_id == auctionDetails.winner_user_id
                           ) {
                             return (
@@ -314,37 +310,37 @@ const AuctionProductDetail = () => {
                         })()}
                       </>
                     ) : (
-                        <h6></h6>
-                      )}
+                      <h6></h6>
+                    )}
                   </>
                 ) : (
-                    <>
-                      <Grid
-                        item
-                        xs={12}
-                        md={6}
-                        style={{ textAlign: 'center', alignContent: 'center' }}
-                      >
-                        <Typography variant="h6">
-                          {'Start Date : ' + auctionDetails.startDate}
-                        </Typography>
-                        <Typography variant="h6">
-                          {'Start Time : ' + auctionDetails.startTime}
-                        </Typography>
-                      </Grid>
-                      <Grid
-                        item
-                        xs={12}
-                        md={6}
-                        style={{ textAlign: 'center', alignContent: 'center' }}
-                      >
-                        <Typography variant="h6">
-                          {'End Date : ' + auctionDetails.endDate}
-                        </Typography>
-                        <Typography variant="h6">
-                          {'End Time : ' + auctionDetails.endTime}
-                        </Typography>
-                      </Grid>
+                  <>
+                    <Grid
+                      item
+                      xs={12}
+                      md={6}
+                      style={{ textAlign: 'center', alignContent: 'center' }}
+                    >
+                      <Typography variant="h6">
+                        {'Start Date : ' + auctionDetails.startDate}
+                      </Typography>
+                      <Typography variant="h6">
+                        {'Start Time : ' + auctionDetails.startTime}
+                      </Typography>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      md={6}
+                      style={{ textAlign: 'center', alignContent: 'center' }}
+                    >
+                      <Typography variant="h6">
+                        {'End Date : ' + auctionDetails.endDate}
+                      </Typography>
+                      <Typography variant="h6">
+                        {'End Time : ' + auctionDetails.endTime}
+                      </Typography>
+                    </Grid>
 
                     <Grid
                       item
@@ -370,15 +366,12 @@ const AuctionProductDetail = () => {
                                 state={auctionDetails}
                                 style={{ textDecoration: 'none' }}
                               >
+                        
                                 <Button
                                   variant="contained"
-                                  style={{ backgroundColor: '	#002E6E' }}
+                                  style={{ backgroundColor: '#002E6E' }}
                                 >
-                                  <Button
-                                    variant="contained"
-                                    style={{ backgroundColor: '#002E6E' }}
-                                  >
-                                    Go to bidding
+                                  Go to bidding
                                 </Button>
                               </Link>
                             </>
@@ -397,31 +390,31 @@ const AuctionProductDetail = () => {
                           >
                             Register
                           </Button>
-                              <RegisterModal
-                                id={id}
-                                show={infoModalShow}
-                                onHide={handleCloseInfoModal}
-                                onRegister={updateRegisterInfo}
-                              />
-                            </span>
-                          )}
+                          <RegisterModal
+                            id={id}
+                            show={infoModalShow}
+                            onHide={handleCloseInfoModal}
+                            onRegister={updateRegisterInfo}
+                          />
+                        </span>
+                      )}
 
-                        {/* <Link
+                      {/* <Link
                   to={{
                     pathname: `/feed/${id}/biding`,
                     state: "sfsf" // your data array of objects
                   }}
                 >sdsds</Link> */}
-                        {/* <Button variant="contained"component={Link}
+                      {/* <Button variant="contained"component={Link}
                 to = {`/feed/${id}/biding`}
                 props={auctionDetails}
                  style={{ backgroundColor: "rgb(231,111,81)" }} 
                  endIcon={<SendIcon />}>
                   Go to bidding
               </Button> */}
-                      </Grid>
-                    </>
-                  )}
+                    </Grid>
+                  </>
+                )}
               </>
 
               <Grid item xs={12}>

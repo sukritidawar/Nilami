@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Keys from '../config';
+import Keys from '../../config';
 import {
   Grid,
   Typography,
@@ -10,17 +10,14 @@ import {
   Container,
   CssBaseline,
 } from '@mui/material';
-import { makeStyles } from '@material-ui/core/styles';
-import SendIcon from '@mui/icons-material/Send';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import AuctionCommp from './AuctionCommp';
 import { ContentPasteOutlined, WifiChannelRounded } from '@mui/icons-material';
-import RegisterModal from './RegisterModal';
+import RegisterModal from '../../UIComponents/modals/RegisterModal';
 import { trackPromise } from 'react-promise-tracker';
-import Store from '../store/Store';
-import Header from '../component/header/Header';
+import Store from '../../store/Store';
+import Header from '../../UIComponents/Header';
 
 const image =
   'https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg';
@@ -177,15 +174,17 @@ const AuctionProductDetail = () => {
         sx={{
           marginTop: 10,
           marginBottom: 10,
-          paddingLeft: 15,
+          paddingLeft: 25,
           paddingRight: 25,
+          alignItems: 'center',
         }}
       >
         <Grid
           container
           sx={{
-            border: '5px solid rgb(233, 196,106)',
+            border: '3px solid #00B9F1',
             padding: 2,
+            borderRadius: 4,
           }}
         >
           <CssBaseline />
@@ -212,7 +211,6 @@ const AuctionProductDetail = () => {
             sx={{
               padding: 2,
               paddingLeft: 5,
-              /*            backgroundColor: 'rgb(233,196,106)',*/
               fontFamily: 'Montserrat',
             }}
           >
@@ -269,7 +267,6 @@ const AuctionProductDetail = () => {
                 </Typography>
               </Grid>
 
-              {/* remove exclamation mark */}
               <>
                 {timeUp ? (
                   <>
@@ -305,7 +302,7 @@ const AuctionProductDetail = () => {
                               >
                                 <Button
                                   variant="contained"
-                                  style={{ backgroundColor: 'rgb(38,70,83)' }}
+                                  style={{ backgroundColor: '	#002E6E' }}
                                 >
                                   CHAT
                                 </Button>
@@ -362,7 +359,7 @@ const AuctionProductDetail = () => {
                         <>
                           {hasStarted ? (
                             <>
-                              <Typography style={{ color: 'rgb(42,157,143)' }}>
+                              <Typography style={{ color: '	#002E6E' }}>
                                 You have registered for the auction. Please
                                 proceed with bidding.
                               </Typography>
@@ -371,16 +368,17 @@ const AuctionProductDetail = () => {
                                 state={auctionDetails}
                                 style={{ textDecoration: 'none' }}
                               >
+                        
                                 <Button
                                   variant="contained"
-                                  style={{ backgroundColor: 'rgb(38,70,83)' }}
+                                  style={{ backgroundColor: '#002E6E' }}
                                 >
                                   Go to bidding
                                 </Button>
                               </Link>
                             </>
                           ) : (
-                            <Typography style={{ color: 'rgb(42,157,143)' }}>
+                            <Typography style={{ color: '	#002E6E' }}>
                               You have registered for the auction.
                             </Typography>
                           )}
@@ -389,7 +387,7 @@ const AuctionProductDetail = () => {
                         <span style={{ marginRight: '20px' }}>
                           <Button
                             variant="contained"
-                            style={{ backgroundColor: 'rgb(38,70,83)' }}
+                            style={{ backgroundColor: '	#002E6E' }}
                             onClick={registerUser}
                           >
                             Register

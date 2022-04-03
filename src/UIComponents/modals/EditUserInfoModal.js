@@ -72,6 +72,7 @@ const EditUserInfoModal = (props) => {
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      style={{ borderRadius: '4px' }}
     >
       <Modal.Header closeButton>
         <Modal.Title style={{ alignItems: 'center' }}>
@@ -125,7 +126,7 @@ const EditUserInfoModal = (props) => {
             />
           </div>
           <div style={{ padding: '10px' }}>
-            <button type="submit" onClick={handleSubmit}>
+            <button type="submit" onClick={handleSubmit}  style={{backgroundColor: '#00B9F1', color: 'white'}}>
               Update
             </button>
           </div>

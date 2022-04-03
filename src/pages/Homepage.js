@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from './header/Header';
+import Header from '../UIComponents/Header';
 import {
   Grid,
   Select,
@@ -7,9 +7,8 @@ import {
   MenuItem,
   InputLabel,
   Button,
-  Box,
 } from '@mui/material';
-import Feed from './Feed';
+import FeedCard from '../UIComponents/FeedCard';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import Keys from '../config';
@@ -113,7 +112,7 @@ const Homepage = () => {
             <form onSubmit={handleSubmit} method="POST">
               <Grid container spacing={2}>
                 <Grid item xs={12} md={2}>
-                  <FormControl fullWidth>
+                  <FormControl fullWidth style={{ marginLeft: '20px' }}>
                     <InputLabel id="demo-simple-select-label">
                       Filter by
                     </InputLabel>
@@ -138,7 +137,7 @@ const Homepage = () => {
                     value={formData.valueAcc}
                     onChange={handleChange}
                     size="50"
-                    style={{ height: '54px' }}
+                    style={{ height: '54px', marginLeft: '10px' }}
                   />
                 </Grid>
                 <Grid item xs={12} md={1}>
@@ -150,7 +149,8 @@ const Homepage = () => {
                     fullWidth
                     style={{
                       height: '54px',
-                      backgroundColor: 'rgb(231,111,81)',
+                      backgroundColor: '#00B9F1',
+                      marginLeft: '10px'
                     }}
                   >
                     Search
@@ -161,7 +161,7 @@ const Homepage = () => {
             <Grid></Grid>
             <Grid container>
               {auctionFeed.map((auction) => (
-                <Feed key={auction.auction_id} auction={auction} />
+                <FeedCard key={auction.auction_id} auction={auction} />
               ))}
             </Grid>
           </Grid>

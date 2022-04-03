@@ -3,7 +3,7 @@ import { Fire } from './firebasee';
 import SendMessage from './SendMessage';
 import { useParams, useLocation } from 'react-router-dom';
 import Store from '../../store/Store';
-import Header from '../../component/header/Header'
+import Header from '../Header'
 
 function Chat() {
   const scroll = useRef();

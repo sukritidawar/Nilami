@@ -1,17 +1,16 @@
 import React from 'react';
 import { useContext, useEffect, useState } from 'react';
-import AuctionCommp from './AuctionCommp';
 import { Grid, Typography, Button } from '@mui/material';
-import Store from '../store/Store';
+import Store from '../../store/Store';
 import axios from 'axios';
-import Keys from '../config';
+import Keys from '../../config';
 import dateFormat from 'dateformat';
-import Feed from '../component/Feed';
+import FeedCard from '../../UIComponents/FeedCard';
 import Spinner from 'react-spinkit';
 import './RegsiteredAuction.css';
 import { trackPromise } from 'react-promise-tracker';
-import Header from '../component/header/Header';
-import LoadingIndicator from '../component/LoadingIndicator';
+import Header from '../../UIComponents/Header';
+import LoadingIndicator from '../../UIComponents/LoadingIndicator';
 import { makeStyles } from '@material-ui/core/styles';
 
 axios.defaults.withCredentials = true;
@@ -67,6 +66,17 @@ const RegisteredAuction = () => {
       console.log(error);
     }
   };
+  const [onClickColorUpcoming, setOnClickColorUpcoming] = useState(true);
+  const [onClickColorPast, setOnClickColorPast] = useState(false);
+  const clickUpcoming = () => {
+    setOnClickColorUpcoming(true);
+    setOnClickColorPast(false);
+  };
+  const clickPast = () => {
+    setOnClickColorUpcoming(false);
+    setOnClickColorPast(true);
+  };
+
   useEffect(async () => {
     // if(userAuth.isAuth){
     getRegAuctions();
@@ -101,7 +111,7 @@ const RegisteredAuction = () => {
                   justifyText="center"
                   style={{ fontStyle: 'serif' }}
                 >
-                  MY REGISTERED AUCTIONS
+                  My Registered Auctions
                 </Typography>
               </Grid>
               <Grid container spacing={2} paddingTop={5}>
@@ -109,15 +119,27 @@ const RegisteredAuction = () => {
                 <Grid item xs={12} md={6} margin="auto">
                   <Button
                     variant="contained"
-                    style={{ backgroundColor: 'rgb(231,111,81)' }}
-                    onClick={getUpcomingAuctions}
+                    style={{
+                      backgroundColor: onClickColorUpcoming
+                        ? '#002E6E'
+                        : '#00B9F1',
+                    }}
+                    onClick={() => {
+                      getUpcomingAuctions();
+                      clickUpcoming();
+                    }}
                   >
                     Upcoming Auctions
                   </Button>
                   <Button
                     variant="contained"
-                    style={{ backgroundColor: 'rgb(244,162,97)' }}
-                    onClick={getPastAuctions}
+                    style={{
+                      backgroundColor: onClickColorPast ? '#002E6E' : '#00B9F1',
+                    }}
+                    onClick={() => {
+                      getPastAuctions();
+                      clickPast();
+                    }}
                   >
                     Past Auctions
                   </Button>
@@ -138,7 +160,7 @@ const RegisteredAuction = () => {
                           (dateFormat(auction.end_date, 'yyyy-mm-dd') ==
                             currentDate &&
                             auction.end_time > currentTime)) && (
-                          <Feed key={auction.auction_id} auction={auction} />
+                          <FeedCard key={auction.auction_id} auction={auction} />
                         )}
                       </>
                     ))
@@ -149,7 +171,7 @@ const RegisteredAuction = () => {
                           (dateFormat(auction.end_date, 'yyyy-mm-dd') ==
                             currentDate &&
                             auction.end_time < currentTime)) && (
-                          <Feed key={auction.auction_id} auction={auction} />
+                          <FeedCard key={auction.auction_id} auction={auction} />
                         )}
                       </>
                     ))}

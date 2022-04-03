@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
-import Keys from '../config';
+import Keys from '../../config';
 axios.defaults.withCredentials = true;
 
 const RegisterModal = (props) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Fire } from '../../auction/chatApp/firebasee';
+import { Fire } from '../chatApp/firebasee';
 import Comments from '../Comments/Comments';
 import { useParams, useLocation } from 'react-router-dom';
 import Store from '../../store/Store';

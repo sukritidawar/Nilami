@@ -21,7 +21,7 @@ import FlashMessage from 'react-flash-message';
 
 axios.defaults.withCredentials = true;
 
-const Feed = ({ auction }) => {
+const FeedCard = ({ auction }) => {
   const [feedLike, setfeedLike] = React.useState(`${auction.n_likes}`);
   const [authInfo, setAuthInfo] = useContext(store);
   const [likeColor, setlikeColor] = useState('gray');
@@ -85,7 +85,7 @@ const Feed = ({ auction }) => {
         margin: 2,
         width: { lg: '27vw', md: '36vw', xs: '66vw' },
         padding: 2,
-        border: '5px solid rgb(233, 196,106)',
+        border: '2px solid #00B9F1',
         justifyContent: 'center',
         textAlign: 'center',
       }}
@@ -144,7 +144,7 @@ const Feed = ({ auction }) => {
           image={auction.product_pic.toString()}
           // image="https://cdn.pixabay.com/photo/2018/09/09/18/04/judge-3665164_960_720.jpg"
           alt="Paella dish"
-          style={{ margin: '6px 2px' }}
+          style={{ margin: '2px' }}
         />
       </Link>
       <CardContent>
@@ -156,7 +156,6 @@ const Feed = ({ auction }) => {
           ) : (
             <></>
           )}
-          {auction.product_details}
         </Typography>
         <br></br>
       </CardContent>
@@ -184,4 +183,4 @@ const Feed = ({ auction }) => {
   );
 };
 
-export default Feed;
+export default FeedCard;

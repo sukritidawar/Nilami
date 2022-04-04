@@ -9,7 +9,7 @@ import CreateAuctionModal from './UIComponents/modals/CreateAuctionModal';
 import Cookies from 'js-cookie';
 import Chat from './UIComponents/chatApp/Chat';
 import EditUserInfoModal from './UIComponents/modals/EditUserInfoModal';
-import Homepage from './pages/Homepage';
+import Homepage from './pages/Homepage/Homepage';
 import Header from './UIComponents/Header';
 import Login from './pages/auth/Login';
 import { LOGIN } from './store/Types';

@@ -86,15 +86,13 @@ const UserProfile = () => {
       ) : (
         <Container className="container">
           <h1 style={{ textAlign: 'center', color: 'white' }}>Your Profile</h1>
-          <Row className="mainContent">
-            <Col xl={12}>
-              <div className="userInfo">
-                <div className="userImage">
-                  <img src={userDetails.user.profile_pic}></img>
-                </div>
-                {/* <div className="userImage">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU" />
-                </div> */}
+          {/* <Row className="mainContent"> */}
+          {/* <Col xl={12}> */}
+          <div className="mainContent">
+            <div className="userInfo">
+              <div className="userImage">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU" />
+              </div>
 
               <div className="userDesc">
                 <p style={{ fontSize: '2rem' }}>
@@ -120,7 +118,7 @@ const UserProfile = () => {
                 user={userDetails.user}
               />
             </div>
-            <div className='address'>
+            <div className="address">
               <div className="address-heading">
                 <h3>Your registered addresses:</h3>
               </div>
@@ -140,10 +138,11 @@ const UserProfile = () => {
 
                           <Col xs={1} className="my-auto">
                             <Button
+                              className="btn-danger"
                               onClick={() =>
                                 deleteAddress(addressElement.address_id)
                               }
-                              style={{backgroundColor: '#002E6E'}}
+                              style={{ backgroundColor: '#002E6E' }}
                             >
                               X
                             </Button>
@@ -169,8 +168,7 @@ const UserProfile = () => {
                 addAddressFunc={addAddressFunc}
               />
             </div>
-            </Col>
-          </Row>
+          </div>
         </Container>
       )}
     </div>

@@ -7,13 +7,10 @@ import {
   Typography,
   Button,
   Box,
-  Container,
   CssBaseline,
 } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ContentPasteOutlined, WifiChannelRounded } from '@mui/icons-material';
 import RegisterModal from '../../UIComponents/modals/RegisterModal';
 import { trackPromise } from 'react-promise-tracker';
 import Store from '../../store/Store';
@@ -25,7 +22,6 @@ const image =
 const defaultAuctionDetails = {
   productName: 'Loading..',
   productDescription: '',
-  productPic: '',
   startingBid: '',
   estimate: '',
   startDate: '',
@@ -63,7 +59,6 @@ const AuctionProductDetail = () => {
           setAuctionDetails({
             productName: tempAuctionDetails.data.product_name,
             productDescription: tempAuctionDetails.data.product_details,
-            productPic: tempAuctionDetails.data.product_pic,
             startingBid: tempAuctionDetails.data.starting_price + '',
             estimate: tempAuctionDetails.data.estimated_price + '',
             startDate: dateFormat(
@@ -193,8 +188,7 @@ const AuctionProductDetail = () => {
             xs={12}
             lg={5}
             sx={{
-              /*border: '5px solid rgb(42,157,143);',*/
-              backgroundImage: `url(${auctionDetails.productPic})`,
+              backgroundImage: `url(${image})`,
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',
               backgroundPosition: 'center',

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../UIComponents/Header';
+import Header from '../../UIComponents/Header';
 import {
   Grid,
   Select,
@@ -8,10 +8,10 @@ import {
   InputLabel,
   Button,
 } from '@mui/material';
-import FeedCard from '../UIComponents/FeedCard';
+import FeedCard from '../../UIComponents/FeedCard';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import Keys from '../config';
+import Keys from '../../config';
 import { trackPromise } from 'react-promise-tracker';
 axios.defaults.withCredentials = true;
 

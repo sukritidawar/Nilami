@@ -1,16 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import {
-  Avatar,
-  Button,
-  Container,
-  CssBaseline,
-  Grid,
-  Box,
-  Link,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Avatar, Button, Container, CssBaseline, Grid, Box, Link, TextField, Typography } from '@mui/material';
 import Store from '../../store/Store';
 import Keys from '../../config';
 import { LOGIN } from '../../store/Types';

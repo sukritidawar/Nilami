@@ -1,14 +1,7 @@
 import { React, useState, useEffect, useContext } from 'react';
 import ShowComments from '../../UIComponents/Comments/ShowComments';
 import TopBids from '../../UIComponents/TopBids';
-import {
-  Grid,
-  Box,
-  Avatar,
-  Typography,
-  CssBaseline,
-  Button,
-} from '@mui/material';
+import { Grid, Typography, CssBaseline, Button,} from '@mui/material';
 import './BiddingPage.css';
 import dateFormat from 'dateformat';
 import axios from 'axios';
@@ -17,7 +10,6 @@ import Store from '../../store/Store';
 import Announcement from '../../UIComponents/Announcements/Announcement';
 import Header from '../../UIComponents/Header';
 import { useParams, useLocation } from 'react-router-dom';
-import FlashMessage from 'react-flash-message';
 
 axios.defaults.withCredentials = true;
 
@@ -152,7 +144,7 @@ const BiddingPage = (props) => {
                                 lg={5}
                                 sx={{
                                   /*border: '5px solid rgb(42,157,143);',*/
-                                  backgroundImage: `url(${image})`,
+                                  backgroundImage: `url(${auctionDetails.productPic})`,
                                   backgroundRepeat: 'no-repeat',
                                   backgroundSize: 'cover',
                                   backgroundPosition: 'center',

@@ -1,18 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import {
-  Grid,
-  Box,
-  TextField,
-  Typography,
-  Button,
-  Avatar,
-  Container,
-  Link,
-  Checkbox,
-  Paper,
-  Backdrop,
-} from '@mui/material';
+import { Grid, Box, TextField, Typography, Button, Avatar, Link, Paper} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Store from '../../store/Store';
 import Keys from '../../config';

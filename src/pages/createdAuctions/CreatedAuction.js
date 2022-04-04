@@ -9,10 +9,8 @@ import dateFormat from 'dateformat';
 import FeedCard from '../../UIComponents/FeedCard';
 import Header from '../../UIComponents/Header';
 import CreateAuctionModal from '../../UIComponents/modals/CreateAuctionModal';
-import Spinner from 'react-spinkit';
 import { trackPromise } from 'react-promise-tracker';
 import { makeStyles } from '@material-ui/core/styles';
-import LoadingIndicator from '../../UIComponents/LoadingIndicator';
 
 axios.defaults.withCredentials = true;
 

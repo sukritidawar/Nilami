@@ -9,7 +9,6 @@ import Keys from '../../config';
 import EditUserInfoModal from '../../UIComponents/modals/EditUserInfoModal';
 import AddAddressModal from '../../UIComponents/modals/AddAddressModal';
 import Store from '../../store/Store';
-import Spinner from 'react-spinkit';
 import Header from '../../UIComponents/Header';
 import { trackPromise } from 'react-promise-tracker';
 axios.defaults.withCredentials = true;
@@ -17,8 +16,7 @@ axios.defaults.withCredentials = true;
 const UserProfile = () => {
   const [userDetails, setUserDetails] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
-  const [userAuth, setUserAuth] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [userAuth, setUserAuth] = useState(Store);
 
   const [infoModalShow, setinfoModalShow] = useState(false);
 
@@ -71,11 +69,7 @@ const UserProfile = () => {
   useEffect(async () => {
     await getUserDetails();
     console.log(userDetails);
-  }, [isLoading]);
-
-  // useEffect(() => {
-  //   setIsLoading(false);
-  // },[]);
+  }, []);
 
   return (
     // <div></div>
@@ -92,33 +86,29 @@ const UserProfile = () => {
                 <div className="userImage">
                   <img src={userDetails.user.profile_pic}></img>
                 </div>
-                {/* <div className="userImage">
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1VTcdzIfHrD1mnqlyyYKPHFSOvDM4YCOVIA&usqp=CAU" />
-                </div> */}
-
-              <div className="userDesc">
-                <p style={{ fontSize: '2rem' }}>
-                  <b>{userDetails.user.name}</b>
-                </p>
-                <p>
-                  <b>Email:</b> {userDetails.user.email}
-                </p>
-                <p>
-                  <b>Phone:</b> {userDetails.user.primary_mobile}
-                </p>
-              </div>
-              <Button
-                variant="contained"
-                onClick={handleShowInfoModal}
-                style={{ backgroundColor: '#00B9F1', color: 'white' }}
-              >
-                Edit
-              </Button>
-              <EditUserInfoModal
-                show={infoModalShow}
-                onHide={handleCloseInfoModal}
-                user={userDetails.user}
-              />
+                <div className="userDesc">
+                  <p style={{ fontSize: '2rem' }}>
+                    <b>{userDetails.user.name}</b>
+                  </p>
+                  <p>
+                    <b>Email:</b> {userDetails.user.email}
+                  </p>
+                  <p>
+                    <b>Phone:</b> {userDetails.user.primary_mobile}
+                  </p>
+                </div>
+                <Button
+                  variant="contained"
+                  onClick={handleShowInfoModal}
+                  style={{ backgroundColor: '#00B9F1', color: 'white' }}
+                >
+                  Edit
+                </Button>
+                <EditUserInfoModal
+                  show={infoModalShow}
+                  onHide={handleCloseInfoModal}
+                  user={userDetails.user}
+                />
             </div>
             <div className='address'>
               <div className="address-heading">

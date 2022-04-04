@@ -2,25 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Keys from '../../config';
-import {
-  Grid,
-  Typography,
-  Button,
-  Box,
-  Container,
-  CssBaseline,
-} from '@mui/material';
+import {Grid, Typography, Button, Box, CssBaseline} from '@mui/material';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ContentPasteOutlined, WifiChannelRounded } from '@mui/icons-material';
 import RegisterModal from '../../UIComponents/modals/RegisterModal';
 import { trackPromise } from 'react-promise-tracker';
 import Store from '../../store/Store';
 import Header from '../../UIComponents/Header';
 
-const image =
-  'https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg';
 
 const defaultAuctionDetails = {
   productName: 'Loading..',
@@ -193,7 +182,6 @@ const AuctionProductDetail = () => {
             xs={12}
             lg={5}
             sx={{
-              /*border: '5px solid rgb(42,157,143);',*/
               backgroundImage: `url(${auctionDetails.productPic})`,
               backgroundRepeat: 'no-repeat',
               backgroundSize: 'cover',

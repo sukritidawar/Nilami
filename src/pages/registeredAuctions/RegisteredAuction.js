@@ -6,12 +6,9 @@ import axios from 'axios';
 import Keys from '../../config';
 import dateFormat from 'dateformat';
 import FeedCard from '../../UIComponents/FeedCard';
-import Spinner from 'react-spinkit';
 import './RegsiteredAuction.css';
 import { trackPromise } from 'react-promise-tracker';
 import Header from '../../UIComponents/Header';
-import LoadingIndicator from '../../UIComponents/LoadingIndicator';
-import { makeStyles } from '@material-ui/core/styles';
 
 axios.defaults.withCredentials = true;
 

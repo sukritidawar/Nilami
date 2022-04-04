@@ -14,7 +14,6 @@ import Header from '../../UIComponents/Header';
 const defaultAuctionDetails = {
   productName: 'Loading..',
   productDescription: '',
-  productPic: '',
   startingBid: '',
   estimate: '',
   startDate: '',
@@ -32,7 +31,6 @@ const AuctionProductDetail = () => {
   const [userAuth, setUserAuth] = useContext(Store);
   const [isRegistered, setIsRegistered] = useState(false);
   const [auctionDetails, setAuctionDetails] = useState(defaultAuctionDetails);
-  const [isLoading, setIsLoading] = useState(true);
   const [timeUp, setTimeUp] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [winnerName, setWinnerName] = useState('Anonymous');
@@ -41,7 +39,6 @@ const AuctionProductDetail = () => {
   const handleShowInfoModal = () => setinfoModalShow(true);
   const updateRegisterInfo = () => {
     setIsRegistered(true);
-    console.log('in update reg ingo');
   };
 
   const getAuctionDetails = async () => {
@@ -52,7 +49,6 @@ const AuctionProductDetail = () => {
           setAuctionDetails({
             productName: tempAuctionDetails.data.product_name,
             productDescription: tempAuctionDetails.data.product_details,
-            productPic: tempAuctionDetails.data.product_pic,
             startingBid: tempAuctionDetails.data.starting_price + '',
             estimate: tempAuctionDetails.data.estimated_price + '',
             startDate: dateFormat(
@@ -90,8 +86,6 @@ const AuctionProductDetail = () => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, 'yyyy-mm-dd');
     var currentTime = dateFormat(myDate, 'HH:MM:ss');
-    console.log(auctionEndDate);
-    console.log(currentDate);
     if (auctionEndDate) {
       if (
         auctionEndDate < currentDate ||
@@ -115,7 +109,6 @@ const AuctionProductDetail = () => {
       const url = Keys.BASE_API + 'user/registeredAuctions';
       var res = await axios.get(url);
       const regAuctions = res.data.registeredAuctions;
-      console.log(id);
       if (regAuctions) {
         regAuctions.forEach((regAuction) => {
           if (regAuction.auction_id == id) {
@@ -144,8 +137,7 @@ const AuctionProductDetail = () => {
     await getAuctionDetails();
     await getRegAuctions();
     await getWinnerName();
-    console.log(isRegistered);
-  }, [isLoading]);
+  }, []);
 
   const registerUser = async () => {
     if (userAuth.isAuth) {
@@ -342,7 +334,6 @@ const AuctionProductDetail = () => {
                         marginTop: 2,
                       }}
                     >
-                      {/* remove this exclamation mark */}
                       {isRegistered ? (
                         <>
                           {hasStarted ? (
@@ -388,20 +379,6 @@ const AuctionProductDetail = () => {
                           />
                         </span>
                       )}
-
-                      {/* <Link
-                  to={{
-                    pathname: `/feed/${id}/biding`,
-                    state: "sfsf" // your data array of objects
-                  }}
-                >sdsds</Link> */}
-                      {/* <Button variant="contained"component={Link}
-                to = {`/feed/${id}/biding`}
-                props={auctionDetails}
-                 style={{ backgroundColor: "rgb(231,111,81)" }} 
-                 endIcon={<SendIcon />}>
-                  Go to bidding
-              </Button> */}
                     </Grid>
                   </>
                 )}

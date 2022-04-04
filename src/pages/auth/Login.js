@@ -53,7 +53,6 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(user);
     handleLogin();
     setUser({
       email: '',
@@ -72,7 +71,6 @@ const Login = () => {
       const body = JSON.stringify(user);
 
       var res = await axios.post(url, body, config);
-      console.log(res);
 
       if (res.data.success) {
         Cookies.set('user_id', `${res.data.user_id}`);

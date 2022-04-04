@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../UIComponents/Header';
-import {
-  Grid,
-  Select,
-  FormControl,
-  MenuItem,
-  InputLabel,
-  Button,
-} from '@mui/material';
-import FeedCard from '../UIComponents/FeedCard';
+import Header from '../../UIComponents/Header';
+import { Grid, Select, FormControl, MenuItem, InputLabel, Button,} from '@mui/material';
+import FeedCard from '../../UIComponents/FeedCard';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import Keys from '../config';
+import Keys from '../../config';
 import { trackPromise } from 'react-promise-tracker';
 axios.defaults.withCredentials = true;
 
@@ -45,12 +38,6 @@ const Homepage = () => {
   const getDefaultAuctionFeed = async () => {
     try {
       const url = Keys.BASE_API + 'auction/feed';
-      // var res = await axios.get(url);
-      // console.log(res);
-      // setAuctionFeed(res.data);
-      // setLoading(false);
-      // console.log(res);
-
       trackPromise(
         axios.get(url).then((res) => {
           setAuctionFeed(res.data);
@@ -62,17 +49,11 @@ const Homepage = () => {
   };
   useEffect(async () => {
     await getDefaultAuctionFeed();
-    console.log(auctionFeed);
   }, [isLoading]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
     filterFunction(formData);
-    // setFormData({
-    //   filterBy: '',
-    //   valueAcc: '',
-    // });
   };
 
   const filterFunction = async (formData) => {
@@ -81,17 +62,13 @@ const Homepage = () => {
       if (formData.filterBy == 1) {
         url = Keys.BASE_API + `auction/location_filter/${formData.valueAcc}`;
       } else {
-        console.log(formData.valueAcc);
         url = Keys.BASE_API + `auction/category_filter/${formData.valueAcc}`;
       }
       const res = await axios.get(url);
       setAuctionFeed(res.data);
-      console.log(res);
     } catch (error) {
       console.log(error);
     }
-    console.log(formData.valueAcc);
-    console.log(formData.filterBy);
   };
 
   const handleChange = (e) => {

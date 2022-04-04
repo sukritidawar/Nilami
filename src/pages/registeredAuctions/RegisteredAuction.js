@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext, useEffect, useState } from 'react';
-import { Grid, Typography, Button } from '@mui/material';
+import { Grid, Typography, Button} from '@mui/material';
 import Store from '../../store/Store';
 import axios from 'axios';
 import Keys from '../../config';
@@ -9,6 +9,7 @@ import FeedCard from '../../UIComponents/FeedCard';
 import './RegsiteredAuction.css';
 import { trackPromise } from 'react-promise-tracker';
 import Header from '../../UIComponents/Header';
+import { makeStyles } from '@material-ui/core/styles';
 
 axios.defaults.withCredentials = true;
 

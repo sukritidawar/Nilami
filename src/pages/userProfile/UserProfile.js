@@ -80,37 +80,39 @@ const UserProfile = () => {
       ) : (
         <Container className="container">
           <h1 style={{ textAlign: 'center', color: 'white' }}>Your Profile</h1>
-          <Row className="mainContent">
-            <Col xl={12}>
-              <div className="userInfo">
-                <div className="userImage">
-                  <img src={userDetails.user.profile_pic}></img>
-                </div>
-                <div className="userDesc">
-                  <p style={{ fontSize: '2rem' }}>
-                    <b>{userDetails.user.name}</b>
-                  </p>
-                  <p>
-                    <b>Email:</b> {userDetails.user.email}
-                  </p>
-                  <p>
-                    <b>Phone:</b> {userDetails.user.primary_mobile}
-                  </p>
-                </div>
-                <Button
-                  variant="contained"
-                  onClick={handleShowInfoModal}
-                  style={{ backgroundColor: '#00B9F1', color: 'white' }}
-                >
-                  Edit
-                </Button>
-                <EditUserInfoModal
-                  show={infoModalShow}
-                  onHide={handleCloseInfoModal}
-                  user={userDetails.user}
-                />
+          {/* <Row className="mainContent"> */}
+          {/* <Col xl={12}> */}
+          <div className="mainContent">
+            <div className="userInfo">
+              <div className="userImage">
+                <img src={userDetails.user.profile_pic} />
+              </div>
+
+              <div className="userDesc">
+                <p style={{ fontSize: '2rem' }}>
+                  <b>{userDetails.user.name}</b>
+                </p>
+                <p>
+                  <b>Email:</b> {userDetails.user.email}
+                </p>
+                <p>
+                  <b>Phone:</b> {userDetails.user.primary_mobile}
+                </p>
+              </div>
+              <Button
+                variant="contained"
+                onClick={handleShowInfoModal}
+                style={{ backgroundColor: '#00B9F1', color: 'white' }}
+              >
+                Edit
+              </Button>
+              <EditUserInfoModal
+                show={infoModalShow}
+                onHide={handleCloseInfoModal}
+                user={userDetails.user}
+              />
             </div>
-            <div className='address'>
+            <div className="address">
               <div className="address-heading">
                 <h3>Your registered addresses:</h3>
               </div>
@@ -130,10 +132,11 @@ const UserProfile = () => {
 
                           <Col xs={1} className="my-auto">
                             <Button
+                              className="btn-danger"
                               onClick={() =>
                                 deleteAddress(addressElement.address_id)
                               }
-                              style={{backgroundColor: '#002E6E'}}
+                              style={{ backgroundColor: '#002E6E' }}
                             >
                               X
                             </Button>
@@ -159,8 +162,7 @@ const UserProfile = () => {
                 addAddressFunc={addAddressFunc}
               />
             </div>
-            </Col>
-          </Row>
+          </div>
         </Container>
       )}
     </div>

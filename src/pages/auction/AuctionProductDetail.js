@@ -38,6 +38,7 @@ const defaultAuctionDetails = {
   auctionCategory: '',
   city: '',
   pincode: '',
+  productPic: '',
 };
 
 const AuctionProductDetail = () => {
@@ -64,6 +65,7 @@ const AuctionProductDetail = () => {
           setAuctionDetails({
             productName: tempAuctionDetails.data.product_name,
             productDescription: tempAuctionDetails.data.product_details,
+            productPic: tempAuctionDetails.data.product_pic,
             startingBid: tempAuctionDetails.data.starting_price + '',
             estimate: tempAuctionDetails.data.estimated_price + '',
             startDate: dateFormat(

@@ -1,3 +1,6 @@
+/*This page shows the upcoming and past auctions that user has organised.
+This page is displayed only when the user is logged in.*/
+
 import React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import { Grid, Typography, Button } from '@mui/material';

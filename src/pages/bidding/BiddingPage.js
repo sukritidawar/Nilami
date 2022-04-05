@@ -1,3 +1,5 @@
+/* This page is displayed only when the auction is live. The users can bid, comment and see announcements.*/
+
 import { React, useState, useEffect, useContext } from 'react';
 import ShowComments from '../../UIComponents/Comments/ShowComments';
 import TopBids from '../../UIComponents/TopBids';
@@ -12,8 +14,6 @@ import Header from '../../UIComponents/Header';
 import { useParams, useLocation } from 'react-router-dom';
 
 axios.defaults.withCredentials = true;
-const image =
-  'https://mediacloud.saffronart.com/sourcingcen/prod/productimages/20220214/9830cb6c-1b54-4015-ae56-c74ea1e92103_2_tbig.jpg';
 
 const BiddingPage = (props) => {
   const [userAuth, setUserAuth] = useContext(Store);
@@ -124,7 +124,6 @@ const BiddingPage = (props) => {
                         container
                         sx={{
                           border: '2px solid #00B9F1',
-                          // margin: 5,
                           marginLeft: 20,
                           marginTop: 5,
                           alignItems: 'center',
@@ -159,7 +158,7 @@ const BiddingPage = (props) => {
                                 xs={12}
                                 lg={5}
                                 sx={{
-                                  backgroundImage: `url(${image})`,
+                                  backgroundImage: `url(${auctionDetails.productPic})`,
                                   backgroundRepeat: 'no-repeat',
                                   backgroundSize: 'cover',
                                   backgroundPosition: 'center',

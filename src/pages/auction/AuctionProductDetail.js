@@ -1,3 +1,6 @@
+/*This file contains the code for the auction details.These details are displayed when user clicks on any auction on 
+feed page. Register modal is used here for registeration.*/
+
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';

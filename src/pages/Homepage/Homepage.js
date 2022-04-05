@@ -1,3 +1,5 @@
+/*This page shows all the auctions that are public. It is the first page shown to the user after login/signup*/
+
 import React, { useState, useEffect } from 'react';
 import Header from '../../UIComponents/Header';
 import { Grid, Select, FormControl, MenuItem, InputLabel, Button, } from '@mui/material';

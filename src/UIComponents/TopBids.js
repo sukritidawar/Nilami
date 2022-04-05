@@ -1,3 +1,5 @@
+/* Component useed in the bidding page, to display top three bidders for the auction.*/
+
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import Keys from '../config';
@@ -29,7 +31,6 @@ const TopBids = ({ id }) => {
     await getTopBids();
     console.log(topBids);
   }, [isLoading]);
-  // setTimeout(function() { window.location=window.location;},5000);
 
   return (
     <div className="topBids">
@@ -39,34 +40,34 @@ const TopBids = ({ id }) => {
             {topBids[0].bid_amount == 0 ? (
               <Typography>No Bid Yet. Be the First One to Bid.</Typography>
             ) : (
-              <>
-                {topBids[0] ? (
-                  <Typography variant="h6">
-                    Highest Bid: $ {topBids[0].bid_amount}
-                  </Typography>
-                ) : (
-                  <></>
-                )}
-                {topBids[1] ? (
-                  <Typography variant="h6">
-                    Second Highest Bid: $ {topBids[1].bid_amount}
-                  </Typography>
-                ) : (
-                  <></>
-                )}
-                {topBids[2] ? (
-                  <Typography variant="h6">
-                    Third highest Bid: $ {topBids[2].bid_amount}
-                  </Typography>
-                ) : (
-                  <></>
-                )}
-              </>
-            )}
+                <>
+                  {topBids[0] ? (
+                    <Typography variant="h6">
+                      Highest Bid: $ {topBids[0].bid_amount}
+                    </Typography>
+                  ) : (
+                      <></>
+                    )}
+                  {topBids[1] ? (
+                    <Typography variant="h6">
+                      Second Highest Bid: $ {topBids[1].bid_amount}
+                    </Typography>
+                  ) : (
+                      <></>
+                    )}
+                  {topBids[2] ? (
+                    <Typography variant="h6">
+                      Third highest Bid: $ {topBids[2].bid_amount}
+                    </Typography>
+                  ) : (
+                      <></>
+                    )}
+                </>
+              )}
           </>
         ) : (
-          <>Loading...</>
-        )}
+            <>Loading...</>
+          )}
       </div>
     </div>
   );

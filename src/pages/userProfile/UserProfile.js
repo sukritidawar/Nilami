@@ -1,3 +1,11 @@
+/* UI for siaplaying User deatils.
+Displays the following user details:
+  Name,
+  Mobile Number,
+  Email,
+  Address
+Allows to delete/add user address.
+*/
 import { React, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button } from 'react-bootstrap';

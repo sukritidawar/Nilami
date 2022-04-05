@@ -1,5 +1,7 @@
-/*This page shows the upcoming and past auctions that user has organised.
-This page is displayed only when the user is logged in.*/
+/* UI for User Created Auctions.
+Displays the upcoming and past auctions created by the user.
+Provides provision for adding new auction.
+*/
 
 import React from 'react';
 import { useContext, useEffect, useState } from 'react';

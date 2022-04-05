@@ -3,24 +3,23 @@ import { Fire } from './firebasee';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-// import firebase from 'firebase'
 import { Input, Button } from '@material-ui/core';
 import Store from '../../store/Store';
 
 const image =
   'https://lh3.googleusercontent.com/-JVpfmGGJuO8/AAAAAAAAAAI/AAAAAAAAAME/sMJVq9F8gec/photo.jpg';
 
+
+// Return send message input component to chat.js file
 function SendMessage({ scroll, collectionName }) {
   const [msg, setMsg] = useState('');
   const [userAuth, setUserAuth] = useContext(Store);
   const userid = userAuth.user_id;
   async function sendMessage(e) {
     e.preventDefault();
-    //user id // photourl
     const uid = userid;
     const userName = userAuth.user_name;
 
-    //messages - auction id + auctioneer id
     await Fire.collection(`${collectionName}`).add({
       text: msg,
       userName,

@@ -1,6 +1,8 @@
 # Niलाmi
 
-“Niलाmi” provides a platform where users can host auctions publicly at large scale or it could be private to a small group of users. They can bid for anything of their interest sitting right at their home.
+“Niलाmi” provides a platform where users can host auctions publicly at large scale or it could be private to a small group of users. They can bid for anything of their interest from anywhere.
+
+This repository include only the frontend code. It is bascially build in react.js
 
 Backend code is available here: https://github.com/shobha9250/NilamiServer
 

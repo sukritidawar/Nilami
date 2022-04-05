@@ -1,8 +1,11 @@
+/* Comment component in which user can see previous comment and add new comments.*/
+
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Fire } from '../chatApp/firebasee';
 import Comments from './Comments';
 import { useParams, useLocation } from 'react-router-dom';
 import Store from '../../store/Store';
+
 
 const ShowComments = () => {
   const scroll = useRef();
@@ -15,7 +18,6 @@ const ShowComments = () => {
   const collectionName = 'Comments_' + auctionId;
   console.log(collectionName);
   useEffect(() => {
-    // auction id + auctioneer id + winner id;
     Fire.collection(`${collectionName}`)
       .orderBy('createdAt')
       .limit(50)
@@ -25,6 +27,7 @@ const ShowComments = () => {
   }, []);
 
   const userid = userAuth.user_id;
+
   return (
     <div style={{ margin: '30px', alignContent: 'center', textAlign: 'center' }}>
       <div className="msgs">

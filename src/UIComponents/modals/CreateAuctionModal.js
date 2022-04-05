@@ -1,3 +1,7 @@
+/* Modal to create new auction. 
+Suitable time to start auction is also suggested.
+*/
+
 import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
@@ -67,6 +71,7 @@ const CreateAuctionModal = (props) => {
     });
   };
 
+  // Add new auction created by the user to the database.
   const send = async (formData) => {
     try {
       const config = {
@@ -93,7 +98,7 @@ const CreateAuctionModal = (props) => {
   };
 
   return (
-    <Modal {...props} size="lg" style={{marginTop: '50px'}}>
+    <Modal {...props} size="lg" style={{ marginTop: '50px' }}>
       <Modal.Header closeButton >
         <Modal.Title>Create Auction</Modal.Title>
       </Modal.Header>
@@ -288,7 +293,7 @@ const CreateAuctionModal = (props) => {
             </div>
           </div>
           <div style={{ padding: '10px', alignContent: 'center', alignItems: 'center' }}>
-            <Button type="submit" onClick={handleSubmit} style={{backgroundColor: '#00B9F1'}}>
+            <Button type="submit" onClick={handleSubmit} style={{ backgroundColor: '#00B9F1' }}>
               Submit
             </Button>
           </div>

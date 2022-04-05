@@ -1,5 +1,6 @@
-/*This page shows all the auctions that are public. It is the first page shown to the user after login/signup*/
-
+/*UI for Homepage of the website. 
+Displays Auction feed. Also allows to filter auctions based on category/location.
+*/
 import React, { useState, useEffect } from 'react';
 import Header from '../../UIComponents/Header';
 import { Grid, Select, FormControl, MenuItem, InputLabel, Button, } from '@mui/material';

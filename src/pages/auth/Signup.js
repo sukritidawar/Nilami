@@ -1,4 +1,4 @@
-/* Signup page for new users*/
+/* UI for User Sign Up page.*/
 
 import React, { useState, useContext } from 'react';
 import axios from 'axios';

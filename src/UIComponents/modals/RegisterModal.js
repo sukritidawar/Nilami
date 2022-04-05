@@ -1,3 +1,5 @@
+/* Modal displayed to user to register in an auction.*/
+
 import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
@@ -28,6 +30,7 @@ const RegisterModal = (props) => {
     props.onHide();
   };
 
+  // Add details to register the user, in the database.
   const send = async (formData) => {
     try {
       const config = {

@@ -1,13 +1,8 @@
+/* Card with auction details that is displayed in Feed, My Auction and Registered Auction page.*/
+
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import { Card, CardHeader, CardMedia, CardContent, IconButton, Typography } from '@mui/material';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
@@ -28,6 +23,8 @@ const FeedCard = ({ auction }) => {
   const [clipboardMessage, setMessage] = useState(false);
   const [timeUp, setTimeUp] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+
+  // Fucntion to update the like count for the given auction.
   const updateLikes = async () => {
     if (authInfo.isAuth) {
       try {
@@ -49,11 +46,12 @@ const FeedCard = ({ auction }) => {
 
   const handleShareClick = () => {
     navigator.clipboard.writeText(
-      'http://localhost:3001/' + `feed/${auction.auction_id}`
+      Keys.BASE_API + `feed/${auction.auction_id}`
     );
     setMessage(true);
   };
 
+  // Check is the auction is ongoing, upcoming or completed.
   const checkTimings = async () => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, 'yyyy-mm-dd');
@@ -118,31 +116,30 @@ const FeedCard = ({ auction }) => {
             <p style={{ color: 'red', marginBottom: '55px' }}>Closed</p>
           </>
         ) : (
-          <>
-            {hasStarted ? (
-              <p style={{ color: 'green', marginBottom: '55px' }}>
-                Auction is live!!
-              </p>
-            ) : (
-              <>
-                <p>
-                  Date: {dateFormat(auction.start_date, 'dd/mm/yy')} -{' '}
-                  {dateFormat(auction.end_date, 'dd/mm/yy')}
+            <>
+              {hasStarted ? (
+                <p style={{ color: 'green', marginBottom: '55px' }}>
+                  Auction is live!!
                 </p>
-                <p>
-                  Time: {auction.start_time} - {auction.end_time}
-                </p>
-              </>
-            )}
-          </>
-        )}
+              ) : (
+                  <>
+                    <p>
+                      Date: {dateFormat(auction.start_date, 'dd/mm/yy')} -{' '}
+                      {dateFormat(auction.end_date, 'dd/mm/yy')}
+                    </p>
+                    <p>
+                      Time: {auction.start_time} - {auction.end_time}
+                    </p>
+                  </>
+                )}
+            </>
+          )}
       </Link>
       <Link to={linkedto}>
         <CardMedia
           component="img"
           height="194"
           image={auction.product_pic.toString()}
-          // image="https://cdn.pixabay.com/photo/2018/09/09/18/04/judge-3665164_960_720.jpg"
           alt="Paella dish"
           style={{ margin: '2px' }}
         />
@@ -154,12 +151,12 @@ const FeedCard = ({ auction }) => {
               <p style={{ color: 'green' }}>(Private Auction)</p>
             </>
           ) : (
-            <></>
-          )}
+              <></>
+            )}
         </Typography>
         <br></br>
       </CardContent>
-      <div style={{alignText: 'centre'}}>
+      <div style={{ alignText: 'centre' }}>
         <div style={{ justifyContent: 'centre', display: 'inline' }}>
           <IconButton
             aria-label="add to favorites"

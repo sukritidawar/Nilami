@@ -1,5 +1,16 @@
-/*This file contains the code for the auction details.These details are displayed when user clicks on any auction on 
-feed page. Register modal is used here for registeration.*/
+/* UI to display the Auction detail page.
+Displays the following details for each auction:
+  Product Name,
+  Auction Category,
+  Product Description,
+  Starting Bid,
+  Estimated Price,
+  Start Date,
+  End Date,
+  City,
+  Winner User name, if present.
+Also allows to register for the auction and bid.
+*/
 
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';

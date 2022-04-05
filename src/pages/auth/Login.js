@@ -1,4 +1,4 @@
-/* Login page*/
+/* UI for User Login page.*/
 
 import React, { useState, useContext } from 'react';
 import axios from 'axios';

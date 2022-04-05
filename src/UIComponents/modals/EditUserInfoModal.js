@@ -1,3 +1,5 @@
+/* Modal to update user's details.*/
+
 import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
@@ -42,6 +44,7 @@ const EditUserInfoModal = (props) => {
     });
   };
 
+  // Update user info in the database.
   const send = async (formData) => {
     try {
       const config = {
@@ -126,7 +129,7 @@ const EditUserInfoModal = (props) => {
             />
           </div>
           <div style={{ padding: '10px' }}>
-            <button type="submit" onClick={handleSubmit}  style={{backgroundColor: '#00B9F1', color: 'white'}}>
+            <button type="submit" onClick={handleSubmit} style={{ backgroundColor: '#00B9F1', color: 'white' }}>
               Update
             </button>
           </div>

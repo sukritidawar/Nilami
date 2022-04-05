@@ -1,17 +1,11 @@
+/* Header component displayed on top of every page.
+Allows easy navigation from one page to another.
+*/
+
 import React, { useContext } from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import Cookies from 'js-cookie';
-import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
 import Store from '../store/Store';
 import { LOGOUT } from '../store/Types';
@@ -32,25 +26,27 @@ const pages = [
     link: '/myauction',
   },
 ];
+
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  // For responsive header
+  const [openNav, setOpenNav] = React.useState(null);
+  const [anchorUser, setAnchorUser] = React.useState(null);
   const [userAuth, dispatch] = useContext(Store);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+    setOpenNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+    setAnchorUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+    setOpenNav(null);
   };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    setAnchorUser(null);
   };
 
   const handleLogout = async () => {
@@ -62,6 +58,7 @@ const Header = () => {
     });
   };
 
+  //Returns header component
   return (
     <AppBar position="sticky" style={{ backgroundColor: '#002E6E' }}>
       <Container maxWidth="xl">
@@ -88,7 +85,7 @@ const Header = () => {
             </IconButton>
             <Menu
               id="menu-appbar"
-              anchorEl={anchorElNav}
+              anchorEl={openNav}
               anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left',
@@ -98,7 +95,7 @@ const Header = () => {
                 vertical: 'top',
                 horizontal: 'left',
               }}
-              open={Boolean(anchorElNav)}
+              open={Boolean(openNav)}
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
@@ -146,7 +143,7 @@ const Header = () => {
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
-              anchorEl={anchorElUser}
+              anchorEl={anchorUser}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
@@ -156,7 +153,7 @@ const Header = () => {
                 vertical: 'top',
                 horizontal: 'right',
               }}
-              open={Boolean(anchorElUser)}
+              open={Boolean(anchorUser)}
               onClose={handleCloseUserMenu}
             >
               {userAuth.isAuth ? (
@@ -173,21 +170,16 @@ const Header = () => {
                   </MenuItem>
                 </>
               ) : (
-                <>
-                  <MenuItem
-                    onClick={() => {
-                      navigate('/');
-                    }}
-                  >
-                    <Typography textAlign="center">Login</Typography>
-                  </MenuItem>
-                </>
-              )}
-              {/* {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))} */}
+                  <>
+                    <MenuItem
+                      onClick={() => {
+                        navigate('/');
+                      }}
+                    >
+                      <Typography textAlign="center">Login</Typography>
+                    </MenuItem>
+                  </>
+                )}
             </Menu>
           </Box>
         </Toolbar>

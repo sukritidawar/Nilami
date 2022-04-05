@@ -124,11 +124,11 @@ const FeedCard = ({ auction }) => {
               ) : (
                   <>
                     <p>
-                      Date: {dateFormat(auction.start_date, 'dd/mm/yy')} -{' '}
-                      {dateFormat(auction.end_date, 'dd/mm/yy')}
+                      Start: {dateFormat(auction.start_date, 'dd/mm/yy')} -{' '}{auction.start_time}
+                      
                     </p>
                     <p>
-                      Time: {auction.start_time} - {auction.end_time}
+                      End: {dateFormat(auction.end_date, 'dd/mm/yy')} - {auction.end_time}
                     </p>
                   </>
                 )}

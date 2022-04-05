@@ -1,3 +1,6 @@
+// returns comment input component to show comment page where 
+//user can send message
+
 import React, { useState, useContext } from 'react';
 import { Fire } from '../chatApp/firebasee';
 import firebase from 'firebase/compat/app';
@@ -6,12 +9,14 @@ import 'firebase/compat/firestore';
 import Store from '../../store/Store';
 import { Button, Grid } from '@mui/material'
 
+
 const Comments = ({ scroll, collectionName }) => {
   const [comment, setComment] = useState('');
   const [userAuth, setUserAuth] = useContext(Store);
   const userid = userAuth.user_id;
   const postComment = async (event) => {
     event.preventDefault();
+
 
     const uid = userid;
     const userName = userAuth.user_name;
@@ -24,6 +29,7 @@ const Comments = ({ scroll, collectionName }) => {
     scroll.current.scrollIntoView({ behavior: 'smooth' });
     setComment('');
   };
+
 
   return (
     <Grid className="comments" style={{ aligncontent: 'center', }}>

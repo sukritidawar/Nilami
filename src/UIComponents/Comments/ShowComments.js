@@ -1,8 +1,11 @@
+// returns comment component in which user can see previous comment and  post new comment too
+
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Fire } from '../chatApp/firebasee';
 import Comments from './Comments';
 import { useParams, useLocation } from 'react-router-dom';
 import Store from '../../store/Store';
+
 
 const ShowComments = () => {
   const scroll = useRef();
@@ -24,6 +27,7 @@ const ShowComments = () => {
   }, []);
 
   const userid = userAuth.user_id;
+  
   return (
     <div style={{ margin: '30px', alignContent: 'center', textAlign: 'center' }}>
       <div className="msgs">

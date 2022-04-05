@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import Cookies from 'js-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import Store from '../store/Store';
@@ -23,7 +24,7 @@ const pages = [
 ];
 
 const Header = () => {
-  // for responsive header
+  // For responsive header
   const [openNav, setOpenNav] = React.useState(null);
   const [anchorUser, setAnchorUser] = React.useState(null);
   const [userAuth, dispatch] = useContext(Store);
@@ -53,7 +54,7 @@ const Header = () => {
     });
   };
 
-  //returns header component
+  //Returns header component
   return (
     <AppBar position="sticky" style={{ backgroundColor: '#002E6E' }}>
       <Container maxWidth="xl">

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
-import { Grid, Box, TextField, Typography, Button, Avatar, Link, Paper} from '@mui/material';
+import { Grid, Box, TextField, Typography, Button, Avatar, Link, Paper } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Store from '../../store/Store';
 import Keys from '../../config';
@@ -21,33 +21,13 @@ const defaultuser = {
 const Login = () => {
   const theme = createTheme();
   const navigate = useNavigate();
-
   const [state, dispatch] = useContext(Store);
   const [user, setUser] = useState(defaultuser);
   let name, value;
 
-  function Copyright(props) {
-    return (
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        align="center"
-        {...props}
-      >
-        {'Copyright © '}
-        <Link color="inherit" href="https://mui.com/">
-          Niलाmi
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
-
   const getUserData = (event) => {
     name = event.target.name;
     value = event.target.value;
-
     setUser({ ...user, [name]: value });
   };
 
@@ -60,6 +40,8 @@ const Login = () => {
     });
   };
 
+  // Check if the credentials are correct and navigate to feed page.
+  // Else show error message.
   const handleLogin = async () => {
     try {
       const config = {
@@ -92,118 +74,136 @@ const Login = () => {
     }
   };
 
+  function Copyright(props) {
+    return (
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        {...props}
+      >
+        {'Copyright © '}
+        <Link color="inherit" href="https://mui.com/">
+          Niलाmi
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
+
   return (
     <>
       {state.isAuth ? (
         <>{navigate('/feed')}</>
       ) : (
-        <ThemeProvider theme={theme}>
-          <Grid container component="main" sx={{ height: '100vh' }}>
-            <CssBaseline />
-            <Grid
-              item
-              xs={false}
-              sm={8}
-              md={6}
-              sx={{
-                backgroundImage: `url(${Image})`,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                textAlign: 'center',
-                paddingTop: 18,
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
+          <ThemeProvider theme={theme}>
+            <Grid container component="main" sx={{ height: '100vh' }}>
+              <CssBaseline />
+              <Grid
+                item
+                xs={false}
+                sm={8}
+                md={6}
+                sx={{
+                  backgroundImage: `url(${Image})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  textAlign: 'center',
+                  paddingTop: 18,
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
                 <Typography variant="h1" fontSize="180px" color="	#002E6E">
                   Ni<span color="#1976d2" impotant>ला</span>mi
                 </Typography>
 
-              <Typography fontSize="36px" color="#1976d2">
-                <i>Like it, Bid for it, Buy it. </i>
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              md={6}
-              component={Paper}
-              elevation={6}
-              square
-            >
-              <Box
-                sx={{
-                  my: 8,
-                  mx: 4,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-              >
-                <Avatar sx={{ m: 1, bgcolor: '#1976d2' }}>
-                  <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                  Sign in
+                <Typography fontSize="36px" color="#1976d2">
+                  <i>Like it, Bid for it, Buy it. </i>
                 </Typography>
+              </Grid>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                md={6}
+                component={Paper}
+                elevation={6}
+                square
+              >
                 <Box
-                  component="form"
-                  noValidate
-                  onSubmit={handleSubmit}
-                  sx={{ mt: 1 }}
+                  sx={{
+                    my: 8,
+                    mx: 4,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
                 >
-                  <TextField
-                    margin="normal"
-                    label="Email"
-                    variant="standard"
-                    placeholder="Email"
-                    name="email"
-                    type="email"
-                    value={user.email}
-                    onChange={getUserData}
-                    fullWidth
-                    required
-                    autoFocus
-                  />
-
-                  <TextField
-                    margin="normal"
-                    label="Password"
-                    variant="standard"
-                    placeholder="Password"
-                    name="password"
-                    type="password"
-                    value={user.password}
-                    onChange={getUserData}
-                    fullWidth
-                    required
-                  />
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                    onClick={handleLogin}
+                  <Avatar sx={{ m: 1, bgcolor: '#1976d2' }}>
+                    <LockOutlinedIcon />
+                  </Avatar>
+                  <Typography component="h1" variant="h5">
+                    Sign in
+                </Typography>
+                  <Box
+                    component="form"
+                    noValidate
+                    onSubmit={handleSubmit}
+                    sx={{ mt: 1 }}
                   >
-                    Sign In
+                    <TextField
+                      margin="normal"
+                      label="Email"
+                      variant="standard"
+                      placeholder="Email"
+                      name="email"
+                      type="email"
+                      value={user.email}
+                      onChange={getUserData}
+                      fullWidth
+                      required
+                      autoFocus
+                    />
+
+                    <TextField
+                      margin="normal"
+                      label="Password"
+                      variant="standard"
+                      placeholder="Password"
+                      name="password"
+                      type="password"
+                      value={user.password}
+                      onChange={getUserData}
+                      fullWidth
+                      required
+                    />
+                    <Button
+                      type="submit"
+                      fullWidth
+                      variant="contained"
+                      sx={{ mt: 3, mb: 2 }}
+                      onClick={handleLogin}
+                    >
+                      Sign In
                   </Button>
 
-                  <Grid container>
-                    <Grid item>
-                      <Link href="/signup" variant="body2">
-                        {'New to Niलाmi? Sign Up.'}
-                      </Link>
+                    <Grid container>
+                      <Grid item>
+                        <Link href="/signup" variant="body2">
+                          {'New to Niलाmi? Sign Up.'}
+                        </Link>
+                      </Grid>
                     </Grid>
-                  </Grid>
-                  <Copyright sx={{ mt: 5 }} />
+                    <Copyright sx={{ mt: 5 }} />
+                  </Box>
                 </Box>
-              </Box>
+              </Grid>
             </Grid>
-          </Grid>
-        </ThemeProvider>
-      )}
+          </ThemeProvider>
+        )}
     </>
   );
 };

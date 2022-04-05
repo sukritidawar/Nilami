@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../UIComponents/Header';
-import { Grid, Select, FormControl, MenuItem, InputLabel, Button,} from '@mui/material';
+import { Grid, Select, FormControl, MenuItem, InputLabel, Button, } from '@mui/material';
 import FeedCard from '../../UIComponents/FeedCard';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
@@ -35,6 +35,7 @@ const Homepage = () => {
   const [auctionFeed, setAuctionFeed] = useState(null);
   const [isLoading, setLoading] = useState(true);
 
+  // Gets all auctions from the database.
   const getDefaultAuctionFeed = async () => {
     try {
       const url = Keys.BASE_API + 'auction/feed';
@@ -47,6 +48,7 @@ const Homepage = () => {
       console.log(error);
     }
   };
+
   useEffect(async () => {
     await getDefaultAuctionFeed();
   }, [isLoading]);
@@ -56,6 +58,7 @@ const Homepage = () => {
     filterFunction(formData);
   };
 
+  // Filters the auction feed based on either location or category.
   const filterFunction = async (formData) => {
     try {
       var url;
@@ -85,64 +88,64 @@ const Homepage = () => {
         {!auctionFeed ? (
           <p> </p>
         ) : (
-          <Grid className={styles.feed_comp}>
-            <form onSubmit={handleSubmit} method="POST">
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={2}>
-                  <FormControl fullWidth style={{ marginLeft: '20px' }}>
-                    <InputLabel id="demo-simple-select-label">
-                      Filter by
+            <Grid className={styles.feed_comp}>
+              <form onSubmit={handleSubmit} method="POST">
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={2}>
+                    <FormControl fullWidth style={{ marginLeft: '20px' }}>
+                      <InputLabel id="demo-simple-select-label">
+                        Filter by
                     </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      label="Filter by"
-                      name="filterBy"
-                      value={formData.filterBy}
+                      <Select
+                        labelId="demo-simple-select-label"
+                        label="Filter by"
+                        name="filterBy"
+                        value={formData.filterBy}
+                        onChange={handleChange}
+                      >
+                        <MenuItem value={1}>Location</MenuItem>
+                        <MenuItem value={2}>Category</MenuItem>
+                      </Select>
+                    </FormControl>
+                  </Grid>
+                  <Grid item xs={12} md={4} style={{ alignItems: 'center' }}>
+                    <input
+                      name="valueAcc"
+                      required="required"
+                      type="string"
+                      placeholder="Filter by"
+                      value={formData.valueAcc}
                       onChange={handleChange}
+                      size="50"
+                      style={{ height: '54px', marginLeft: '10px' }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={1}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      onClick={handleSubmit}
+                      fullWidth
+                      style={{
+                        height: '54px',
+                        backgroundColor: '#00B9F1',
+                        marginLeft: '10px'
+                      }}
                     >
-                      <MenuItem value={1}>Location</MenuItem>
-                      <MenuItem value={2}>Category</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
-                <Grid item xs={12} md={4} style={{ alignItems: 'center' }}>
-                  <input
-                    name="valueAcc"
-                    required="required"
-                    type="string"
-                    placeholder="Filter by"
-                    value={formData.valueAcc}
-                    onChange={handleChange}
-                    size="50"
-                    style={{ height: '54px', marginLeft: '10px' }}
-                  />
-                </Grid>
-                <Grid item xs={12} md={1}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                    fullWidth
-                    style={{
-                      height: '54px',
-                      backgroundColor: '#00B9F1',
-                      marginLeft: '10px'
-                    }}
-                  >
-                    Search
+                      Search
                   </Button>
+                  </Grid>
                 </Grid>
+              </form>
+              <Grid></Grid>
+              <Grid container>
+                {auctionFeed.map((auction) => (
+                  <FeedCard key={auction.auction_id} auction={auction} />
+                ))}
               </Grid>
-            </form>
-            <Grid></Grid>
-            <Grid container>
-              {auctionFeed.map((auction) => (
-                <FeedCard key={auction.auction_id} auction={auction} />
-              ))}
             </Grid>
-          </Grid>
-        )}
+          )}
       </Grid>
     </>
   );

@@ -64,11 +64,7 @@ body {
 .userAddressCard {
   box-sizing: border-box;
   margin-top: 20px;
-  /* backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background-color: rgba(182, 186, 194, 0.25); */
   border-radius: 12px;
-  /* box-shadow: 2px 4px black; */
   border: 2px solid rgb(38, 70, 83);
   text-align: center;
   padding: 10px;

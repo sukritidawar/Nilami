@@ -13,8 +13,6 @@
   width: 50% !important;
 }
 
-.productDetails {
-}
 .Typo {
   font-size: 25px;
 }
@@ -25,10 +23,4 @@
 
 .avatar {
   display: flex;
-}
-
-.comments {
-}
-
-.bidChat {
 }

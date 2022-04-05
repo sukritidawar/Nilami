@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreatedAuction = () => {
+  const styles = useStyles();
   const [userAuth, setUserAuth] = useContext(Store);
   const [myAuctions, setMyAuctions] = useState(null);
   const [upAuctions, setUpAuctions] = useState(true);
@@ -48,17 +49,21 @@ const CreatedAuction = () => {
   var upcomingColor = 'rgb(231,111,81)';
   var pastColor = 'rgb(244,162,97)';
 
+  // Handles UI changes for upcoming Auctions.
   const getUpcomingAuctions = () => {
     setUpAuctions(true);
     upcomingColor = 'rgb(231,111,81)';
     pastColor = 'rgb(244,162,97)';
   };
+
+  // Handles UI changes for past Auctions.
   const getPastAuctions = () => {
     setUpAuctions(false);
     upcomingColor = 'rgb(244,162,97)';
     pastColor = 'rgb(231,111,81)';
   };
 
+  // Get auctions created by the user.
   const getmyAuctions = async () => {
     try {
       const url = Keys.BASE_API + 'user/myAuctions';
@@ -68,35 +73,34 @@ const CreatedAuction = () => {
         })
       );
 
-      var myDate = new Date();
-      var x = dateFormat(myDate, 'yyyy-mm-dd');
-      setCurrentDate(x);
-      x = dateFormat(myDate, 'HH:MM:ss');
-      setCurrentTime(x);
-      // setLoading(false);
-    } catch (error) {
+      var curDate = new Date();
+      var currentDate = dateFormat(curDate, 'yyyy-mm-dd');
+      setCurrentDate(currentDate);
+      var currentTime = dateFormat(curDate, 'HH:MM:ss');
+      setCurrentTime(currentTime);
+    }
+    catch (error) {
       console.log(error);
     }
   };
   const [onClickColorUpcoming, setOnClickColorUpcoming] = useState(true);
   const [onClickColorPast, setOnClickColorPast] = useState(false);
+
+  // Changes color when Upcoming button is clicked.
   const clickUpcoming = () => {
     setOnClickColorUpcoming(true);
     setOnClickColorPast(false);
   };
+
+  // Changes color when past button is clicked.
   const clickPast = () => {
     setOnClickColorUpcoming(false);
     setOnClickColorPast(true);
   };
-  useEffect(async () => {
-    // if (userAuth.isAuth) {
-    getmyAuctions();
 
-    // } else {
-    //   console.log("user not authorised");
-    // }
+  useEffect(async () => {
+    getmyAuctions();
   }, [isLoading]);
-  const styles = useStyles();
 
   return (
     <>
@@ -107,107 +111,107 @@ const CreatedAuction = () => {
             {!myAuctions ? (
               <p> </p>
             ) : (
-              <>
-                <Grid
-                  container
-                  margin="auto"
-                  justifyContent="center"
-                  alignContent="center"
-                >
-                  <Typography
-                    item
-                    xs={12}
-                    variant="h2"
+                <>
+                  <Grid
+                    container
                     margin="auto"
                     justifyContent="center"
-                    justifyText="center"
-                    style={{ fontStyle: 'serif' }}
+                    alignContent="center"
                   >
-                    My Auctions
+                    <Typography
+                      item
+                      xs={12}
+                      variant="h2"
+                      margin="auto"
+                      justifyContent="center"
+                      justifyText="center"
+                      style={{ fontStyle: 'serif' }}
+                    >
+                      My Auctions
                   </Typography>
-                </Grid>
-                <Grid container spacing={2} paddingTop={5}>
-                  <Grid item xs={0} md={3}></Grid>
-                  <Grid item xs={12} md={6} margin="auto">
-                    <Button
-                      variant="contained"
-                      style={{
-                        backgroundColor: onClickColorUpcoming
-                          ? '#002E6E'
-                          : '#00B9F1',
-                      }}
-                      onClick={() => {
-                        getUpcomingAuctions();
-                        clickUpcoming();
-                      }}
-                    >
-                      Upcoming Auctions
-                    </Button>
-                    <Button
-                      variant="contained"
-                      style={{
-                        backgroundColor: onClickColorPast
-                          ? '#002E6E'
-                          : '#00B9F1',
-                      }}
-                      onClick={() => {
-                        getPastAuctions();
-                        clickPast();
-                      }}
-                    >
-                      Past Auctions
-                    </Button>
                   </Grid>
-                  <Button
-                    variant="contained"
-                    onClick={handleShowInfoModal}
-                    style={{ backgroundColor: 'green' }}
+                  <Grid container spacing={2} paddingTop={5}>
+                    <Grid item xs={0} md={3}></Grid>
+                    <Grid item xs={12} md={6} margin="auto">
+                      <Button
+                        variant="contained"
+                        style={{
+                          backgroundColor: onClickColorUpcoming
+                            ? '#002E6E'
+                            : '#00B9F1',
+                        }}
+                        onClick={() => {
+                          getUpcomingAuctions();
+                          clickUpcoming();
+                        }}
+                      >
+                        Upcoming Auctions
+                    </Button>
+                      <Button
+                        variant="contained"
+                        style={{
+                          backgroundColor: onClickColorPast
+                            ? '#002E6E'
+                            : '#00B9F1',
+                        }}
+                        onClick={() => {
+                          getPastAuctions();
+                          clickPast();
+                        }}
+                      >
+                        Past Auctions
+                    </Button>
+                    </Grid>
+                    <Button
+                      variant="contained"
+                      onClick={handleShowInfoModal}
+                      style={{ backgroundColor: 'green' }}
+                    >
+                      <AddCircleIcon></AddCircleIcon>
+                    </Button>
+                    <CreateAuctionModal
+                      show={infoModalShow}
+                      onHide={handleCloseInfoModal}
+                      style={{ top: '20px' }}
+                    />
+                  </Grid>
+                  <Grid
+                    container
+                    margin="auto"
+                    justifyContent="center"
+                    alignContent="center"
+                    paddingTop={5}
                   >
-                    <AddCircleIcon></AddCircleIcon>
-                  </Button>
-                  <CreateAuctionModal
-                    show={infoModalShow}
-                    onHide={handleCloseInfoModal}
-                    style={{ top: '20px' }}
-                  />
-                </Grid>
-                <Grid
-                  container
-                  margin="auto"
-                  justifyContent="center"
-                  alignContent="center"
-                  paddingTop={5}
-                >
-                  {upAuctions
-                    ? myAuctions.map((auction) => (
+                    {upAuctions
+                      ? myAuctions.map((auction) => (
                         <>
                           {(dateFormat(auction.end_date, 'yyyy-mm-dd') >
                             currentDate ||
                             (dateFormat(auction.end_date, 'yyyy-mm-dd') ==
                               currentDate &&
                               auction.end_time > currentTime)) && (
-                            <FeedCard key={auction.auction_id} auction={auction} />
-                          )}
+                              <FeedCard key={auction.auction_id} auction={auction} />
+                            )}
                         </>
                       ))
-                    : myAuctions.map((auction) => (
+                      : myAuctions.map((auction) => (
                         <>
                           {(dateFormat(auction.end_date, 'yyyy-mm-dd') <
                             currentDate ||
                             (dateFormat(auction.end_date, 'yyyy-mm-dd') ==
                               currentDate &&
                               auction.end_time < currentTime)) && (
-                            <FeedCard key={auction.auction_id} auction={auction} />
-                          )}
+                              <FeedCard key={auction.auction_id} auction={auction} />
+                            )}
                         </>
                       ))}
-                </Grid>
-              </>
-            )}
+                  </Grid>
+                </>
+              )}
           </>
         ) : (
-          <h6>You need to login to continue</h6>
-        )}
+            <h6>You need to login to continue</h6>
+          )}
       </Grid>
     </>
   );

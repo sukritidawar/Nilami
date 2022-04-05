@@ -1,3 +1,8 @@
+/* UI for User Created Auctions.
+Displays the upcoming and past auctions created by the user.
+Provides provision for adding new auction.
+*/
+
 import React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import { Grid, Typography, Button } from '@mui/material';

@@ -1,3 +1,10 @@
+/* UI for Auction Bidding page.
+Displays auction details, comments and announcements.
+Allows the bidder to:
+  Provide their bidding amount.
+  Add comments to the auction.
+*/
+
 import { React, useState, useEffect, useContext } from 'react';
 import ShowComments from '../../UIComponents/Comments/ShowComments';
 import TopBids from '../../UIComponents/TopBids';

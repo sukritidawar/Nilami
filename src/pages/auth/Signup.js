@@ -1,3 +1,5 @@
+/* UI for User Sign Up page.*/
+
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { Avatar, Button, Container, CssBaseline, Grid, Box, Link, TextField, Typography } from '@mui/material';

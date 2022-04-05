@@ -1,3 +1,6 @@
+/*UI for Homepage of the website. 
+Displays Auction feed. Also allows to filter auctions based on category/location.
+*/
 import React, { useState, useEffect } from 'react';
 import Header from '../../UIComponents/Header';
 import { Grid, Select, FormControl, MenuItem, InputLabel, Button, } from '@mui/material';

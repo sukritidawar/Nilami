@@ -1,3 +1,17 @@
+/* UI to display the Auction detail page.
+Displays the following details for each auction:
+  Product Name,
+  Auction Category,
+  Product Description,
+  Starting Bid,
+  Estimated Price,
+  Start Date,
+  End Date,
+  City,
+  Winner User name, if present.
+Also allows to register for the auction and bid.
+*/
+
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';

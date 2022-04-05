@@ -1,3 +1,7 @@
+/* UI for User Registeredd Auctions.
+Displays the upcoming and past auctions the user has registered.
+*/
+
 import React from 'react';
 import { useContext, useEffect, useState } from 'react';
 import { Grid, Typography, Button } from '@mui/material';

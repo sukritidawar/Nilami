@@ -125,7 +125,8 @@ const AuctionProductDetail = () => {
       const url = Keys.BASE_API + 'auction/getWinnerName/id/' + id;
       trackPromise(
         axios.get(url).then((res) => {
-          setWinnerName(res.data[0].user_name);
+          if(!res.data.error)
+            setWinnerName(res.data);
         })
       );
     } catch (error) {

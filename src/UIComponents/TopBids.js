@@ -1,17 +1,14 @@
-/* Component useed in the bidding page, to display top three bidders for the auction.*/
+/* Component used in the bidding page, to display top three bidders for the auction.*/
 
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import Keys from '../config';
-import Store from '../store/Store';
-import { useParams, useLocation } from 'react-router-dom';
 import { trackPromise } from 'react-promise-tracker';
 import { Typography } from '@mui/material';
 axios.defaults.withCredentials = true;
 
 const TopBids = ({ id }) => {
   const [topBids, setTopBids] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
 
   const getTopBids = async () => {
     try {
@@ -30,7 +27,7 @@ const TopBids = ({ id }) => {
   useEffect(async () => {
     await getTopBids();
     console.log(topBids);
-  }, [isLoading]);
+  }, []);
 
   return (
     <div className="topBids">

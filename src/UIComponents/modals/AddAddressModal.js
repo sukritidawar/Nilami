@@ -1,4 +1,4 @@
-/* Modal to add new user address.*/
+/* Modal to add new user address. It is used in user profile page*/
 
 import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';

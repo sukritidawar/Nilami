@@ -1,4 +1,5 @@
-/*Indicator displayed to th euser when a page is loading. */
+/*Indicator displayed to end user when a page is loading. */
+
 import React from 'react';
 import { usePromiseTracker } from 'react-promise-tracker';
 import Spinner from 'react-spinkit';

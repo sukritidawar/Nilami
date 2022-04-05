@@ -3,10 +3,8 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardMedia, CardContent, IconButton, Typography } from '@mui/material';
-import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import dateFormat from 'dateformat';
 import Keys from '../config';
 import axios from 'axios';

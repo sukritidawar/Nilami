@@ -1,3 +1,5 @@
+/*This file include all the routes*/
+
 import React, { useEffect } from 'react';
 import { useContext, useReducer, useState } from 'react';
 import { Route, Routes, Link } from 'react-router-dom';
@@ -44,11 +46,7 @@ const Routess = () => {
         <Route exact path="/feed/:id/biding" element={<BiddingPage />} />
         <Route exact path="/feed/:id/chat" element={<Chat />} />
         <Route exact path="/profile" element={<UserProfile />} />
-        <Route
-          exact
-          path="/registeredauction"
-          element={<RegisteredAuction />}
-        />
+        <Route exact  path="/registeredauction" element={<RegisteredAuction />} />
         <Route exact path="/myauction" element={<CreatedAuction />} />
       </Routes>
       <LoadingIndicator />

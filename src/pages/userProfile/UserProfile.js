@@ -1,5 +1,3 @@
-//try promise tracker in this and also remove the credentials from here
-
 import { React, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container, Row, Col, Button } from 'react-bootstrap';
@@ -28,6 +26,7 @@ const UserProfile = () => {
   const handleCloseAddressModal = () => setaddressModalShow(false);
   const handleShowAddressModal = () => setaddressModalShow(true);
 
+  // Deletes the address from the user database.
   const deleteAddress = async (address_id) => {
     const url = Keys.BASE_API + 'user/deleteAddress';
     try {
@@ -42,19 +41,18 @@ const UserProfile = () => {
       console.log(error);
     }
   };
+
+  // Adds address for the user.
   const addAddressFunc = (formData) => {
-    console.log('gdgg');
     setUserAddress((prevAddress) => {
       return [formData, ...prevAddress];
     });
   };
 
+  // Gets user details from the database.
   const getUserDetails = async () => {
-    console.log('hello');
-
     try {
       const url = Keys.BASE_API + 'user/profile';
-
       trackPromise(
         axios.get(url).then((res) => {
           setUserDetails(res.data.userData);
@@ -72,99 +70,96 @@ const UserProfile = () => {
   }, []);
 
   return (
-    // <div></div>
     <div>
       <Header />
       {!userDetails ? (
         <p> </p>
       ) : (
-        <Container className="container">
-          <h1 style={{ textAlign: 'center', color: 'white' }}>Your Profile</h1>
-          {/* <Row className="mainContent"> */}
-          {/* <Col xl={12}> */}
-          <div className="mainContent">
-            <div className="userInfo">
-              <div className="userImage">
-                <img src={userDetails.user.profile_pic} />
-              </div>
+          <Container className="container">
+            <h1 style={{ textAlign: 'center', color: 'white' }}>Your Profile</h1>
+            <div className="mainContent">
+              <div className="userInfo">
+                <div className="userImage">
+                  <img src={userDetails.user.profile_pic} />
+                </div>
 
-              <div className="userDesc">
-                <p style={{ fontSize: '2rem' }}>
-                  <b>{userDetails.user.name}</b>
-                </p>
-                <p>
-                  <b>Email:</b> {userDetails.user.email}
-                </p>
-                <p>
-                  <b>Phone:</b> {userDetails.user.primary_mobile}
-                </p>
-              </div>
-              <Button
-                variant="contained"
-                onClick={handleShowInfoModal}
-                style={{ backgroundColor: '#00B9F1', color: 'white' }}
-              >
-                Edit
-              </Button>
-              <EditUserInfoModal
-                show={infoModalShow}
-                onHide={handleCloseInfoModal}
-                user={userDetails.user}
-              />
-            </div>
-            <div className="address">
-              <div className="address-heading">
-                <h3>Your registered addresses:</h3>
-              </div>
-              <div className="userAddresses">
-                <Row>
-                  {userAddress &&
-                    userAddress.map((addressElement, i) => (
-                      <Col md={5} className="userAddressCard mx-auto m-1">
-                        <Row>
-                          <Col xs={11} className="my-auto">
-                            <p>
-                              {addressElement.address}, {addressElement.city},
-                              {addressElement.pincode}
-                            </p>
-                            <p>Mobile:{addressElement.mobile}</p>
-                          </Col>
-
-                          <Col xs={1} className="my-auto">
-                            <Button
-                              className="btn-danger"
-                              onClick={() =>
-                                deleteAddress(addressElement.address_id)
-                              }
-                              style={{ backgroundColor: '#002E6E' }}
-                            >
-                              X
-                            </Button>
-                          </Col>
-                        </Row>
-                      </Col>
-                    ))}
-                </Row>
-              </div>
-              <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+                <div className="userDesc">
+                  <p style={{ fontSize: '2rem' }}>
+                    <b>{userDetails.user.name}</b>
+                  </p>
+                  <p>
+                    <b>Email:</b> {userDetails.user.email}
+                  </p>
+                  <p>
+                    <b>Phone:</b> {userDetails.user.primary_mobile}
+                  </p>
+                </div>
                 <Button
                   variant="contained"
-                  onClick={handleShowAddressModal}
+                  onClick={handleShowInfoModal}
                   style={{ backgroundColor: '#00B9F1', color: 'white' }}
                 >
-                  Add Address
-                </Button>
+                  Edit
+              </Button>
+                <EditUserInfoModal
+                  show={infoModalShow}
+                  onHide={handleCloseInfoModal}
+                  user={userDetails.user}
+                />
               </div>
-              <AddAddressModal
-                show={addressModalShow}
-                onHide={handleCloseAddressModal}
-                user={userDetails.user}
-                addAddressFunc={addAddressFunc}
-              />
+              <div className="address">
+                <div className="address-heading">
+                  <h3>Your registered addresses:</h3>
+                </div>
+                <div className="userAddresses">
+                  <Row>
+                    {userAddress &&
+                      userAddress.map((addressElement, i) => (
+                        <Col md={5} className="userAddressCard mx-auto m-1">
+                          <Row>
+                            <Col xs={11} className="my-auto">
+                              <p>
+                                {addressElement.address}, {addressElement.city},
+                              {addressElement.pincode}
+                              </p>
+                              <p>Mobile:{addressElement.mobile}</p>
+                            </Col>
+
+                            <Col xs={1} className="my-auto">
+                              <Button
+                                className="btn-danger"
+                                onClick={() =>
+                                  deleteAddress(addressElement.address_id)
+                                }
+                                style={{ backgroundColor: '#002E6E' }}
+                              >
+                                X
+                            </Button>
+                            </Col>
+                          </Row>
+                        </Col>
+                      ))}
+                  </Row>
+                </div>
+                <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+                  <Button
+                    variant="contained"
+                    onClick={handleShowAddressModal}
+                    style={{ backgroundColor: '#00B9F1', color: 'white' }}
+                  >
+                    Add Address
+                </Button>
+                </div>
+                <AddAddressModal
+                  show={addressModalShow}
+                  onHide={handleCloseAddressModal}
+                  user={userDetails.user}
+                  addAddressFunc={addAddressFunc}
+                />
+              </div>
             </div>
-          </div>
-        </Container>
-      )}
+          </Container>
+        )}
     </div>
   );
 };

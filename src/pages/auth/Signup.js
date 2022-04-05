@@ -24,34 +24,14 @@ const defaultuser = {
 
 const Signup = () => {
   const theme = createTheme();
-
   const navigate = useNavigate();
   const [state, dispatch] = useContext(Store);
   const [user, setUser] = useState(defaultuser);
   let name, value;
 
-  function Copyright(props) {
-    return (
-      <Typography
-        variant="body2"
-        color="text.secondary"
-        align="center"
-        {...props}
-      >
-        {'Copyright © '}
-        <Link color="inherit" href="https://github.com/sukritidawar/Nilami">
-          Niलाmi
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
-
   const getUserData = (event) => {
     name = event.target.name;
     value = event.target.value;
-
     setUser({ ...user, [name]: value });
   };
 
@@ -72,6 +52,7 @@ const Signup = () => {
     });
   };
 
+  // Register the new user in the databse.
   const postData = async (newUser) => {
     try {
       const config = {
@@ -105,6 +86,24 @@ const Signup = () => {
     }
   };
 
+  function Copyright(props) {
+    return (
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+        {...props}
+      >
+        {'Copyright © '}
+        <Link color="inherit" href="https://github.com/sukritidawar/Nilami">
+          Niलाmi
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -124,8 +123,8 @@ const Signup = () => {
             Like it, Bid for it, Buy it.
             </i></Typography>
 
-          <Avatar sx={{ m: 1, bgcolor: '#1976d2'}}>
-            <LockOutlinedIcon/>
+          <Avatar sx={{ m: 1, bgcolor: '#1976d2' }}>
+            <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
@@ -280,7 +279,7 @@ const Signup = () => {
                 onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
                 alignSelf='center'
-                style={{marginLeft: '14px'}}
+                style={{ marginLeft: '14px' }}
               >
                 Sign Up
               </Button>

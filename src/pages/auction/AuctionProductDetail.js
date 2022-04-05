@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Keys from '../../config';
-import {Grid, Typography, Button, Box, CssBaseline} from '@mui/material';
+import { Grid, Typography, Button, Box, CssBaseline } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import dateFormat from 'dateformat';
 import RegisterModal from '../../UIComponents/modals/RegisterModal';
@@ -41,6 +41,7 @@ const AuctionProductDetail = () => {
     setIsRegistered(true);
   };
 
+  // Fetch the details for auction.
   const getAuctionDetails = async () => {
     try {
       const url = Keys.BASE_API + 'auction/id/' + id;
@@ -53,10 +54,11 @@ const AuctionProductDetail = () => {
             estimate: tempAuctionDetails.data.estimated_price + '',
             startDate: dateFormat(
               tempAuctionDetails.data.start_date,
-              'yyyy-mm-dd'
-            ),
+              'yyyy-mm-dd'),
             startTime: tempAuctionDetails.data.start_time,
-            endDate: dateFormat(tempAuctionDetails.data.end_date, 'yyyy-mm-dd'),
+            endDate: dateFormat(
+              tempAuctionDetails.data.end_date,
+              'yyyy-mm-dd'),
             endTime: tempAuctionDetails.data.end_time,
             auctioneerUserName: tempAuctionDetails.data.auctioneer_id,
             auctionCategory: tempAuctionDetails.data.product_category,
@@ -77,15 +79,17 @@ const AuctionProductDetail = () => {
       console.log(error);
     }
   };
+
+  // Check if the auction is an ongoing one, has already completed or is upcoming.
   const checkTimings = async (
     auctionStartDate,
     auctionStartTime,
     auctionEndDate,
     auctionEndTime
   ) => {
-    var myDate = new Date();
-    var currentDate = dateFormat(myDate, 'yyyy-mm-dd');
-    var currentTime = dateFormat(myDate, 'HH:MM:ss');
+    var curDate = new Date();
+    var currentDate = dateFormat(curDate, 'yyyy-mm-dd');
+    var currentTime = dateFormat(curDate, 'HH:MM:ss');
     if (auctionEndDate) {
       if (
         auctionEndDate < currentDate ||
@@ -104,6 +108,7 @@ const AuctionProductDetail = () => {
     }
   };
 
+  // Check if the user has registered for the auction.
   const getRegAuctions = async () => {
     try {
       const url = Keys.BASE_API + 'user/registeredAuctions';
@@ -120,6 +125,8 @@ const AuctionProductDetail = () => {
       console.log(error);
     }
   };
+
+  // Get user name of the auction winner, if present.
   const getWinnerName = async () => {
     try {
       const url = Keys.BASE_API + 'auction/getWinnerName/id/' + id;
@@ -140,6 +147,7 @@ const AuctionProductDetail = () => {
     await getWinnerName();
   }, []);
 
+  // Displays the register modal, when user clicks on Register button.
   const registerUser = async () => {
     if (userAuth.isAuth) {
       handleShowInfoModal();
@@ -228,8 +236,8 @@ const AuctionProductDetail = () => {
                       <p style={{ color: 'green' }}>(Private Auction)</p>
                     </>
                   ) : (
-                    <></>
-                  )}
+                      <></>
+                    )}
                   {auctionDetails.productDescription}
                 </Typography>
               </Grid>
@@ -272,7 +280,7 @@ const AuctionProductDetail = () => {
                         {(() => {
                           if (
                             userAuth.user_id ==
-                              auctionDetails.auctioneerUserName ||
+                            auctionDetails.auctioneerUserName ||
                             userAuth.user_id == auctionDetails.winner_user_id
                           ) {
                             return (
@@ -293,96 +301,96 @@ const AuctionProductDetail = () => {
                         })()}
                       </>
                     ) : (
-                      <h6></h6>
-                    )}
+                        <h6></h6>
+                      )}
                   </>
                 ) : (
-                  <>
-                    <Grid
-                      item
-                      xs={12}
-                      md={6}
-                      style={{ textAlign: 'center', alignContent: 'center' }}
-                    >
-                      <Typography variant="h6">
-                        {'Start Date : ' + auctionDetails.startDate}
-                      </Typography>
-                      <Typography variant="h6">
-                        {'Start Time : ' + auctionDetails.startTime}
-                      </Typography>
-                    </Grid>
-                    <Grid
-                      item
-                      xs={12}
-                      md={6}
-                      style={{ textAlign: 'center', alignContent: 'center' }}
-                    >
-                      <Typography variant="h6">
-                        {'End Date : ' + auctionDetails.endDate}
-                      </Typography>
-                      <Typography variant="h6">
-                        {'End Time : ' + auctionDetails.endTime}
-                      </Typography>
-                    </Grid>
+                    <>
+                      <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        style={{ textAlign: 'center', alignContent: 'center' }}
+                      >
+                        <Typography variant="h6">
+                          {'Start Date : ' + auctionDetails.startDate}
+                        </Typography>
+                        <Typography variant="h6">
+                          {'Start Time : ' + auctionDetails.startTime}
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        style={{ textAlign: 'center', alignContent: 'center' }}
+                      >
+                        <Typography variant="h6">
+                          {'End Date : ' + auctionDetails.endDate}
+                        </Typography>
+                        <Typography variant="h6">
+                          {'End Time : ' + auctionDetails.endTime}
+                        </Typography>
+                      </Grid>
 
-                    <Grid
-                      item
-                      xs={12}
-                      style={{
-                        justifyContent: 'center',
-                        textAlign: 'center',
-                        aligncontent: 'center',
-                        marginTop: 2,
-                      }}
-                    >
-                      {isRegistered ? (
-                        <>
-                          {hasStarted ? (
-                            <>
-                              <Typography style={{ color: '	#002E6E' }}>
-                                You have registered for the auction. Please
-                                proceed with bidding.
+                      <Grid
+                        item
+                        xs={12}
+                        style={{
+                          justifyContent: 'center',
+                          textAlign: 'center',
+                          aligncontent: 'center',
+                          marginTop: 2,
+                        }}
+                      >
+                        {isRegistered ? (
+                          <>
+                            {hasStarted ? (
+                              <>
+                                <Typography style={{ color: '	#002E6E' }}>
+                                  You have registered for the auction. Please
+                                  proceed with bidding.
                               </Typography>
-                              <Link
-                                to={`/feed/${id}/biding`}
-                                state={auctionDetails}
-                                style={{ textDecoration: 'none' }}
-                              >
-                        
-                                <Button
-                                  variant="contained"
-                                  style={{ backgroundColor: '#002E6E' }}
+                                <Link
+                                  to={`/feed/${id}/biding`}
+                                  state={auctionDetails}
+                                  style={{ textDecoration: 'none' }}
                                 >
-                                  Go to bidding
+
+                                  <Button
+                                    variant="contained"
+                                    style={{ backgroundColor: '#002E6E' }}
+                                  >
+                                    Go to bidding
                                 </Button>
-                              </Link>
-                            </>
-                          ) : (
-                            <Typography style={{ color: '	#002E6E' }}>
-                              You have registered for the auction.
-                            </Typography>
-                          )}
-                        </>
-                      ) : (
-                        <span style={{ marginRight: '20px' }}>
-                          <Button
-                            variant="contained"
-                            style={{ backgroundColor: '	#002E6E' }}
-                            onClick={registerUser}
-                          >
-                            Register
+                                </Link>
+                              </>
+                            ) : (
+                                <Typography style={{ color: '	#002E6E' }}>
+                                  You have registered for the auction.
+                                </Typography>
+                              )}
+                          </>
+                        ) : (
+                            <span style={{ marginRight: '20px' }}>
+                              <Button
+                                variant="contained"
+                                style={{ backgroundColor: '	#002E6E' }}
+                                onClick={registerUser}
+                              >
+                                Register
                           </Button>
-                          <RegisterModal
-                            id={id}
-                            show={infoModalShow}
-                            onHide={handleCloseInfoModal}
-                            onRegister={updateRegisterInfo}
-                          />
-                        </span>
-                      )}
-                    </Grid>
-                  </>
-                )}
+                              <RegisterModal
+                                id={id}
+                                show={infoModalShow}
+                                onHide={handleCloseInfoModal}
+                                onRegister={updateRegisterInfo}
+                              />
+                            </span>
+                          )}
+                      </Grid>
+                    </>
+                  )}
               </>
 
               <Grid item xs={12}>

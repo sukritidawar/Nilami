@@ -6,10 +6,6 @@ import 'firebase/compat/firestore';
 import { Input, Button } from '@material-ui/core';
 import Store from '../../store/Store';
 
-const image =
-  'https://lh3.googleusercontent.com/-JVpfmGGJuO8/AAAAAAAAAAI/AAAAAAAAAME/sMJVq9F8gec/photo.jpg';
-
-
 // Return send message input component to chat.js file
 function SendMessage({ scroll, collectionName }) {
   const [msg, setMsg] = useState('');

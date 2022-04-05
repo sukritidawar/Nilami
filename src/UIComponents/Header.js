@@ -33,24 +33,25 @@ const pages = [
   },
 ];
 const Header = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+ // for responsive header
+  const [ openNav, setOpenNav] = React.useState(null);
+  const [anchorUser, setAnchorUser] = React.useState(null);
   const [userAuth, dispatch] = useContext(Store);
   const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
+     setOpenNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+    setAnchorUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+     setOpenNav(null);
   };
 
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+    setAnchorUser(null);
   };
 
   const handleLogout = async () => {
@@ -62,6 +63,7 @@ const Header = () => {
     });
   };
 
+   //returns header component
   return (
     <AppBar position="sticky" style={{ backgroundColor: '#002E6E' }}>
       <Container maxWidth="xl">
@@ -88,7 +90,7 @@ const Header = () => {
             </IconButton>
             <Menu
               id="menu-appbar"
-              anchorEl={anchorElNav}
+              anchorEl={openNav}
               anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left',
@@ -98,7 +100,7 @@ const Header = () => {
                 vertical: 'top',
                 horizontal: 'left',
               }}
-              open={Boolean(anchorElNav)}
+              open={Boolean(openNav)}
               onClose={handleCloseNavMenu}
               sx={{
                 display: { xs: 'block', md: 'none' },
@@ -146,7 +148,7 @@ const Header = () => {
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
-              anchorEl={anchorElUser}
+              anchorEl={anchorUser}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
@@ -156,7 +158,7 @@ const Header = () => {
                 vertical: 'top',
                 horizontal: 'right',
               }}
-              open={Boolean(anchorElUser)}
+              open={Boolean(anchorUser)}
               onClose={handleCloseUserMenu}
             >
               {userAuth.isAuth ? (
@@ -183,11 +185,6 @@ const Header = () => {
                   </MenuItem>
                 </>
               )}
-              {/* {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))} */}
             </Menu>
           </Box>
         </Toolbar>

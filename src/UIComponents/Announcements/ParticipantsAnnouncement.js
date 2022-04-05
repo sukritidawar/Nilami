@@ -1,3 +1,5 @@
+//Returns Ammouncement component where all Bidders can see announcement made by auctionner
+
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Fire } from '../chatApp/firebasee';
 import { useParams, useLocation } from 'react-router-dom';
@@ -9,6 +11,8 @@ import Collapse from '@mui/material/Collapse';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import AlertTitle from '@mui/material/AlertTitle';
+
+
 
 const ParticipantsAnnouncement = () => {
   const scroll = useRef();

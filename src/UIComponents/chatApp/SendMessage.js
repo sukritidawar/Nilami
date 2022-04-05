@@ -3,13 +3,14 @@ import { Fire } from './firebasee';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-// import firebase from 'firebase'
 import { Input, Button } from '@material-ui/core';
 import Store from '../../store/Store';
 
 const image =
   'https://lh3.googleusercontent.com/-JVpfmGGJuO8/AAAAAAAAAAI/AAAAAAAAAME/sMJVq9F8gec/photo.jpg';
 
+
+// return send message input component to chat.js file
 function SendMessage({ scroll, collectionName }) {
   const [msg, setMsg] = useState('');
   const [userAuth, setUserAuth] = useContext(Store);

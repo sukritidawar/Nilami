@@ -1,6 +1,6 @@
-// returns comment input component to show comment page where 
-//user can send message
-
+/* Comment input component to show comment page 
+where user can send message.
+*/
 import React, { useState, useContext } from 'react';
 import { Fire } from '../chatApp/firebasee';
 import firebase from 'firebase/compat/app';

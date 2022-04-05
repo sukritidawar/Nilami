@@ -1,4 +1,4 @@
-// returns comment component in which user can see previous comment and  post new comment too
+/* Comment component in which user can see previous comment and add new comments.*/
 
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Fire } from '../chatApp/firebasee';
@@ -27,7 +27,7 @@ const ShowComments = () => {
   }, []);
 
   const userid = userAuth.user_id;
-  
+
   return (
     <div style={{ margin: '30px', alignContent: 'center', textAlign: 'center' }}>
       <div className="msgs">

@@ -1,3 +1,5 @@
+/* Card with auction details that is displayed in Feed, My Auction and Registered Auction page.*/
+
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardHeader, CardMedia, CardContent, IconButton, Typography } from '@mui/material';
@@ -21,6 +23,8 @@ const FeedCard = ({ auction }) => {
   const [clipboardMessage, setMessage] = useState(false);
   const [timeUp, setTimeUp] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+
+  // Fucntion to update the like count for the given auction.
   const updateLikes = async () => {
     if (authInfo.isAuth) {
       try {
@@ -47,6 +51,7 @@ const FeedCard = ({ auction }) => {
     setMessage(true);
   };
 
+  // Check is the auction is ongoing, upcoming or completed.
   const checkTimings = async () => {
     var myDate = new Date();
     var currentDate = dateFormat(myDate, 'yyyy-mm-dd');

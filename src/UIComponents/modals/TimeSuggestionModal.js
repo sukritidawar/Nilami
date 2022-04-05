@@ -1,3 +1,5 @@
+/* Modal to display suitable time to start the auction created by the user.*/
+
 import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
@@ -42,6 +44,7 @@ const TimeSuggestion = (props) => {
     });
   };
 
+  // Fetches the best time to start the auction from the time suggesting algorithm.
   const send = async (formData) => {
     try {
       const config = {

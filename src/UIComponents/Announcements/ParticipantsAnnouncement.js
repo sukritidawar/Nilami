@@ -1,4 +1,4 @@
-//Returns Ammouncement component where all Bidders can see announcement made by auctionner
+/* Announcement component where all Bidders can see announcement made by auctionner */
 
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Fire } from '../chatApp/firebasee';
@@ -11,7 +11,6 @@ import Collapse from '@mui/material/Collapse';
 import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import AlertTitle from '@mui/material/AlertTitle';
-
 
 
 const ParticipantsAnnouncement = () => {

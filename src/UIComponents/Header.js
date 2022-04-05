@@ -1,3 +1,7 @@
+/* Header component displayed on top of every page.
+Allows easy navigation from one page to another.
+*/
+
 import React, { useContext } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';

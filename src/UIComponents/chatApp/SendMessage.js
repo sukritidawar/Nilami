@@ -10,7 +10,7 @@ const image =
   'https://lh3.googleusercontent.com/-JVpfmGGJuO8/AAAAAAAAAAI/AAAAAAAAAME/sMJVq9F8gec/photo.jpg';
 
 
-// return send message input component to chat.js file
+// Return send message input component to chat.js file
 function SendMessage({ scroll, collectionName }) {
   const [msg, setMsg] = useState('');
   const [userAuth, setUserAuth] = useContext(Store);

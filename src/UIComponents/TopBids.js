@@ -1,3 +1,5 @@
+/* Component useed in the bidding page, to display top three bidders for the auction.*/
+
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import Keys from '../config';

@@ -1,3 +1,5 @@
+/* Chat component that is displayed to winner of auction and auctioneer after the auction ends.*/
+
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Fire } from './firebasee';
 import SendMessage from './SendMessage';
@@ -12,10 +14,12 @@ function Chat() {
   const [userAuth, setUserAuth] = useContext(Store);
   const auctionDetails = useLocation().state;
   console.log(auctionDetails);
+
   const auctionId = id;
   const auctioneerID = auctionDetails.auctioneerUserName;
   const winnerId = auctionDetails.winnerid;
   const collectionName = auctionId + '_' + auctioneerID + '_' + winnerId;
+
   console.log(collectionName);
   useEffect(() => {
     Fire.collection(`${collectionName}`)

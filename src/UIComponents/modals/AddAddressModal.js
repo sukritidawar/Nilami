@@ -1,3 +1,5 @@
+/* Modal to add new user address.*/
+
 import React, { useState, useContext } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
@@ -42,6 +44,7 @@ const AddAddressModal = (props) => {
     });
   };
 
+  // Adds new address details for th user in the database.
   const send = async (formData) => {
     try {
       const config = {

@@ -15,7 +15,6 @@ const AuctionnerAnnouncement = () => {
   const collectionName = 'Announcements_' + auctionId;
   console.log(collectionName);
   useEffect(() => {
-    // auction id + auctioneer id + winner id;
     Fire.collection(`${collectionName}`)
       .orderBy('createdAt')
       .limit(50)
@@ -25,7 +24,6 @@ const AuctionnerAnnouncement = () => {
   }, []);
 
   const userid = userAuth.user_id;
-  // const userid = "66f63f1d-9303-4e29-abba-c58be203c270";
 
   return (
     <div style={{ margin: '30px' }}>

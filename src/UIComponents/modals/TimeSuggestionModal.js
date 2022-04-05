@@ -16,7 +16,7 @@ const TimeSuggestion = (props) => {
     city: '',
     duration: null,
   });
-  const [showSuggestion,setShowSuggestion] = useState(false);
+  const [showSuggestion, setShowSuggestion] = useState(false);
   const [timeSuggested, setTimeSuggested] = useState(null);
 
   const handleChange = (e) => {
@@ -31,14 +31,14 @@ const TimeSuggestion = (props) => {
     console.log(formData);
     send(formData);
     setFormData({
-        freeStartDate: '',
-        freeStartTime: '',
-        freeEndDate: '',
-        freeEndTime: '',
-        estimatedPrice: '',
-        category: '',
-        city: '',
-        duration: '',
+      freeStartDate: '',
+      freeStartTime: '',
+      freeEndDate: '',
+      freeEndTime: '',
+      estimatedPrice: '',
+      category: '',
+      city: '',
+      duration: '',
     });
   };
 
@@ -69,7 +69,7 @@ const TimeSuggestion = (props) => {
     <Modal
       {...props}
       size="md"
-      style={{marginTop: '50px'}}
+      style={{ marginTop: '50px' }}
     >
       <Modal.Header closeButton>
         <Modal.Title >
@@ -77,97 +77,102 @@ const TimeSuggestion = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ padding: '20px' }}>
-        {showSuggestion?<p>Time Suggested is: {dateFormat(timeSuggested,"yyyy-mm-dd")}  {dateFormat(timeSuggested,"HH:MM:ss")}</p> : <>
+        {showSuggestion ?
+          <p>
+            Time Suggested is: {dateFormat(timeSuggested, "yyyy-mm-dd")}  {dateFormat(timeSuggested, "HH:MM:ss")}
+          </p>
+          :
+          <>
             <h6 >
-            Please enter the following details.
+              Please enter the following details.
             </h6>
             <form
-            style={{ padding: '10px' }}
-            onSubmit={handleSubmit}
-            method="PUT"
+              style={{ padding: '10px' }}
+              onSubmit={handleSubmit}
+              method="PUT"
             >
-            <div style={{ padding: '10px' }}>
+              <div style={{ padding: '10px' }}>
                 Product Category:  <select
-                name="category"
-                required="required"
-                placeholder="Category"
-                onChange={handleChange}>
-                <option value="art">Art</option>
-                <option value="antique">Antique</option>
-                <option value="antique">Religious</option>
+                  name="category"
+                  required="required"
+                  placeholder="Category"
+                  onChange={handleChange}>
+                  <option value="art">Art</option>
+                  <option value="antique">Antique</option>
+                  <option value="antique">Religious</option>
                 </select>
-            </div>
-            <div style={{ padding: '10px' }}>
+              </div>
+              <div style={{ padding: '10px' }}>
                 <input
-                name="estimatedPrice"
-                required="required"
-                type="string"
-                placeholder="Estimated Price"
-                onChange={handleChange}
+                  name="estimatedPrice"
+                  required="required"
+                  type="string"
+                  placeholder="Estimated Price"
+                  onChange={handleChange}
                 />
-            </div>
-            <div style={{ padding: '10px' }}>
+              </div>
+              <div style={{ padding: '10px' }}>
                 <input
-                name="city"
-                required="required"
-                type="string"
-                placeholder="City"
-                onChange={handleChange}
+                  name="city"
+                  required="required"
+                  type="string"
+                  placeholder="City"
+                  onChange={handleChange}
                 />
-            </div>
+              </div>
             Enter the time range, when you are available to host the auction:
             <div style={{ padding: '10px' }}>
                 Availability Start Date:  <input
-                name="freeStartDate"
-                required="required"
-                type="date"
-                placeholder="start date"
-                onChange={handleChange}
+                  name="freeStartDate"
+                  required="required"
+                  type="date"
+                  placeholder="start date"
+                  onChange={handleChange}
                 />
-            </div>
-            <div style={{ padding: '10px' }}>
+              </div>
+              <div style={{ padding: '10px' }}>
                 Availability Start Time:  <input
-                name="freeStartTime"
-                required="required"
-                type="time"
-                placeholder="start time"
-                onChange={handleChange}
+                  name="freeStartTime"
+                  required="required"
+                  type="time"
+                  placeholder="start time"
+                  onChange={handleChange}
                 />
-            </div>
-            <div style={{ padding: '10px' }}>
+              </div>
+              <div style={{ padding: '10px' }}>
                 Availability End Date:  <input
-                name="freeEndDate"
-                required="required"
-                type="date"
-                placeholder="end date"
-                onChange={handleChange}
+                  name="freeEndDate"
+                  required="required"
+                  type="date"
+                  placeholder="end date"
+                  onChange={handleChange}
                 />
-            </div>
-            <div style={{ padding: '10px' }}>
+              </div>
+              <div style={{ padding: '10px' }}>
                 Availability End Time:  <input
-                name="freeEndTime"
-                required="required"
-                type="time"
-                placeholder="end time"
-                onChange={handleChange}
+                  name="freeEndTime"
+                  required="required"
+                  type="time"
+                  placeholder="end time"
+                  onChange={handleChange}
                 />
-            </div>
-            <div style={{ padding: '10px' }}>
+              </div>
+              <div style={{ padding: '10px' }}>
                 Duration of Auction:  <input
-                name="duration"
-                required="required"
-                type="integer"
-                placeholder="in seconds"
-                onChange={handleChange}
+                  name="duration"
+                  required="required"
+                  type="integer"
+                  placeholder="in seconds"
+                  onChange={handleChange}
                 />
-            </div>
-            <div style={{ padding: '10px', alignContent: 'center' }}>
-                <Button type="submit" onClick={handleSubmit} style={{backgroundColor: '#00B9F1'}}>
-                Submit
+              </div>
+              <div style={{ padding: '10px', alignContent: 'center' }}>
+                <Button type="submit" onClick={handleSubmit} style={{ backgroundColor: '#00B9F1' }}>
+                  Submit
                 </Button>
-            </div>
+              </div>
             </form>
-        </>}
+          </>}
       </Modal.Body>
     </Modal>
   );

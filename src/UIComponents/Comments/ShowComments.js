@@ -15,7 +15,6 @@ const ShowComments = () => {
   const collectionName = 'Comments_' + auctionId;
   console.log(collectionName);
   useEffect(() => {
-    // auction id + auctioneer id + winner id;
     Fire.collection(`${collectionName}`)
       .orderBy('createdAt')
       .limit(50)

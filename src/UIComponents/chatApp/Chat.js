@@ -18,7 +18,6 @@ function Chat() {
   const collectionName = auctionId + '_' + auctioneerID + '_' + winnerId;
   console.log(collectionName);
   useEffect(() => {
-    // auction id + auctioneer id + winner id;
     Fire.collection(`${collectionName}`)
       .orderBy('createdAt')
       .limit(50)
@@ -28,30 +27,29 @@ function Chat() {
   }, []);
 
   const userid = userAuth.user_id;
-  // const userid = "66f63f1d-9303-4e29-abba-c58be203c270";
 
   return (
     <>
-    <Header />
-    <div style={{ margin: '30px' }}>
-      <div className="msgs">
-        <h2 style={{ textAlign: 'center' }}>Welcome {userAuth.user_name}!!</h2>
-        {messages.map(({ id, text, userName, uid }) => (
-          <div>
-            <div
-              key={id}
-              className={`msg ${uid === userid ? 'sent' : 'received'}`}
-            >
-              <b>{userName}:</b> {text}
+      <Header />
+      <div style={{ margin: '30px' }}>
+        <div className="msgs">
+          <h2 style={{ textAlign: 'center' }}>Welcome {userAuth.user_name}!!</h2>
+          {messages.map(({ id, text, userName, uid }) => (
+            <div>
+              <div
+                key={id}
+                className={`msg ${uid === userid ? 'sent' : 'received'}`}
+              >
+                <b>{userName}:</b> {text}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div style={{ marginTop: "30px" }}>
+          <SendMessage scroll={scroll} collectionName={collectionName} />
+        </div>
+        <div ref={scroll}></div>
       </div>
-      <div style={{marginTop:"30px"}}>
-        <SendMessage scroll={scroll} collectionName={collectionName} />
-      </div>
-      <div ref={scroll}></div>
-    </div>
     </>
   );
 }

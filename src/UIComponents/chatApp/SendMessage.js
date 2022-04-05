@@ -3,7 +3,6 @@ import { Fire } from './firebasee';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-// import firebase from 'firebase'
 import { Input, Button } from '@material-ui/core';
 import Store from '../../store/Store';
 
@@ -16,11 +15,9 @@ function SendMessage({ scroll, collectionName }) {
   const userid = userAuth.user_id;
   async function sendMessage(e) {
     e.preventDefault();
-    //user id // photourl
     const uid = userid;
     const userName = userAuth.user_name;
 
-    //messages - auction id + auctioneer id
     await Fire.collection(`${collectionName}`).add({
       text: msg,
       userName,

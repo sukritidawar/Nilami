@@ -53,7 +53,7 @@ const RegisterModal = (props) => {
   };
 
   return (
-    <Modal {...props} size="md">
+    <Modal {...props} size="md" centered>
       <Modal.Header closeButton>
         <Modal.Title>Register Auction</Modal.Title>
       </Modal.Header>

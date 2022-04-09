@@ -138,7 +138,7 @@ const FeedCard = ({ auction }) => {
           component="img"
           height="194"
           image={auction.product_pic.toString()}
-          alt="Paella dish"
+          alt="Product image"
           style={{ margin: '2px' }}
         />
       </Link>

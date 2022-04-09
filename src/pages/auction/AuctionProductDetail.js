@@ -359,14 +359,20 @@ const AuctionProductDetail = () => {
                           marginTop: 2,
                         }}
                       >
-                        {isRegistered ? (
+                        {(isRegistered || userAuth.user_id == auctionDetails.auctioneerUserName) ? (
                           <>
-                            {hasStarted ? (
+                            {(hasStarted || userAuth.user_id == auctionDetails.auctioneerUserName)? (
                               <>
-                                <Typography style={{ color: '	#002E6E' }}>
-                                  You have registered for the auction. Please
-                                  proceed with bidding.
-                              </Typography>
+                                {userAuth.user_id == auctionDetails.auctioneerUserName ? 
+                                    <Typography style={{ color: '	#002E6E' }}>
+                                      Auctioneer Go ahead...
+                                    </Typography>
+                                    :
+                                    <Typography style={{ color: '	#002E6E' }}>
+                                        You have registered for the auction. Please
+                                        proceed with bidding.
+                                    </Typography>
+                                }
                                 <Link
                                   to={`/feed/${id}/biding`}
                                   state={auctionDetails}

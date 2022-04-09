@@ -91,7 +91,7 @@ const RegisteredAuction = () => {
     <>
       <Header />
       {!regAuctions ? (
-        <p> </p>
+        <p></p>
       ) : (
           <Grid component="main" className={styles.feed_comp}>
             {userAuth.isAuth ? (

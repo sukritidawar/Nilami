@@ -55,7 +55,6 @@ const BiddingPage = (props) => {
 
   useEffect(async () => {
     await checkTimings();
-    console.log(userAuth.user_id);
   }, []);
 
   const handleChange = (e) => {
@@ -239,7 +238,7 @@ const BiddingPage = (props) => {
                                       <Grid item xs={12} md={8}>
                                         <Button onClick={handleCloseAuction}>
                                           Close Auction
-                                  </Button>
+                                        </Button>
                                       </Grid>
                                     ) : (
                                       <></>
@@ -248,69 +247,84 @@ const BiddingPage = (props) => {
                               </Grid>
                             </Grid>
                           </Grid>
-
-                          <Grid
-                            item
-                            xs={12}
-                            md={5}
-                            lg={3}
-                            sx={{ borderLeft: '2px solid #00B9F1', padding: 2 }}
-                          >
-                            <Grid item xs={12}>
-                              <TopBids id={id} />
-                            </Grid>
-
-                            <Grid item xs={12} style={{ position: 'relative', top: 90 }}>
+                          
+                          {auctionDetails.auctioneerUserName ==
+                            userAuth.user_id ? (
                               <Grid
-                                className="bidding-form"
-                                alignContent="center"
-                                justifyContent="center"
-                                margin="auto"
-                                textAlign="center"
-                              >
-                                <form
-                                  onSubmit={handleSubmit}
-                                  method="POST"
+                                  className="bidding-form"
                                   alignContent="center"
                                   justifyContent="center"
+                                  margin="auto"
                                   textAlign="center"
                                 >
-                                  <Grid
+                              <Grid item xs={12}>
+                              <TopBids id={id} />
+                            </Grid>
+                            </Grid>
+                            ) : (
+                              <Grid
+                              item
+                              xs={12}
+                              md={5}
+                              lg={3}
+                              sx={{ borderLeft: '2px solid #00B9F1', padding: 2 }}
+                            >
+                              <Grid item xs={12}>
+                                <TopBids id={id} />
+                              </Grid>
+
+                              <Grid item xs={12} style={{ position: 'relative', top: 90 }}>
+                                <Grid
+                                  className="bidding-form"
+                                  alignContent="center"
+                                  justifyContent="center"
+                                  margin="auto"
+                                  textAlign="center"
+                                >
+                                  <form
+                                    onSubmit={handleSubmit}
+                                    method="POST"
                                     alignContent="center"
                                     justifyContent="center"
                                     textAlign="center"
                                   >
-                                    <input
-                                      name="bid_amount"
-                                      required="required"
-                                      type="integer"
-                                      placeholder="Amount"
-                                      onChange={handleChange}
-                                    />
-                                  </Grid>
-                                  <Button
-                                    type="submit"
-                                    onClick={handleSubmit}
-                                    variant="contained"
-                                    style={{
-                                      backgroundColor: '#002E6E',
-                                      marginTop: 3,
-                                    }}
-                                  >
-                                    Bid
-                              </Button>
-                                  {feedback.feedback ? (
-                                    <Typography className="feedback-box">
-                                      {' '}
-                                      {feedback.feedback}{' '}
-                                    </Typography>
-                                  ) : (
-                                      <></>
-                                    )}
-                                </form>
+                                    <Grid
+                                      alignContent="center"
+                                      justifyContent="center"
+                                      textAlign="center"
+                                    >
+                                      <input
+                                        name="bid_amount"
+                                        required="required"
+                                        type="integer"
+                                        placeholder="Amount"
+                                        onChange={handleChange}
+                                      />
+                                    </Grid>
+                                    <Button
+                                      type="submit"
+                                      onClick={handleSubmit}
+                                      variant="contained"
+                                      style={{
+                                        backgroundColor: '#002E6E',
+                                        marginTop: 3,
+                                      }}
+                                    >
+                                      Bid
+                                </Button>
+                                    {feedback.feedback ? (
+                                      <Typography className="feedback-box">
+                                        {' '}
+                                        {feedback.feedback}{' '}
+                                      </Typography>
+                                    ) : (
+                                        <></>
+                                      )}
+                                  </form>
+                                </Grid>
                               </Grid>
                             </Grid>
-                          </Grid>
+                            )}              
                         </Grid>
                       </Grid>
                       <Grid

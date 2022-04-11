@@ -9,7 +9,6 @@ axios.defaults.withCredentials = true;
 
 const TopBids = ({ id }) => {
   const [topBids, setTopBids] = useState('');
-
   const getTopBids = async () => {
     try {
       console.log(id);
@@ -25,8 +24,12 @@ const TopBids = ({ id }) => {
     }
   };
   useEffect(async () => {
+    
     await getTopBids();
-    console.log(topBids);
+    const interval = setInterval(() =>{ getTopBids()},3000);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -35,7 +38,7 @@ const TopBids = ({ id }) => {
         {topBids ? (
           <>
             {topBids[0].bid_amount == 0 ? (
-              <Typography>No Bid Yet. Be the First One to Bid.</Typography>
+              <Typography>No Bid Yet.</Typography>
             ) : (
                 <>
                   {topBids[0] ? (

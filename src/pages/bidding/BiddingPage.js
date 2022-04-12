@@ -223,12 +223,12 @@ const BiddingPage = (props) => {
                                     }}
                                   >
                                     <Typography variant="h5">
-                                      {'Starting Bid : $' +
+                                      {'Starting Bid : Rs' +
                                         auctionDetails.startingBid}
                                     </Typography>
 
                                     <Typography variant="h5">
-                                      {'Estimated Price: $' +
+                                      {'Estimated Price: Rs' +
                                         auctionDetails.estimate}
                                     </Typography>
                                   </Grid>
@@ -251,15 +251,15 @@ const BiddingPage = (props) => {
                           {auctionDetails.auctioneerUserName ==
                             userAuth.user_id ? (
                               <Grid
-                                  className="bidding-form"
-                                  alignContent="center"
-                                  justifyContent="center"
-                                  margin="auto"
-                                  textAlign="center"
-                                >
+                                item
+                                xs={12}
+                                md={5}
+                                lg={3}
+                                sx={{ borderLeft: '2px solid #00B9F1', padding: 2 }}
+                              >
                               <Grid item xs={12}>
-                              <TopBids id={id} />
-                            </Grid>
+                                <TopBids id={id} />
+                              </Grid>
                             </Grid>
                             ) : (
                               <Grid
@@ -273,13 +273,14 @@ const BiddingPage = (props) => {
                                 <TopBids id={id} />
                               </Grid>
 
-                              <Grid item xs={12} style={{ position: 'relative', top: 90 }}>
+                              <Grid item xs={12} >
                                 <Grid
                                   className="bidding-form"
                                   alignContent="center"
                                   justifyContent="center"
                                   margin="auto"
                                   textAlign="center"
+                                  style={{marginTop:'20px'}}
                                 >
                                   <form
                                     onSubmit={handleSubmit}
@@ -333,6 +334,7 @@ const BiddingPage = (props) => {
                           border: '2px solid #00B9F1',
                           marginLeft: 20,
                           marginTop: 5,
+                          marginBottom: 5,
                           alignItems: 'center',
                           justifyContent: 'center',
                           maxWidth: 1117,

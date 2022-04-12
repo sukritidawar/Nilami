@@ -26,7 +26,7 @@ const TopBids = ({ id }) => {
   useEffect(async () => {
     
     await getTopBids();
-    const interval = setInterval(() =>{ getTopBids()},3000);
+    var interval = setInterval(() =>{ getTopBids()},3000);
     return () => {
       clearInterval(interval);
     };
@@ -43,21 +43,21 @@ const TopBids = ({ id }) => {
                 <>
                   {topBids[0] ? (
                     <Typography variant="h6">
-                      Highest Bid: $ {topBids[0].bid_amount}
+                      Highest Bid: Rs {topBids[0].bid_amount}
                     </Typography>
                   ) : (
                       <></>
                     )}
                   {topBids[1] ? (
                     <Typography variant="h6">
-                      Second Highest Bid: $ {topBids[1].bid_amount}
+                      2nd Highest Bid: Rs {topBids[1].bid_amount}
                     </Typography>
                   ) : (
                       <></>
                     )}
                   {topBids[2] ? (
                     <Typography variant="h6">
-                      Third highest Bid: $ {topBids[2].bid_amount}
+                      3rd highest Bid: Rs {topBids[2].bid_amount}
                     </Typography>
                   ) : (
                       <></>

@@ -264,11 +264,11 @@ const AuctionProductDetail = () => {
                 style={{ textAlign: 'center', alignContent: 'center' }}
               >
                 <Typography variant="h5">
-                  {'Starting Bid : $' + auctionDetails.startingBid}
+                  {'Starting Bid : Rs ' + auctionDetails.startingBid}
                 </Typography>
 
                 <Typography variant="h5">
-                  {'Estimated Price: $' + auctionDetails.estimate}
+                  {'Estimated Price: Rs ' + auctionDetails.estimate}
                 </Typography>
               </Grid>
 
